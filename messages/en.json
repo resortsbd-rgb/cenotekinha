@@ -1,0 +1,43 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "experiences": "Experiences",
+    "booking": "Book Now",
+    "gallery": "Gallery",
+    "contact": "Contact",
+    "faq": "FAQ"
+  },
+  "home": {
+    "hero_title": "Dive into the magic of Cenote Kin-Ha",
+    "hero_subtitle": "A unique experience in the Riviera Maya",
+    "cta_book": "Book Now",
+    "cta_explore": "Explore Experiences"
+  },
+  "about": {
+    "title": "About Cenote Kin-Ha",
+    "subtitle": "History, nature and Mayan culture"
+  },
+  "experiences": {
+    "title": "Our Experiences",
+    "subtitle": "Choose your adventure"
+  },
+  "booking": {
+    "title": "Book Your Visit",
+    "subtitle": "Select date, experience and number of guests"
+  },
+  "gallery": {
+    "title": "Gallery",
+    "subtitle": "Moments at Kin-Ha"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "We are here to help"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions"
+  },
+  "footer": {
+    "rights": "All rights reserved"
+  }
+}

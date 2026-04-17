@@ -1,0 +1,43 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "about": "Nosotros",
+    "experiences": "Experiencias",
+    "booking": "Reservar",
+    "gallery": "Galería",
+    "contact": "Contacto",
+    "faq": "FAQ"
+  },
+  "home": {
+    "hero_title": "Sumérgete en la magia del Cenote Kin-Ha",
+    "hero_subtitle": "Una experiencia única en la Riviera Maya",
+    "cta_book": "Reservar ahora",
+    "cta_explore": "Explorar experiencias"
+  },
+  "about": {
+    "title": "Sobre Cenote Kin-Ha",
+    "subtitle": "Historia, naturaleza y cultura maya"
+  },
+  "experiences": {
+    "title": "Nuestras Experiencias",
+    "subtitle": "Elige tu aventura"
+  },
+  "booking": {
+    "title": "Reserva tu visita",
+    "subtitle": "Selecciona fecha, experiencia y número de personas"
+  },
+  "gallery": {
+    "title": "Galería",
+    "subtitle": "Momentos en Kin-Ha"
+  },
+  "contact": {
+    "title": "Contacto",
+    "subtitle": "Estamos para ayudarte"
+  },
+  "faq": {
+    "title": "Preguntas Frecuentes"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados"
+  }
+}
