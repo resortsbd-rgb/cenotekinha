@@ -1,8 +1,8 @@
 "use client";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+
 import { translations } from "@/lib/translations";
-import type { Locale } from "@/lib/translations";
+
 
 const BASE_URL =
   "https://d2xsxph8kpxj0f.cloudfront.net/310519663403066106/Zp7c8E6uddmsrRA2xBjMah/";
@@ -20,8 +20,7 @@ const images = [
 ];
 
 export default function GalleryGrid() {
-  const { locale } = useParams<{ locale: string }>();
-  const t = translations[(locale as Locale) ?? "es"];
+  const t = translations.es;
 
   return (
     <section id="gallery" className="bg-white py-24 px-4">

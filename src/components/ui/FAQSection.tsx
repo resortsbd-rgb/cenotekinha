@@ -1,13 +1,12 @@
 "use client";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useParams } from "next/navigation";
+
 import { translations } from "@/lib/translations";
-import type { Locale } from "@/lib/translations";
+
 
 export default function FAQSection() {
-  const { locale } = useParams<{ locale: string }>();
-  const t = translations[(locale as Locale) ?? "es"];
+  const t = translations.es;
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   function toggle(i: number) {

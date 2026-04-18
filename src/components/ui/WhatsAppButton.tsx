@@ -1,11 +1,10 @@
 "use client";
-import { useParams } from "next/navigation";
+
 import { translations } from "@/lib/translations";
-import type { Locale } from "@/lib/translations";
+
 
 export default function WhatsAppButton() {
-  const { locale } = useParams<{ locale: string }>();
-  const t = translations[(locale as Locale) ?? "es"];
+  const t = translations.es;
 
   return (
     <a

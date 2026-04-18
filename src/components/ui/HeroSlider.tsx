@@ -2,9 +2,9 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 import { translations } from "@/lib/translations";
-import type { Locale } from "@/lib/translations";
+
+const t = translations.es;
 
 const slides = [
   { src: "/images/hero4.png", alt: "Cenote Kin-Ha agua turquesa" },
@@ -13,8 +13,6 @@ const slides = [
 ];
 
 export default function HeroSlider() {
-  const { locale } = useParams<{ locale: string }>();
-  const t = translations[(locale as Locale) ?? "es"];
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
@@ -67,13 +65,13 @@ export default function HeroSlider() {
 
         <div className="flex flex-wrap justify-center gap-4">
           <Link
-            href={`/${locale}/experiences`}
+            href="/experiences"
             className="rounded-full bg-teal-500 px-8 py-3.5 font-semibold text-white shadow-lg transition hover:bg-teal-400 hover:shadow-teal-400/40"
           >
             {t.hero.cta_primary}
           </Link>
           <Link
-            href={`/${locale}/booking`}
+            href="/booking"
             className="rounded-full border-2 border-white/70 px-8 py-3.5 font-semibold text-white backdrop-blur-sm transition hover:bg-white/10"
           >
             {t.hero.cta_secondary}

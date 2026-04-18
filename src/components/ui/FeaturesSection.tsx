@@ -1,7 +1,7 @@
 "use client";
-import { useParams } from "next/navigation";
+
 import { translations } from "@/lib/translations";
-import type { Locale } from "@/lib/translations";
+
 
 const features = [
   {
@@ -31,8 +31,7 @@ const features = [
 ];
 
 export default function FeaturesSection() {
-  const { locale } = useParams<{ locale: string }>();
-  const t = translations[(locale as Locale) ?? "es"];
+  const t = translations.es;
 
   return (
     <section className="bg-white py-24 px-4">

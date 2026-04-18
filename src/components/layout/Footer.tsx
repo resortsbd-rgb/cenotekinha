@@ -1,22 +1,19 @@
-"use client";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 import { translations } from "@/lib/translations";
-import type { Locale } from "@/lib/translations";
+
+const t = translations.es;
 
 export default function Footer() {
-  const { locale } = useParams<{ locale: string }>();
-  const t = translations[(locale as Locale) ?? "es"];
 
   const tourLinks = [
     { href: "/experiences", label: t.nav.tours },
     { href: "/gallery", label: t.nav.gallery },
-    { href: "/booking", label: locale === "es" ? "Reservar" : "Book Now" },
+    { href: "/booking", label: "Reservar" },
   ];
 
   const infoLinks = [
-    { href: "/about", label: locale === "es" ? "Nosotros" : "About" },
-    { href: "/faq", label: locale === "es" ? "FAQ" : "FAQ" },
+    { href: "/about", label: "Nosotros" },
+    { href: "/faq", label: "FAQ" },
     { href: "/contact", label: t.nav.contact },
   ];
 
@@ -67,7 +64,7 @@ export default function Footer() {
             {tourLinks.map(({ href, label }) => (
               <li key={href}>
                 <Link
-                  href={`/${locale}${href}`}
+                  href={href}
                   className="text-sm text-teal-300 hover:text-white transition"
                 >
                   {label}
@@ -82,7 +79,7 @@ export default function Footer() {
             {infoLinks.map(({ href, label }) => (
               <li key={href}>
                 <Link
-                  href={`/${locale}${href}`}
+                  href={href}
                   className="text-sm text-teal-300 hover:text-white transition"
                 >
                   {label}

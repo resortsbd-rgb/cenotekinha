@@ -1,7 +1,7 @@
 "use client";
-import { useParams } from "next/navigation";
+
 import { translations } from "@/lib/translations";
-import type { Locale } from "@/lib/translations";
+
 
 const stats = [
   { value: "2", labelKey: "cenotes" as const, icon: "💧" },
@@ -11,8 +11,7 @@ const stats = [
 ];
 
 export default function StatsSection() {
-  const { locale } = useParams<{ locale: string }>();
-  const t = translations[(locale as Locale) ?? "es"];
+  const t = translations.es;
 
   return (
     <section className="bg-teal-800 py-16 px-4">

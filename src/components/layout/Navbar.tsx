@@ -1,13 +1,17 @@
 "use client";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { translations } from "@/lib/translations";
-import type { Locale } from "@/lib/translations";
+
+const t = translations.es;
+
+const navLinks = [
+  { href: "/experiences", label: t.nav.tours },
+  { href: "/gallery", label: t.nav.gallery },
+  { href: "/contact", label: t.nav.contact },
+];
 
 export default function Navbar() {
-  const { locale } = useParams<{ locale: string }>();
-  const t = translations[(locale as Locale) ?? "es"];
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -16,14 +20,6 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  const navLinks = [
-    { href: "/experiences", label: t.nav.tours },
-    { href: "/gallery", label: t.nav.gallery },
-    { href: "/contact", label: t.nav.contact },
-  ];
-
-  const otherLocale = locale === "es" ? "en" : "es";
 
   return (
     <header
@@ -34,36 +30,21 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
-        {/* Logo */}
-        <Link href={`/${locale}`} className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2">
           <span className="text-teal-400 font-bold text-xl tracking-wide">
             Cenotes <span className="text-white">Kin-Ha</span>
           </span>
         </Link>
 
-        {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-white">
           {navLinks.map(({ href, label }) => (
-            <Link
-              key={href}
-              href={`/${locale}${href}`}
-              className="hover:text-teal-300 transition-colors"
-            >
+            <Link key={href} href={href} className="hover:text-teal-300 transition-colors">
               {label}
             </Link>
           ))}
         </nav>
 
-        {/* Desktop Right */}
         <div className="hidden md:flex items-center gap-3">
-          {/* Language toggle */}
-          <Link
-            href={`/${otherLocale}`}
-            className="text-xs font-semibold text-white border border-teal-400/60 px-3 py-1.5 rounded-full hover:bg-teal-700/50 transition"
-          >
-            {otherLocale.toUpperCase()}
-          </Link>
-          {/* WhatsApp */}
           <a
             href={`https://wa.me/529982753162?text=${encodeURIComponent(t.whatsapp_msg)}`}
             target="_blank"
@@ -75,16 +56,14 @@ export default function Navbar() {
             </svg>
             WhatsApp
           </a>
-          {/* Book CTA */}
           <Link
-            href={`/${locale}/booking`}
+            href="/booking"
             className="bg-teal-500 hover:bg-teal-400 text-white font-semibold px-5 py-2 rounded-full text-sm transition shadow"
           >
             {t.hero.cta_secondary}
           </Link>
         </div>
 
-        {/* Mobile hamburger */}
         <button
           className="md:hidden p-2 text-white"
           onClick={() => setOpen(!open)}
@@ -102,34 +81,25 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile menu */}
       {open && (
         <div className="md:hidden bg-teal-900 px-4 pb-5 pt-2 flex flex-col gap-3 text-sm text-white border-t border-teal-800">
           {navLinks.map(({ href, label }) => (
             <Link
               key={href}
-              href={`/${locale}${href}`}
+              href={href}
               onClick={() => setOpen(false)}
               className="py-2 hover:text-teal-300 transition-colors border-b border-teal-800/50"
             >
               {label}
             </Link>
           ))}
-          <div className="flex gap-3 pt-2">
-            <Link
-              href={`/${otherLocale}`}
-              className="flex-1 text-center border border-teal-400 px-3 py-2 rounded-full text-xs font-semibold"
-            >
-              {otherLocale.toUpperCase()}
-            </Link>
-            <Link
-              href={`/${locale}/booking`}
-              onClick={() => setOpen(false)}
-              className="flex-1 text-center bg-teal-500 px-3 py-2 rounded-full text-xs font-semibold"
-            >
-              {t.hero.cta_secondary}
-            </Link>
-          </div>
+          <Link
+            href="/booking"
+            onClick={() => setOpen(false)}
+            className="text-center bg-teal-500 px-3 py-2 rounded-full text-xs font-semibold"
+          >
+            {t.hero.cta_secondary}
+          </Link>
         </div>
       )}
     </header>
