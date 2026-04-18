@@ -1,0 +1,143 @@
+export const translations = {
+  es: {
+    nav: {
+      tours: 'Experiencias',
+      cenotes: 'Nuestros Cenotes',
+      gallery: 'Galería',
+      reviews: 'Reseñas',
+      contact: 'Contacto',
+    },
+    hero: {
+      title: 'Luz y Sombra. Cielo y Caverna. Kin-Ha.',
+      subtitle: 'El único sistema dual de cenotes en la Riviera Maya. Cueva ancestral. Laguna celestial. Una experiencia.',
+      cta_primary: 'Explorar el Sistema',
+      cta_secondary: 'Reservar Portal',
+      badge: 'Puerto Morelos, Riviera Maya',
+    },
+    stats: {
+      cenotes: 'Cenotes',
+      years: 'Años de experiencia',
+      visitors: 'Visitantes felices',
+      certified: 'Seguridad certificada',
+    },
+    tours: {
+      title: 'Nuestras Experiencias',
+      subtitle: 'Portales hacia el mundo ancestral maya',
+      book: 'Reservar',
+      duration: 'Duración',
+      max: 'Máx. personas',
+      price_from: 'Desde',
+    },
+    features: {
+      title: 'Por qué elegir Kin-Ha',
+      safety: { title: 'Seguridad Certificada', desc: 'Equipo profesional y protocolos de seguridad certificados.' },
+      nature: { title: 'Naturaleza Auténtica', desc: 'Ecosistema preservado sin intervención masiva.' },
+      memories: { title: 'Memorias Únicas', desc: 'El único sistema dual de cenotes en la Riviera Maya.' },
+    },
+    gallery: { title: 'Galería', subtitle: 'Momentos en Kin-Ha' },
+    faq: {
+      title: 'Preguntas Frecuentes',
+      items: [
+        { q: '¿Qué incluye la entrada básica?', a: 'Acceso a ambos cenotes, equipo de snorkel, salvavidas y guía.' },
+        { q: '¿Puedo llevar niños?', a: 'Sí, niños mayores de 5 años pueden participar con chaleco salvavidas.' },
+        { q: '¿Hay que saber nadar?', a: 'No es obligatorio, proporcionamos chalecos salvavidas para todos.' },
+        { q: '¿Dónde están ubicados?', a: 'En Puerto Morelos, a 25 min de Cancún y 20 min de Playa del Carmen.' },
+        { q: '¿Cuál es el horario?', a: 'Abrimos de 8am a 5pm todos los días del año.' },
+        { q: '¿Cómo reservo?', a: 'Puedes reservar en línea con pago seguro Stripe o por WhatsApp.' },
+      ],
+    },
+    contact: {
+      title: 'Contáctanos',
+      address: 'Puerto Morelos, Quintana Roo, México',
+      schedule: 'Lun-Dom: 8:00am - 5:00pm',
+      phone: '+52 998 275 3162',
+      email: 'info@cenotekinha.com',
+    },
+    footer: {
+      tagline: 'Portales Ancestrales Maya',
+      tours: 'Experiencias',
+      info: 'Información',
+      contact: 'Contacto',
+      rights: 'Todos los derechos reservados',
+      dev: 'Desarrollado por ZitioGroup.com',
+    },
+    whatsapp_msg: 'Hola, me interesa reservar una experiencia en Cenotes Kin-Ha',
+    cta_final: {
+      title: '¿Listo para la Aventura?',
+      subtitle: 'Reserva hoy y obtén un 10% de descuento',
+      btn: 'Reservar Ahora',
+    },
+  },
+  en: {
+    nav: {
+      tours: 'Experiences',
+      cenotes: 'Our Cenotes',
+      gallery: 'Gallery',
+      reviews: 'Reviews',
+      contact: 'Contact',
+    },
+    hero: {
+      title: 'Light and Shadow. Sky and Cavern. Kin-Ha.',
+      subtitle: 'The only dual cenote system in the Riviera Maya. Ancient cave. Celestial lagoon. One experience.',
+      cta_primary: 'Explore the System',
+      cta_secondary: 'Book a Portal',
+      badge: 'Puerto Morelos, Riviera Maya',
+    },
+    stats: {
+      cenotes: 'Cenotes',
+      years: 'Years of experience',
+      visitors: 'Happy visitors',
+      certified: 'Certified safety',
+    },
+    tours: {
+      title: 'Our Experiences',
+      subtitle: 'Portals to the ancient Mayan world',
+      book: 'Book Now',
+      duration: 'Duration',
+      max: 'Max. people',
+      price_from: 'From',
+    },
+    features: {
+      title: 'Why choose Kin-Ha',
+      safety: { title: 'Certified Safety', desc: 'Professional team and certified safety protocols.' },
+      nature: { title: 'Authentic Nature', desc: 'Preserved ecosystem without mass intervention.' },
+      memories: { title: 'Unique Memories', desc: 'The only dual cenote system in the Riviera Maya.' },
+    },
+    gallery: { title: 'Gallery', subtitle: 'Moments at Kin-Ha' },
+    faq: {
+      title: 'Frequently Asked Questions',
+      items: [
+        { q: 'What does basic entry include?', a: 'Access to both cenotes, snorkel gear, life jacket and guide.' },
+        { q: 'Can I bring children?', a: 'Yes, children over 5 years old can participate with life jackets.' },
+        { q: 'Do I need to know how to swim?', a: 'Not required, we provide life jackets for everyone.' },
+        { q: 'Where are you located?', a: 'In Puerto Morelos, 25 min from Cancún and 20 min from Playa del Carmen.' },
+        { q: 'What are your hours?', a: 'We are open 8am to 5pm every day of the year.' },
+        { q: 'How do I book?', a: 'You can book online with secure Stripe payment or via WhatsApp.' },
+      ],
+    },
+    contact: {
+      title: 'Contact Us',
+      address: 'Puerto Morelos, Quintana Roo, Mexico',
+      schedule: 'Mon-Sun: 8:00am - 5:00pm',
+      phone: '+52 998 275 3162',
+      email: 'info@cenotekinha.com',
+    },
+    footer: {
+      tagline: 'Ancient Mayan Portals',
+      tours: 'Experiences',
+      info: 'Information',
+      contact: 'Contact',
+      rights: 'All rights reserved',
+      dev: 'Developed by ZitioGroup.com',
+    },
+    whatsapp_msg: 'Hello, I am interested in booking a tour at Cenotes Kin-Ha',
+    cta_final: {
+      title: 'Ready for the Adventure?',
+      subtitle: 'Book today and get 10% off',
+      btn: 'Book Now',
+    },
+  },
+};
+
+export type Locale = 'es' | 'en';
+export type Translations = typeof translations.es;

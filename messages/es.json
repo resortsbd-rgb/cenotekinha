@@ -2,25 +2,28 @@
   "nav": {
     "home": "Inicio",
     "about": "Nosotros",
+    "tours": "Experiencias",
+    "cenotes": "Nuestros Cenotes",
     "experiences": "Experiencias",
     "booking": "Reservar",
     "gallery": "Galería",
+    "reviews": "Reseñas",
     "contact": "Contacto",
     "faq": "FAQ"
   },
   "home": {
-    "hero_title": "Sumérgete en la magia del Cenote Kin-Ha",
-    "hero_subtitle": "Una experiencia única en la Riviera Maya",
-    "cta_book": "Reservar ahora",
-    "cta_explore": "Explorar experiencias"
+    "hero_title": "Luz y Sombra. Cielo y Caverna. Kin-Ha.",
+    "hero_subtitle": "El único sistema dual de cenotes en la Riviera Maya. Cueva ancestral. Laguna celestial. Una experiencia.",
+    "cta_book": "Reservar Portal",
+    "cta_explore": "Explorar el Sistema"
   },
   "about": {
-    "title": "Sobre Cenote Kin-Ha",
+    "title": "Sobre Cenotes Kin-Ha",
     "subtitle": "Historia, naturaleza y cultura maya"
   },
   "experiences": {
     "title": "Nuestras Experiencias",
-    "subtitle": "Elige tu aventura"
+    "subtitle": "Portales hacia el mundo ancestral maya"
   },
   "booking": {
     "title": "Reserva tu visita",
@@ -31,13 +34,15 @@
     "subtitle": "Momentos en Kin-Ha"
   },
   "contact": {
-    "title": "Contacto",
+    "title": "Contáctanos",
     "subtitle": "Estamos para ayudarte"
   },
   "faq": {
     "title": "Preguntas Frecuentes"
   },
   "footer": {
-    "rights": "Todos los derechos reservados"
+    "tagline": "Portales Ancestrales Maya",
+    "rights": "Todos los derechos reservados",
+    "dev": "Desarrollado por ZitioGroup.com"
   }
 }

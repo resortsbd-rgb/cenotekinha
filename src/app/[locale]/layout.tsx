@@ -1,18 +1,31 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Playfair_Display, Inter } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { Toaster } from "react-hot-toast";
 import "../globals.css";
 
-const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "Cenote Kin-Ha | Riviera Maya",
-  description: "Vive la experiencia única del Cenote Kin-Ha en la Riviera Maya",
+  title: "Cenotes Kin-Ha | Portales Ancestrales Maya",
+  description:
+    "El único sistema dual de cenotes en la Riviera Maya. Cueva ancestral y laguna celestial en Puerto Morelos.",
+  keywords: "cenote, riviera maya, snorkel, puerto morelos, cancún, kin-ha, mayan",
 };
 
 export function generateStaticParams() {
@@ -32,12 +45,16 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${geist.variable} h-full antialiased`}>
+    <html
+      lang={locale}
+      className={`${playfair.variable} ${inter.variable} h-full antialiased`}
+    >
       <body className="min-h-full flex flex-col">
         <NextIntlClientProvider messages={messages}>
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
+          <Toaster position="bottom-center" />
         </NextIntlClientProvider>
       </body>
     </html>
