@@ -64,6 +64,18 @@ export const translations = {
       about: 'Nosotros',
     },
     testimonials: { title: 'Lo que dicen nuestros visitantes' },
+    about: {
+      title: 'Sobre Nosotros',
+      subtitle: 'Conoce la historia y pasión detrás de Cenotes Kin-Ha.',
+    },
+    booking: {
+      title: 'Reservar',
+      subtitle: 'Selecciona tu experiencia y fecha preferida.',
+      experience: 'Experiencia',
+      date: 'Fecha',
+      people: 'Personas',
+      submit: 'Continuar al pago',
+    },
     whatsapp_msg: 'Hola, me interesa reservar una experiencia en Cenotes Kin-Ha',
     cta_final: {
       title: '¿Listo para la Aventura?',
@@ -136,6 +148,18 @@ export const translations = {
       about: 'About Us',
     },
     testimonials: { title: 'What our visitors say' },
+    about: {
+      title: 'About Us',
+      subtitle: 'Learn the story and passion behind Cenotes Kin-Ha.',
+    },
+    booking: {
+      title: 'Book Now',
+      subtitle: 'Select your experience and preferred date.',
+      experience: 'Experience',
+      date: 'Date',
+      people: 'People',
+      submit: 'Continue to payment',
+    },
     whatsapp_msg: 'Hello, I am interested in booking a tour at Cenotes Kin-Ha',
     cta_final: {
       title: 'Ready for the Adventure?',
