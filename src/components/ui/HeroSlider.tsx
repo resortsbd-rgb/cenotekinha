@@ -4,11 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { translations } from "@/lib/translations";
 import { useLanguage } from "@/contexts/LanguageContext";
+import BASE_PATH from "@/lib/basePath";
 
 const slides = [
-  { src: "/images/hero4.png", alt: "Cenote Kin-Ha agua turquesa" },
-  { src: "/images/cenote7.png", alt: "Cenote Kin-Ha cueva con estalactitas" },
-  { src: "/images/hero1.png", alt: "Cenote Kin-Ha entrada" },
+  { src: `${BASE_PATH}/images/hero4.png`, alt: "Cenote Kin-Ha agua turquesa" },
+  { src: `${BASE_PATH}/images/cenote7.png`, alt: "Cenote Kin-Ha cueva con estalactitas" },
+  { src: `${BASE_PATH}/images/hero1.png`, alt: "Cenote Kin-Ha entrada" },
 ];
 
 export default function HeroSlider() {

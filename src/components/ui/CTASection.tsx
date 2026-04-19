@@ -4,6 +4,7 @@ import Link from "next/link";
 import { translations } from "@/lib/translations";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useParams } from "next/navigation";
+import BASE_PATH from "@/lib/basePath";
 
 export default function CTASection() {
   const { locale } = useLanguage();
@@ -15,7 +16,7 @@ export default function CTASection() {
     <section className="relative py-28 px-4 overflow-hidden">
       <div className="absolute inset-0">
         <Image
-          src="/images/hero4.png"
+          src={`${BASE_PATH}/images/hero4.png`}
           alt="Cenote Kin-Ha"
           fill
           className="object-cover"
