@@ -1,5 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
+import { translations } from "@/lib/translations";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const testimonials = [
   {
@@ -29,6 +31,8 @@ const testimonials = [
 ];
 
 export default function TestimonialsCarousel() {
+  const { locale } = useLanguage();
+  const t = translations[locale];
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
@@ -38,7 +42,7 @@ export default function TestimonialsCarousel() {
     return () => clearInterval(timer);
   }, []);
 
-  const t = testimonials[current];
+  const testimonial = testimonials[current];
 
   return (
     <section className="bg-teal-900 py-24 px-4">
@@ -47,14 +51,13 @@ export default function TestimonialsCarousel() {
           Reviews
         </p>
         <h2 className="text-white text-4xl font-bold mb-14">
-          Lo que dicen nuestros visitantes
+          {t.testimonials.title}
         </h2>
 
         <div className="relative min-h-[180px] flex items-center justify-center">
           <div key={current} className="animate-fade-in text-center">
-            {/* Stars */}
             <div className="flex justify-center gap-1 mb-5">
-              {Array.from({ length: t.rating }).map((_, i) => (
+              {Array.from({ length: testimonial.rating }).map((_, i) => (
                 <svg key={i} className="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
@@ -62,15 +65,14 @@ export default function TestimonialsCarousel() {
             </div>
 
             <blockquote className="text-white text-lg md:text-xl italic leading-relaxed max-w-2xl mx-auto mb-6">
-              &ldquo;{t.text}&rdquo;
+              &ldquo;{testimonial.text}&rdquo;
             </blockquote>
 
-            <p className="text-teal-300 font-semibold">{t.name}</p>
-            <p className="text-teal-500 text-sm">{t.origin}</p>
+            <p className="text-teal-300 font-semibold">{testimonial.name}</p>
+            <p className="text-teal-500 text-sm">{testimonial.origin}</p>
           </div>
         </div>
 
-        {/* Dots */}
         <div className="flex justify-center gap-2 mt-8">
           {testimonials.map((_, i) => (
             <button

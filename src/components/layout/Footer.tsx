@@ -1,18 +1,20 @@
+"use client";
 import Link from "next/link";
 import { translations } from "@/lib/translations";
-
-const t = translations.es;
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Footer() {
+  const { locale } = useLanguage();
+  const t = translations[locale];
 
   const tourLinks = [
     { href: "/experiences", label: t.nav.tours },
     { href: "/gallery", label: t.nav.gallery },
-    { href: "/booking", label: "Reservar" },
+    { href: "/booking", label: t.footer.book },
   ];
 
   const infoLinks = [
-    { href: "/about", label: "Nosotros" },
+    { href: "/about", label: t.footer.about },
     { href: "/faq", label: "FAQ" },
     { href: "/contact", label: t.nav.contact },
   ];
@@ -42,7 +44,7 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              href={`https://wa.me/529982753162?text=${encodeURIComponent(t.whatsapp_msg)}`}
+              href={`https://wa.me/529987777498?text=${encodeURIComponent(t.whatsapp_msg)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="w-9 h-9 bg-green-700 rounded-full flex items-center justify-center hover:bg-green-500 transition"
@@ -63,10 +65,7 @@ export default function Footer() {
           <ul className="space-y-2">
             {tourLinks.map(({ href, label }) => (
               <li key={href}>
-                <Link
-                  href={href}
-                  className="text-sm text-teal-300 hover:text-white transition"
-                >
+                <Link href={href} className="text-sm text-teal-300 hover:text-white transition">
                   {label}
                 </Link>
               </li>
@@ -78,10 +77,7 @@ export default function Footer() {
           <ul className="space-y-2">
             {infoLinks.map(({ href, label }) => (
               <li key={href}>
-                <Link
-                  href={href}
-                  className="text-sm text-teal-300 hover:text-white transition"
-                >
+                <Link href={href} className="text-sm text-teal-300 hover:text-white transition">
                   {label}
                 </Link>
               </li>

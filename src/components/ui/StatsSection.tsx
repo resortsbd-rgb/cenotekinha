@@ -1,7 +1,7 @@
 "use client";
 
 import { translations } from "@/lib/translations";
-
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const stats = [
   { value: "2", labelKey: "cenotes" as const, icon: "💧" },
@@ -11,7 +11,8 @@ const stats = [
 ];
 
 export default function StatsSection() {
-  const t = translations.es;
+  const { locale } = useLanguage();
+  const t = translations[locale];
 
   return (
     <section className="bg-teal-800 py-16 px-4">

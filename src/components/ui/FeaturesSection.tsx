@@ -1,7 +1,7 @@
 "use client";
 
 import { translations } from "@/lib/translations";
-
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const features = [
   {
@@ -31,7 +31,8 @@ const features = [
 ];
 
 export default function FeaturesSection() {
-  const t = translations.es;
+  const { locale } = useLanguage();
+  const t = translations[locale];
 
   return (
     <section className="bg-white py-24 px-4">

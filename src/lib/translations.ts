@@ -50,7 +50,7 @@ export const translations = {
       title: 'Contáctanos',
       address: 'Puerto Morelos, Quintana Roo, México',
       schedule: 'Lun-Dom: 8:00am - 5:00pm',
-      phone: '+52 998 275 3162',
+      phone: '+52 998 777 7498',
       email: 'info@cenotekinha.com',
     },
     footer: {
@@ -60,7 +60,10 @@ export const translations = {
       contact: 'Contacto',
       rights: 'Todos los derechos reservados',
       dev: 'Desarrollado por ZitioGroup.com',
+      book: 'Reservar',
+      about: 'Nosotros',
     },
+    testimonials: { title: 'Lo que dicen nuestros visitantes' },
     whatsapp_msg: 'Hola, me interesa reservar una experiencia en Cenotes Kin-Ha',
     cta_final: {
       title: '¿Listo para la Aventura?',
@@ -119,7 +122,7 @@ export const translations = {
       title: 'Contact Us',
       address: 'Puerto Morelos, Quintana Roo, Mexico',
       schedule: 'Mon-Sun: 8:00am - 5:00pm',
-      phone: '+52 998 275 3162',
+      phone: '+52 998 777 7498',
       email: 'info@cenotekinha.com',
     },
     footer: {
@@ -129,7 +132,10 @@ export const translations = {
       contact: 'Contact',
       rights: 'All rights reserved',
       dev: 'Developed by ZitioGroup.com',
+      book: 'Book Now',
+      about: 'About Us',
     },
+    testimonials: { title: 'What our visitors say' },
     whatsapp_msg: 'Hello, I am interested in booking a tour at Cenotes Kin-Ha',
     cta_final: {
       title: 'Ready for the Adventure?',

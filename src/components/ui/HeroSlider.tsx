@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { translations } from "@/lib/translations";
-
-const t = translations.es;
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const slides = [
   { src: "/images/hero4.png", alt: "Cenote Kin-Ha agua turquesa" },
@@ -13,6 +12,8 @@ const slides = [
 ];
 
 export default function HeroSlider() {
+  const { locale } = useLanguage();
+  const t = translations[locale];
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
@@ -24,7 +25,6 @@ export default function HeroSlider() {
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
-      {/* Slides */}
       {slides.map((slide, i) => (
         <div
           key={slide.src}
@@ -43,12 +43,9 @@ export default function HeroSlider() {
         </div>
       ))}
 
-      {/* Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/70" />
 
-      {/* Content */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-white">
-        {/* Badge */}
         <div className="mb-5 inline-flex items-center gap-2 bg-teal-500/20 border border-teal-400/40 backdrop-blur-sm px-4 py-2 rounded-full">
           <span className="w-2 h-2 bg-teal-400 rounded-full animate-pulse" />
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-teal-300">
@@ -79,7 +76,6 @@ export default function HeroSlider() {
         </div>
       </div>
 
-      {/* Dot indicators */}
       <div className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 gap-2">
         {slides.map((_, i) => (
           <button
@@ -93,7 +89,6 @@ export default function HeroSlider() {
         ))}
       </div>
 
-      {/* Scroll indicator */}
       <div className="absolute bottom-8 right-8 z-10 hidden flex-col items-center gap-2 md:flex">
         <span
           className="text-xs text-white/50 tracking-widest uppercase"

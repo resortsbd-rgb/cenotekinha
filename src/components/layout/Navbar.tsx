@@ -2,24 +2,29 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { translations } from "@/lib/translations";
-
-const t = translations.es;
-
-const navLinks = [
-  { href: "/experiences", label: t.nav.tours },
-  { href: "/gallery", label: t.nav.gallery },
-  { href: "/contact", label: t.nav.contact },
-];
+import { useLanguage, setLocale } from "@/contexts/LanguageContext";
 
 export default function Navbar() {
+  const { locale } = useLanguage();
+  const t = translations[locale];
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const navLinks = [
+    { href: "/experiences", label: t.nav.tours },
+    { href: "/gallery", label: t.nav.gallery },
+    { href: "/contact", label: t.nav.contact },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  function handleSetLocale(l: "es" | "en") {
+    setLocale(l);
+  }
 
   return (
     <header
@@ -45,8 +50,31 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
+          {/* Language toggle — inline to avoid nested-component remount issue */}
+          <div className="flex items-center gap-1 text-xs font-semibold">
+            <button
+              type="button"
+              onClick={() => handleSetLocale("es")}
+              className={`px-1.5 py-0.5 rounded transition-colors duration-200 ${
+                locale === "es" ? "text-teal-400" : "text-white/50 hover:text-white/80"
+              }`}
+            >
+              ES
+            </button>
+            <span className="text-white/30">|</span>
+            <button
+              type="button"
+              onClick={() => handleSetLocale("en")}
+              className={`px-1.5 py-0.5 rounded transition-colors duration-200 ${
+                locale === "en" ? "text-teal-400" : "text-white/50 hover:text-white/80"
+              }`}
+            >
+              EN
+            </button>
+          </div>
+
           <a
-            href={`https://wa.me/529982753162?text=${encodeURIComponent(t.whatsapp_msg)}`}
+            href={`https://wa.me/529987777498?text=${encodeURIComponent(t.whatsapp_msg)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 bg-green-500 hover:bg-green-400 text-white text-xs font-semibold px-4 py-2 rounded-full transition"
@@ -65,6 +93,7 @@ export default function Navbar() {
         </div>
 
         <button
+          type="button"
           className="md:hidden p-2 text-white"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
@@ -93,13 +122,36 @@ export default function Navbar() {
               {label}
             </Link>
           ))}
-          <Link
-            href="/booking"
-            onClick={() => setOpen(false)}
-            className="text-center bg-teal-500 px-3 py-2 rounded-full text-xs font-semibold"
-          >
-            {t.hero.cta_secondary}
-          </Link>
+          <div className="flex items-center justify-between pt-1">
+            <div className="flex items-center gap-1 text-xs font-semibold">
+              <button
+                type="button"
+                onClick={() => handleSetLocale("es")}
+                className={`px-1.5 py-0.5 rounded transition-colors duration-200 ${
+                  locale === "es" ? "text-teal-400" : "text-white/50 hover:text-white/80"
+                }`}
+              >
+                ES
+              </button>
+              <span className="text-white/30">|</span>
+              <button
+                type="button"
+                onClick={() => handleSetLocale("en")}
+                className={`px-1.5 py-0.5 rounded transition-colors duration-200 ${
+                  locale === "en" ? "text-teal-400" : "text-white/50 hover:text-white/80"
+                }`}
+              >
+                EN
+              </button>
+            </div>
+            <Link
+              href="/booking"
+              onClick={() => setOpen(false)}
+              className="text-center bg-teal-500 px-3 py-2 rounded-full text-xs font-semibold"
+            >
+              {t.hero.cta_secondary}
+            </Link>
+          </div>
         </div>
       )}
     </header>

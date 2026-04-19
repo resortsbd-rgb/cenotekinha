@@ -1,14 +1,15 @@
 "use client";
 
 import { translations } from "@/lib/translations";
-
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function WhatsAppButton() {
-  const t = translations.es;
+  const { locale } = useLanguage();
+  const t = translations[locale];
 
   return (
     <a
-      href={`https://wa.me/529982753162?text=${encodeURIComponent(t.whatsapp_msg)}`}
+      href={`https://wa.me/529987777498?text=${encodeURIComponent(t.whatsapp_msg)}`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
