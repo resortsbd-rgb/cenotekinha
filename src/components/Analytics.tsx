@@ -1,21 +1,18 @@
-'use client';
+﻿'use client';
 
 import Script from 'next/script';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 
-// Meta Pixel ID y GTM ID - configurar en variables de entorno
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 
-// Eventos custom para Meta Pixel
 export const trackEvent = (eventName: string, data?: Record<string, any>) => {
   if (typeof window !== 'undefined' && (window as any).fbq) {
     (window as any).fbq('track', eventName, data);
   }
 };
 
-// Eventos custom para Google Tag Manager
 export const gtmEvent = (eventName: string, data?: Record<string, any>) => {
   if (typeof window !== 'undefined' && (window as any).dataLayer) {
     (window as any).dataLayer.push({
@@ -27,9 +24,7 @@ export const gtmEvent = (eventName: string, data?: Record<string, any>) => {
 
 export default function Analytics() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
-  // Track page views cuando cambia la ruta
   useEffect(() => {
     if (META_PIXEL_ID) {
       trackEvent('PageView');
@@ -40,16 +35,14 @@ export default function Analytics() {
         page_title: document.title,
       });
     }
-  }, [pathname, searchParams]);
+  }, [pathname]);
 
   if (!META_PIXEL_ID && !GTM_ID) {
-    // No hay IDs configurados - modo development
     return null;
   }
 
   return (
     <>
-      {/* Meta Pixel */}
       {META_PIXEL_ID && (
         <>
           <Script
@@ -82,7 +75,6 @@ export default function Analytics() {
         </>
       )}
 
-      {/* Google Tag Manager */}
       {GTM_ID && (
         <>
           <Script
