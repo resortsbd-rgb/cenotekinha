@@ -3,6 +3,7 @@ import { Playfair_Display, Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import Analytics from "@/components/Analytics";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" className={`${playfair.variable} ${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
+        <Analytics />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

@@ -2,10 +2,15 @@
 
 import { translations } from "@/lib/translations";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 export default function WhatsAppButton() {
   const { locale } = useLanguage();
   const t = translations[locale];
+
+  const handleClick = () => {
+    trackWhatsAppClick('floating_button');
+  };
 
   return (
     <a
@@ -13,6 +18,7 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
+      onClick={handleClick}
       className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-green-500 hover:bg-green-400 text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-green-400/40 transition-all duration-300 hover:scale-110"
     >
       <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">

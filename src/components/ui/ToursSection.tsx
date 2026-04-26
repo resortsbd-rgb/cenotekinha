@@ -1,14 +1,45 @@
 "use client";
 import Image from "next/image";
+import { useEffect, useRef } from "react";
 import { translations } from "@/lib/translations";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { TOURS } from "@/lib/stripe";
+import { trackTourView, trackWhatsAppClick } from "@/lib/analytics";
 
 const WA_NUMBER = "529987777498";
 
 export default function ToursSection() {
   const { locale } = useLanguage();
   const t = translations[locale];
+  const tourRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const viewedTours = useRef<Set<string>>(new Set());
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const tourId = entry.target.getAttribute('data-tour-id');
+            if (tourId && !viewedTours.current.has(tourId)) {
+              const tour = TOURS.find((t) => t.id === tourId);
+              if (tour) {
+                const name = locale === "es" ? tour.nameEs : tour.nameEn;
+                trackTourView(tour.id, name, tour.priceMXN);
+                viewedTours.current.add(tourId);
+              }
+            }
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    Object.values(tourRefs.current).forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => observer.disconnect();
+  }, [locale]);
 
   function waLink(tourName: string) {
     const msg = locale === "es"
@@ -16,6 +47,10 @@ export default function ToursSection() {
       : `Hello, I am interested in booking: ${tourName}`;
     return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
   }
+
+  const handleBookingClick = (tourName: string) => {
+    trackWhatsAppClick('tour_card', tourName);
+  };
 
   return (
     <section id="tours" className="bg-gray-50 py-24 px-4">
@@ -36,6 +71,8 @@ export default function ToursSection() {
             return (
               <div
                 key={tour.id}
+                ref={(el) => { tourRefs.current[tour.id] = el; }}
+                data-tour-id={tour.id}
                 className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col"
               >
                 <div className="relative h-56 overflow-hidden">
@@ -71,6 +108,7 @@ export default function ToursSection() {
                     href={waLink(name)}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => handleBookingClick(name)}
                     className="w-full bg-green-500 hover:bg-green-400 text-white font-semibold py-3 rounded-xl transition flex items-center justify-center gap-2"
                   >
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
