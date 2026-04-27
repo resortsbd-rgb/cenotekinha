@@ -1,4 +1,22 @@
-import { trackEvent, gtmEvent } from '@/components/Analytics';
+// Funciones de tracking para Meta Pixel y Google Tag Manager
+// NO importa nada de Analytics.tsx - funciona de forma independiente
+
+// Meta Pixel tracking
+export const trackEvent = (eventName: string, params?: Record<string, any>) => {
+  if (typeof window !== 'undefined' && window.fbq) {
+    window.fbq('track', eventName, params);
+  }
+};
+
+// Google Tag Manager tracking
+export const gtmEvent = (eventName: string, params?: Record<string, any>) => {
+  if (typeof window !== 'undefined' && window.dataLayer) {
+    window.dataLayer.push({
+      event: eventName,
+      ...params,
+    });
+  }
+};
 
 // Eventos de reserva
 export const trackBookingStart = (tourId: string, tourName: string) => {
@@ -84,3 +102,11 @@ export const trackCTAClick = (ctaName: string, location: string) => {
     location: location,
   });
 };
+
+// Declaraciones de tipos para window
+declare global {
+  interface Window {
+    fbq?: (command: string, eventName: string, params?: Record<string, any>) => void;
+    dataLayer?: Array<Record<string, any>>;
+  }
+}
