@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
@@ -7,6 +7,13 @@ import Script from 'next/script';
 // Hardcoded IDs - Cenotes Kin-Ha
 const META_PIXEL_ID = '840518511778515';
 const GTM_ID = 'GTM-MBBHBPKW';
+
+// Declaraciones de tipos para window
+declare global {
+  interface Window {
+    gtag?: (command: string, eventName: string, params?: Record<string, any>) => void;
+  }
+}
 
 export default function Analytics() {
   const pathname = usePathname();
@@ -27,7 +34,7 @@ export default function Analytics() {
         id="meta-pixel"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
-          __html: `
+          __html: 
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
             n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -36,9 +43,9 @@ export default function Analytics() {
             t.src=v;s=b.getElementsByTagName(e)[0];
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '${META_PIXEL_ID}');
+            fbq('init', '');
             fbq('track', 'PageView');
-          `,
+          ,
         }}
       />
       <noscript>
@@ -46,7 +53,7 @@ export default function Analytics() {
           height="1"
           width="1"
           style={{ display: 'none' }}
-          src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
+          src={https://www.facebook.com/tr?id=&ev=PageView&noscript=1}
           alt=""
         />
       </noscript>
@@ -56,18 +63,18 @@ export default function Analytics() {
         id="gtm"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
-          __html: `
+          __html: 
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','${GTM_ID}');
-          `,
+            })(window,document,'script','dataLayer','');
+          ,
         }}
       />
       <noscript>
         <iframe
-          src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+          src={https://www.googletagmanager.com/ns.html?id=}
           height="0"
           width="0"
           style={{ display: 'none', visibility: 'hidden' }}
