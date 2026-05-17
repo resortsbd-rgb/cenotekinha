@@ -8,7 +8,7 @@ export const translations = {
       contact: 'Contacto',
     },
     hero: {
-      title: 'Luz y Sombra. Cielo y Caverna. Kin-Ha.',
+      title: 'Cenotes sagrados. Aventura real. Naturaleza viva.',
       subtitle: 'El único sistema dual de cenotes en la Riviera Maya. Cueva ancestral. Laguna celestial. Una experiencia.',
       cta_primary: 'Explorar el Sistema',
       cta_secondary: 'Reservar Portal',
@@ -51,7 +51,7 @@ export const translations = {
       address: 'Puerto Morelos, Quintana Roo, México',
       schedule: 'Lun-Dom: 8:00am - 5:00pm',
       phone: '+52 998 777 7498',
-      email: 'info@cenotekinha.com',
+      email: 'reserva@cenotekinha.com',
     },
     footer: {
       tagline: 'Portales Ancestrales Maya',
@@ -92,7 +92,7 @@ export const translations = {
       contact: 'Contact',
     },
     hero: {
-      title: 'Light and Shadow. Sky and Cavern. Kin-Ha.',
+      title: 'Sacred cenotes. Real adventure. Living nature.',
       subtitle: 'The only dual cenote system in the Riviera Maya. Ancient cave. Celestial lagoon. One experience.',
       cta_primary: 'Explore the System',
       cta_secondary: 'Book a Portal',
@@ -135,7 +135,7 @@ export const translations = {
       address: 'Puerto Morelos, Quintana Roo, Mexico',
       schedule: 'Mon-Sun: 8:00am - 5:00pm',
       phone: '+52 998 777 7498',
-      email: 'info@cenotekinha.com',
+      email: 'reserva@cenotekinha.com',
     },
     footer: {
       tagline: 'Ancient Mayan Portals',

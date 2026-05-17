@@ -64,7 +64,7 @@ export default function ToursSection() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {TOURS.map((tour) => {
             const name = locale === "es" ? tour.nameEs : tour.nameEn;
             const desc = locale === "es" ? tour.descEs : tour.descEn;
