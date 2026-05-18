@@ -19,9 +19,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Cenotes Kin-Ha | Portales Ancestrales Maya",
+  title: "Cenotes Kin-Ha | ATV, Tirolesas y Cenotes en Puerto Morelos",
   description:
-    "El único sistema dual de cenotes en la Riviera Maya. Cueva ancestral y laguna celestial en Puerto Morelos.",
+    "Dos cenotes naturales, cuatrimotos, tirolesas y caballos en la Ruta de los Cenotes, Puerto Morelos. A 30 min de Cancún. Reserva por WhatsApp.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

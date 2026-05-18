@@ -62,14 +62,16 @@ export default function HeroSlider() {
         </p>
 
         <div className="flex flex-wrap justify-center gap-4">
-          <Link
-            href="/experiences"
+          <a
+            href={`https://wa.me/529987777498?text=${encodeURIComponent(t.whatsapp_msg)}`}
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-full bg-teal-500 px-8 py-3.5 font-semibold text-white shadow-lg transition hover:bg-teal-400 hover:shadow-teal-400/40"
           >
             {t.hero.cta_primary}
-          </Link>
+          </a>
           <Link
-            href="/booking"
+            href="/experiences"
             className="rounded-full border-2 border-white/70 px-8 py-3.5 font-semibold text-white backdrop-blur-sm transition hover:bg-white/10"
           >
             {t.hero.cta_secondary}

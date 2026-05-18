@@ -88,7 +88,7 @@ export default function Navbar() {
             href="/booking"
             className="bg-teal-500 hover:bg-teal-400 text-white font-semibold px-5 py-2 rounded-full text-sm transition shadow"
           >
-            {t.hero.cta_secondary}
+            {t.nav.book_now}
           </Link>
         </div>
 
@@ -149,7 +149,7 @@ export default function Navbar() {
               onClick={() => setOpen(false)}
               className="text-center bg-teal-500 px-3 py-2 rounded-full text-xs font-semibold"
             >
-              {t.hero.cta_secondary}
+              {t.nav.book_now}
             </Link>
           </div>
         </div>

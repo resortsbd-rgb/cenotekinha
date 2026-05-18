@@ -5,8 +5,8 @@
 export const TOURS = [
   {
     id: 'cenote-dual',
-    nameEs: 'Sistema Dual Kin-Ha',
-    nameEn: 'Kin-Ha Dual System',
+    nameEs: 'Dos Cenotes Kin-Ha',
+    nameEn: 'Kin-Ha Two Cenotes',
     descEs: 'Acceso a Cenote Kin-Ha + Blanca Flor (laguna). Snorkel, guía certificado.',
     descEn: 'Access to Cenote Kin-Ha + Blanca Flor (lagoon). Snorkel, certified guide.',
     priceMXN: 430,
@@ -16,8 +16,8 @@ export const TOURS = [
   },
   {
     id: 'atv-cenotes',
-    nameEs: 'Aventura ATV + Cenotes',
-    nameEn: 'ATV + Cenotes Adventure',
+    nameEs: 'ATV, Tirolesas y Cenotes',
+    nameEn: 'ATV, Zip Lines & Cenotes',
     descEs: 'ATV por la selva + acceso a cenotes. Add-ons: caballos +$10 USD, seguro ATV $5 USD.',
     descEn: 'Jungle ATV + cenote access. Add-ons: horses +$10 USD, ATV insurance $5 USD.',
     priceMXN: 1060,
@@ -27,8 +27,8 @@ export const TOURS = [
   },
   {
     id: 'ecuestre-cenotes',
-    nameEs: 'Aventura Ecuestre + Cenotes',
-    nameEn: 'Equestrian + Cenotes Adventure',
+    nameEs: 'Caballos y Cenotes',
+    nameEn: 'Horses & Cenotes',
     descEs: 'Paseo a caballo por la selva + acceso a cenotes. Guía certificado incluido.',
     descEn: 'Horseback ride through the jungle + cenote access. Certified guide included.',
     priceMXN: 1170,
@@ -38,8 +38,8 @@ export const TOURS = [
   },
   {
     id: 'experiencia-completa',
-    nameEs: 'Experiencia Completa Kin-Ha',
-    nameEn: 'Kin-Ha Complete Experience',
+    nameEs: 'Aventura Completa Kin-Ha',
+    nameEn: 'Kin-Ha Complete Adventure',
     descEs: 'Sistema dual + ATV + caballos + almuerzo yucateco. Add-on: seguro ATV $5 USD.',
     descEn: 'Dual system + ATV + horses + Yucatecan lunch. Add-on: ATV insurance $5 USD.',
     priceMXN: 1350,
