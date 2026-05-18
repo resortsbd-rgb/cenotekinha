@@ -1,0 +1,517 @@
+diff --git a/src/app/layout.tsx b/src/app/layout.tsx
+index fd5f09f..98a3e03 100644
+--- a/src/app/layout.tsx
++++ b/src/app/layout.tsx
+@@ -19,9 +19,9 @@ const inter = Inter({
+ });
+ 
+ export const metadata: Metadata = {
+-  title: "Cenotes Kin-Ha | Portales Ancestrales Maya",
++  title: "Cenotes Kin-Ha | ATV, Tirolesas y Cenotes en Puerto Morelos",
+   description:
+-    "El único sistema dual de cenotes en la Riviera Maya. Cueva ancestral y laguna celestial en Puerto Morelos.",
++    "Dos cenotes naturales, cuatrimotos, tirolesas y caballos en la Ruta de los Cenotes, Puerto Morelos. A 30 min de Cancún. Reserva por WhatsApp.",
+ };
+ 
+ export default function RootLayout({ children }: { children: React.ReactNode }) {
+diff --git a/src/components/layout/Navbar.tsx b/src/components/layout/Navbar.tsx
+index 0fb7a44..9825103 100644
+--- a/src/components/layout/Navbar.tsx
++++ b/src/components/layout/Navbar.tsx
+@@ -88,7 +88,7 @@ export default function Navbar() {
+             href="/booking"
+             className="bg-teal-500 hover:bg-teal-400 text-white font-semibold px-5 py-2 rounded-full text-sm transition shadow"
+           >
+-            {t.hero.cta_secondary}
++            {t.nav.book_now}
+           </Link>
+         </div>
+ 
+@@ -149,7 +149,7 @@ export default function Navbar() {
+               onClick={() => setOpen(false)}
+               className="text-center bg-teal-500 px-3 py-2 rounded-full text-xs font-semibold"
+             >
+-              {t.hero.cta_secondary}
++              {t.nav.book_now}
+             </Link>
+           </div>
+         </div>
+diff --git a/src/components/ui/FeaturesSection.tsx b/src/components/ui/FeaturesSection.tsx
+index 85e3696..bb3848f 100644
+--- a/src/components/ui/FeaturesSection.tsx
++++ b/src/components/ui/FeaturesSection.tsx
+@@ -5,29 +5,53 @@ import { useLanguage } from "@/contexts/LanguageContext";
+ 
+ const features = [
+   {
+-    key: "safety" as const,
++    key: "dual" as const,
+     icon: (
+       <svg className="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
++        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+       </svg>
+     ),
+   },
+   {
+-    key: "nature" as const,
++    key: "adventure" as const,
+     icon: (
+       <svg className="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
++        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
++      </svg>
++    ),
++  },
++  {
++    key: "intimate" as const,
++    icon: (
++      <svg className="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
++        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+       </svg>
+     ),
+   },
+   {
+-    key: "memories" as const,
++    key: "families" as const,
+     icon: (
+       <svg className="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+       </svg>
+     ),
+   },
++  {
++    key: "whatsapp" as const,
++    icon: (
++      <svg className="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
++        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
++      </svg>
++    ),
++  },
++  {
++    key: "nature" as const,
++    icon: (
++      <svg className="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
++        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
++      </svg>
++    ),
++  },
+ ];
+ 
+ export default function FeaturesSection() {
+@@ -38,17 +62,18 @@ export default function FeaturesSection() {
+     <section className="bg-white py-24 px-4">
+       <div className="max-w-7xl mx-auto">
+         <div className="text-center mb-14">
+-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-teal-600 mb-3">
+-            Kin-Ha
+-          </p>
+-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
++          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+             {t.features.title}
+           </h2>
++          <p className="text-lg text-gray-500 max-w-2xl mx-auto">
++            {t.features.subtitle}
++          </p>
+         </div>
+ 
+-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
++        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+           {features.map(({ key, icon }) => {
+             const feature = t.features[key];
++            if (!feature || !feature.title) return null;
+             return (
+               <div
+                 key={key}
+@@ -57,7 +82,7 @@ export default function FeaturesSection() {
+                 <div className="w-16 h-16 bg-teal-50 rounded-2xl flex items-center justify-center mb-5">
+                   {icon}
+                 </div>
+-                <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
++                <h3 className="text-lg font-bold text-gray-900 mb-3">{feature.title}</h3>
+                 <p className="text-gray-600 text-sm leading-relaxed">{feature.desc}</p>
+               </div>
+             );
+diff --git a/src/components/ui/HeroSlider.tsx b/src/components/ui/HeroSlider.tsx
+index 30a1d5a..4b270f0 100644
+--- a/src/components/ui/HeroSlider.tsx
++++ b/src/components/ui/HeroSlider.tsx
+@@ -62,14 +62,16 @@ export default function HeroSlider() {
+         </p>
+ 
+         <div className="flex flex-wrap justify-center gap-4">
+-          <Link
+-            href="/experiences"
++          <a
++            href={`https://wa.me/529987777498?text=${encodeURIComponent(t.whatsapp_msg)}`}
++            target="_blank"
++            rel="noopener noreferrer"
+             className="rounded-full bg-teal-500 px-8 py-3.5 font-semibold text-white shadow-lg transition hover:bg-teal-400 hover:shadow-teal-400/40"
+           >
+             {t.hero.cta_primary}
+-          </Link>
++          </a>
+           <Link
+-            href="/booking"
++            href="/experiences"
+             className="rounded-full border-2 border-white/70 px-8 py-3.5 font-semibold text-white backdrop-blur-sm transition hover:bg-white/10"
+           >
+             {t.hero.cta_secondary}
+diff --git a/src/components/ui/ToursSection.tsx b/src/components/ui/ToursSection.tsx
+index 769a91d..fb95e09 100644
+--- a/src/components/ui/ToursSection.tsx
++++ b/src/components/ui/ToursSection.tsx
+@@ -43,8 +43,8 @@ export default function ToursSection() {
+ 
+   function waLink(tourName: string) {
+     const msg = locale === "es"
+-      ? `Hola, me interesa reservar: ${tourName}`
+-      : `Hello, I am interested in booking: ${tourName}`;
++      ? `Hola, quiero reservar: ${tourName}.\nFecha: \nPersonas: `
++      : `Hello, I want to book: ${tourName}.\nDate: \nPeople: `;
+     return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+   }
+ 
+@@ -64,10 +64,11 @@ export default function ToursSection() {
+           </h2>
+         </div>
+ 
+-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
++        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+           {TOURS.map((tour) => {
+             const name = locale === "es" ? tour.nameEs : tour.nameEn;
+             const desc = locale === "es" ? tour.descEs : tour.descEn;
++            const priceDisplay = (tour as any).priceLabel || `$${tour.priceMXN.toLocaleString()}`;
+             return (
+               <div
+                 key={tour.id}
+@@ -75,32 +76,32 @@ export default function ToursSection() {
+                 data-tour-id={tour.id}
+                 className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col"
+               >
+-                <div className="relative h-56 overflow-hidden">
++                <div className="relative h-48 overflow-hidden">
+                   <Image
+                     src={tour.image}
+                     alt={name}
+                     fill
+                     className="object-cover transition-transform duration-500 hover:scale-105"
+-                    sizes="(max-width: 768px) 100vw, 33vw"
++                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                   />
+-                  <div className="absolute top-4 right-4 bg-teal-500 text-white text-xs font-bold px-3 py-1 rounded-full">
++                  <div className="absolute top-3 right-3 bg-teal-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                     {tour.duration}
+                   </div>
+                 </div>
+ 
+-                <div className="p-6 flex flex-col flex-1">
+-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{name}</h3>
++                <div className="p-5 flex flex-col flex-1">
++                  <h3 className="text-lg font-bold text-gray-900 mb-2">{name}</h3>
+                   <p className="text-gray-500 text-sm leading-relaxed flex-1 mb-4">{desc}</p>
+ 
+-                  <div className="flex items-center justify-between text-sm text-gray-500 mb-5">
++                  <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                     <span className="flex items-center gap-1">
+                       <svg className="w-4 h-4 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                       </svg>
+                       {t.tours.max}: {tour.maxPeople}
+                     </span>
+-                    <span className="text-2xl font-bold text-teal-700">
+-                      ${tour.priceMXN.toLocaleString()} MXN
++                    <span className="text-xl font-bold text-teal-700">
++                      {priceDisplay} MXN
+                     </span>
+                   </div>
+ 
+diff --git a/src/lib/stripe.ts b/src/lib/stripe.ts
+index 84d24e4..6a678a7 100644
+--- a/src/lib/stripe.ts
++++ b/src/lib/stripe.ts
+@@ -5,35 +5,56 @@
+ export const TOURS = [
+   {
+     id: 'cenote-dual',
+-    nameEs: 'Sistema Dual Kin-Ha',
+-    nameEn: 'Kin-Ha Dual System',
+-    descEs: 'Acceso a Cenote Kin-Ha (cueva) + Blanca Flor (laguna). Snorkel, guía certificado.',
+-    descEn: 'Access to Cenote Kin-Ha (cave) + Blanca Flor (lagoon). Snorkel, certified guide.',
+-    priceMXN: 450,
++    nameEs: 'Dos Cenotes Kin-Ha',
++    nameEn: 'Two Cenotes Kin-Ha',
++    descEs: 'Cenote subterráneo + laguna abierta Blanca Flor. Dos cenotes, tirolesas acuáticas, chaleco, locker y hamacas.',
++    descEn: 'Underground cenote + open-air Blanca Flor lagoon. Two cenotes, aquatic ziplines, life jacket, locker and hammocks.',
++    priceMXN: 430,
+     duration: '3h',
+     maxPeople: 20,
+     image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663403066106/Zp7c8E6uddmsrRA2xBjMah/cenote-kinha-1_354574cd.jpg',
+   },
+   {
+-    id: 'cenote-cave',
+-    nameEs: 'Portal Cueva + Rappel',
+-    nameEn: 'Cave Portal + Rappel',
+-    descEs: 'Rappel de descenso al cenote cueva + snorkel + guía espeleológico.',
+-    descEn: 'Rappel descent into cave cenote + snorkel + speleological guide.',
+-    priceMXN: 750,
++    id: 'atv-cenotes',
++    nameEs: 'ATV, Tirolesas y Cenotes',
++    nameEn: 'ATV, Ziplines & 2 Cenotes',
++    descEs: 'Adrenalina en la selva. Recorrido en cuatrimoto por la jungla maya + ambos cenotes + tirolesas + snack y agua. Opción de agregar caballos (+$10 USD).',
++    descEn: 'Adrenaline in the jungle. ATV ride through the Mayan jungle + both cenotes + ziplines + snack & water. Option to add horseback riding (+$10 USD).',
++    priceMXN: 1060,
++    priceLabel: '$1,060 - $1,270',
+     duration: '4h',
+-    maxPeople: 12,
+-    image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663403066106/Zp7c8E6uddmsrRA2xBjMah/cenote-cave_02f834b4.jpg',
++    maxPeople: 15,
++    image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663403066106/Zp7c8E6uddmsrRA2xBjMah/atv-jungle_3b7c5d3f.jpg',
++    addons: [
++      { nameEs: 'Paseo a caballo', nameEn: 'Horseback riding', priceUSD: 10 },
++      { nameEs: 'Seguro de cuatrimoto', nameEn: 'ATV insurance', priceUSD: 5 },
++    ],
++  },
++  {
++    id: 'caballos-cenotes',
++    nameEs: 'Caballos y Cenotes',
++    nameEn: 'Horseback Riding & 2 Cenotes',
++    descEs: 'La selva a paso de caballo. Cabalgata por senderos ancestrales + ambos cenotes + tirolesas + snack y agua.',
++    descEn: 'The jungle at horseback pace. Ride through ancestral trails + both cenotes + ziplines + snack & water.',
++    priceMXN: 1170,
++    priceLabel: '$1,170 - $1,270',
++    duration: '4h',
++    maxPeople: 15,
++    image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663403066106/Zp7c8E6uddmsrRA2xBjMah/horses-jungle_34a1d854.jpg',
+   },
+   {
+     id: 'experiencia-completa',
+-    nameEs: 'Experiencia Completa',
+-    nameEn: 'Complete Experience',
+-    descEs: 'Sistema dual + ATV selva + caballos + almuerzo yucateco + fotos profesionales. Todo incluido.',
+-    descEn: 'Dual system + jungle ATV + horses + Yucatecan lunch + professional photos. All-inclusive.',
+-    priceMXN: 1200,
+-    duration: 'Full day',
++    nameEs: 'Aventura Completa Kin-Ha',
++    nameEn: 'Ultimate Kin-Ha Adventure',
++    descEs: 'Todo. Sin límites. ATV + caballos + ambos cenotes + tirolesas + snack con bebida. El día completo de pura magia.',
++    descEn: 'Everything. No limits. ATV + horses + both cenotes + ziplines + snack with drink. A full day of pure magic.',
++    priceMXN: 1350,
++    priceLabel: '$1,350 - $1,550',
++    duration: '5-6h',
+     maxPeople: 15,
+-    image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663403066106/Zp7c8E6uddmsrRA2xBjMah/atv-jungle_3b7c5d3f.jpg',
++    image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663403066106/Zp7c8E6uddmsrRA2xBjMah/atv-tour_9bf62408.jpg',
++    addons: [
++      { nameEs: 'Seguro de cuatrimoto', nameEn: 'ATV insurance', priceUSD: 5 },
++    ],
+   },
+ ];
+diff --git a/src/lib/translations.ts b/src/lib/translations.ts
+index 23581fb..e4717ea 100644
+--- a/src/lib/translations.ts
++++ b/src/lib/translations.ts
+@@ -6,55 +6,64 @@ export const translations = {
+       gallery: 'Galería',
+       reviews: 'Reseñas',
+       contact: 'Contacto',
++      book_now: 'Reservar ahora',
+     },
+     hero: {
+-      title: 'Luz y Sombra. Cielo y Caverna. Kin-Ha.',
+-      subtitle: 'El único sistema dual de cenotes en la Riviera Maya. Cueva ancestral. Laguna celestial. Una experiencia.',
+-      cta_primary: 'Explorar el Sistema',
+-      cta_secondary: 'Reservar Portal',
+-      badge: 'Puerto Morelos, Riviera Maya',
++      title: 'Cenotes sagrados. Aventura real. Naturaleza viva.',
++      subtitle: 'Vive Cenotes Kin-Ha: dos cenotes naturales, ATV, tirolesas, caballos opcionales y una experiencia más íntima en la Ruta de los Cenotes.',
++      cta_primary: 'Reservar mi aventura',
++      cta_secondary: 'Ver tours y precios',
++      badge: 'Ruta de los Cenotes · Puerto Morelos',
+     },
+     stats: {
+       cenotes: 'Cenotes',
+-      years: 'Años de experiencia',
++      years: 'Años de operación',
+       visitors: 'Visitantes felices',
+-      certified: 'Seguridad certificada',
++      certified: 'Protocolos de seguridad',
+     },
+     tours: {
+-      title: 'Nuestras Experiencias',
+-      subtitle: 'Portales hacia el mundo ancestral maya',
+-      book: 'Reservar',
++      title: 'Tours y Precios',
++      subtitle: 'Elige tu aventura en Cenotes Kin-Ha',
++      book: 'Reservar este tour',
+       duration: 'Duración',
+       max: 'Máx. personas',
+       price_from: 'Desde',
+     },
+     features: {
+-      title: 'Por qué elegir Kin-Ha',
+-      safety: { title: 'Seguridad Certificada', desc: 'Equipo profesional y protocolos de seguridad certificados.' },
+-      nature: { title: 'Naturaleza Auténtica', desc: 'Ecosistema preservado sin intervención masiva.' },
+-      memories: { title: 'Memorias Únicas', desc: 'El único sistema dual de cenotes en la Riviera Maya.' },
++      title: 'No es un parque masivo. Es Kin-Ha.',
++      subtitle: 'Una experiencia más natural, cercana y auténtica en la Ruta de los Cenotes.',
++      dual: { title: 'Dos cenotes en una experiencia', desc: 'Explora un cenote subterráneo y una laguna abierta rodeada de selva. Dos formas de vivir el agua sagrada de Kin-Ha.' },
++      adventure: { title: 'Aventura real en la selva', desc: 'ATV, tirolesas, cenotes y caballos opcionales en un entorno natural, sin experiencias artificiales o masivas.' },
++      intimate: { title: 'Más íntimo, más personal', desc: 'Grupos controlados, guías locales y una experiencia diseñada para conectar con el lugar, no solo para tomarte una foto.' },
++      families: { title: 'Ideal para familias, parejas y grupos', desc: 'Naturaleza, adrenalina y diversión real cerca de Cancún, Puerto Morelos y Riviera Maya.' },
++      whatsapp: { title: 'Reserva fácil por WhatsApp', desc: 'Consulta disponibilidad, horarios, transporte y opciones de actividad en minutos.' },
++      nature: { title: 'Naturaleza viva', desc: 'Cada visita fortalece el valor turístico y de conservación de este entorno natural único en la Ruta de los Cenotes.' },
++      safety: { title: '', desc: '' },
++      memories: { title: '', desc: '' },
+     },
+     gallery: { title: 'Galería', subtitle: 'Momentos en Kin-Ha' },
+     faq: {
+       title: 'Preguntas Frecuentes',
+       items: [
+-        { q: '¿Qué incluye la entrada básica?', a: 'Acceso a ambos cenotes, equipo de snorkel, salvavidas y guía.' },
+-        { q: '¿Puedo llevar niños?', a: 'Sí, niños mayores de 5 años pueden participar con chaleco salvavidas.' },
++        { q: '¿Qué incluye la entrada básica?', a: 'Acceso a Cenote Kin-Ha (cueva subterránea) y Cenote Blanca Flor (laguna abierta), tirolesas acuáticas, chaleco salvavidas, locker y hamacas.' },
++        { q: '¿Puedo llevar niños?', a: 'Sí. Niños de 3-9 años tienen tarifa especial. Infantes de 0-2 años pagan solo entrada básica.' },
+         { q: '¿Hay que saber nadar?', a: 'No es obligatorio, proporcionamos chalecos salvavidas para todos.' },
+-        { q: '¿Dónde están ubicados?', a: 'En Puerto Morelos, a 25 min de Cancún y 20 min de Playa del Carmen.' },
+-        { q: '¿Cuál es el horario?', a: 'Abrimos de 8am a 5pm todos los días del año.' },
+-        { q: '¿Cómo reservo?', a: 'Puedes reservar en línea con pago seguro Stripe o por WhatsApp.' },
++        { q: '¿Dónde están ubicados?', a: 'Km 18.5, Ruta de los Cenotes, Puerto Morelos. A 30 min de Cancún y 20 min de Playa del Carmen.' },
++        { q: '¿Cuál es el horario?', a: 'Lunes a Domingo de 8:00am a 5:00pm, todo el año.' },
++        { q: '¿Cómo reservo?', a: 'Escríbenos por WhatsApp al +52 998 777 7498 o envía un correo a reserva@cenotekinha.com.' },
++        { q: '¿Qué debo traer?', a: 'Traje de baño, toalla, zapatos para agua, gorra y ropa extra. No se permite bloqueador solar ni repelente (protección del ecosistema).' },
++        { q: '¿Tienen transporte?', a: 'El transporte desde zona hotelera está disponible como servicio adicional. Consulta por WhatsApp.' },
+       ],
+     },
+     contact: {
+       title: 'Contáctanos',
+-      address: 'Puerto Morelos, Quintana Roo, México',
++      address: 'Km 18.5, Ruta de los Cenotes, Puerto Morelos, Q.R.',
+       schedule: 'Lun-Dom: 8:00am - 5:00pm',
+       phone: '+52 998 777 7498',
+-      email: 'info@cenotekinha.com',
++      email: 'reserva@cenotekinha.com',
+     },
+     footer: {
+-      tagline: 'Portales Ancestrales Maya',
++      tagline: 'Cenotes sagrados, aventura real y naturaleza viva',
+       tours: 'Experiencias',
+       info: 'Información',
+       contact: 'Contacto',
+@@ -76,11 +85,11 @@ export const translations = {
+       people: 'Personas',
+       submit: 'Continuar al pago',
+     },
+-    whatsapp_msg: 'Hola, me interesa reservar una experiencia en Cenotes Kin-Ha',
++    whatsapp_msg: 'Hola, quiero reservar una experiencia en Cenotes Kin-Ha',
+     cta_final: {
+       title: '¿Listo para la Aventura?',
+-      subtitle: 'Reserva hoy y obtén un 10% de descuento',
+-      btn: 'Reservar Ahora',
++      subtitle: 'Reserva hoy tu experiencia en Cenotes Kin-Ha',
++      btn: 'Reservar mi aventura',
+     },
+   },
+   en: {
+@@ -90,55 +99,64 @@ export const translations = {
+       gallery: 'Gallery',
+       reviews: 'Reviews',
+       contact: 'Contact',
++      book_now: 'Book Now',
+     },
+     hero: {
+-      title: 'Light and Shadow. Sky and Cavern. Kin-Ha.',
+-      subtitle: 'The only dual cenote system in the Riviera Maya. Ancient cave. Celestial lagoon. One experience.',
+-      cta_primary: 'Explore the System',
+-      cta_secondary: 'Book a Portal',
+-      badge: 'Puerto Morelos, Riviera Maya',
++      title: 'Sacred cenotes. Real adventure. Living nature.',
++      subtitle: 'Experience Cenotes Kin-Ha: two natural cenotes, ATV, ziplines, optional horseback riding and an intimate adventure on the Ruta de los Cenotes.',
++      cta_primary: 'Book my adventure',
++      cta_secondary: 'See tours & prices',
++      badge: 'Ruta de los Cenotes · Puerto Morelos',
+     },
+     stats: {
+       cenotes: 'Cenotes',
+-      years: 'Years of experience',
++      years: 'Years in operation',
+       visitors: 'Happy visitors',
+-      certified: 'Certified safety',
++      certified: 'Safety protocols',
+     },
+     tours: {
+-      title: 'Our Experiences',
+-      subtitle: 'Portals to the ancient Mayan world',
+-      book: 'Book Now',
++      title: 'Tours & Prices',
++      subtitle: 'Choose your adventure at Cenotes Kin-Ha',
++      book: 'Book this tour',
+       duration: 'Duration',
+       max: 'Max. people',
+       price_from: 'From',
+     },
+     features: {
+-      title: 'Why choose Kin-Ha',
+-      safety: { title: 'Certified Safety', desc: 'Professional team and certified safety protocols.' },
+-      nature: { title: 'Authentic Nature', desc: 'Preserved ecosystem without mass intervention.' },
+-      memories: { title: 'Unique Memories', desc: 'The only dual cenote system in the Riviera Maya.' },
++      title: "Not a massive theme park. It's Kin-Ha.",
++      subtitle: 'A more natural, personal and authentic experience on the Ruta de los Cenotes.',
++      dual: { title: 'Two cenotes in one experience', desc: 'Explore an underground cenote and an open-air lagoon surrounded by jungle. Two ways to experience the sacred waters of Kin-Ha.' },
++      adventure: { title: 'Real jungle adventure', desc: 'ATV, ziplines, cenotes and optional horseback riding in a natural setting — no artificial or mass-tourism vibes.' },
++      intimate: { title: 'More intimate, more personal', desc: 'Controlled groups, local guides and an experience designed to connect with the place, not just snap a photo.' },
++      families: { title: 'Perfect for families, couples & groups', desc: 'Nature, adrenaline and real fun near Cancún, Puerto Morelos and the Riviera Maya.' },
++      whatsapp: { title: 'Easy booking via WhatsApp', desc: 'Check availability, schedules, transport and activity options in minutes.' },
++      nature: { title: 'Living nature', desc: 'Every visit strengthens the tourism and conservation value of this unique natural environment on the Ruta de los Cenotes.' },
++      safety: { title: '', desc: '' },
++      memories: { title: '', desc: '' },
+     },
+     gallery: { title: 'Gallery', subtitle: 'Moments at Kin-Ha' },
+     faq: {
+       title: 'Frequently Asked Questions',
+       items: [
+-        { q: 'What does basic entry include?', a: 'Access to both cenotes, snorkel gear, life jacket and guide.' },
+-        { q: 'Can I bring children?', a: 'Yes, children over 5 years old can participate with life jackets.' },
++        { q: 'What does basic entry include?', a: 'Access to Cenote Kin-Ha (underground cave) and Cenote Blanca Flor (open lagoon), aquatic ziplines, life jacket, locker and hammocks.' },
++        { q: 'Can I bring children?', a: 'Yes. Children 3-9 have special rates. Infants 0-2 pay basic entry only.' },
+         { q: 'Do I need to know how to swim?', a: 'Not required, we provide life jackets for everyone.' },
+-        { q: 'Where are you located?', a: 'In Puerto Morelos, 25 min from Cancún and 20 min from Playa del Carmen.' },
+-        { q: 'What are your hours?', a: 'We are open 8am to 5pm every day of the year.' },
+-        { q: 'How do I book?', a: 'You can book online with secure Stripe payment or via WhatsApp.' },
++        { q: 'Where are you located?', a: 'Km 18.5, Ruta de los Cenotes, Puerto Morelos. 30 min from Cancún, 20 min from Playa del Carmen.' },
++        { q: 'What are your hours?', a: 'Monday to Sunday, 8:00am to 5:00pm, year-round.' },
++        { q: 'How do I book?', a: 'WhatsApp us at +52 998 777 7498 or email reserva@cenotekinha.com.' },
++        { q: 'What should I bring?', a: 'Swimsuit, towel, water shoes, hat and extra clothes. No sunscreen or bug spray allowed (ecosystem protection).' },
++        { q: 'Do you offer transport?', a: 'Transport from hotel zone available as add-on. Ask via WhatsApp.' },
+       ],
+     },
+     contact: {
+       title: 'Contact Us',
+-      address: 'Puerto Morelos, Quintana Roo, Mexico',
++      address: 'Km 18.5, Ruta de los Cenotes, Puerto Morelos, Q.R.',
+       schedule: 'Mon-Sun: 8:00am - 5:00pm',
+       phone: '+52 998 777 7498',
+-      email: 'info@cenotekinha.com',
++      email: 'reserva@cenotekinha.com',
+     },
+     footer: {
+-      tagline: 'Ancient Mayan Portals',
++      tagline: 'Sacred cenotes, real adventure and living nature',
+       tours: 'Experiences',
+       info: 'Information',
+       contact: 'Contact',
+@@ -160,11 +178,11 @@ export const translations = {
+       people: 'People',
+       submit: 'Continue to payment',
+     },
+-    whatsapp_msg: 'Hello, I am interested in booking a tour at Cenotes Kin-Ha',
++    whatsapp_msg: 'Hello, I want to book an experience at Cenotes Kin-Ha',
+     cta_final: {
+       title: 'Ready for the Adventure?',
+-      subtitle: 'Book today and get 10% off',
+-      btn: 'Book Now',
++      subtitle: 'Book your Cenotes Kin-Ha experience today',
++      btn: 'Book my adventure',
+     },
+   },
+ };
