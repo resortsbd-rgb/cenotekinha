@@ -1,123 +1,145 @@
 "use client";
+
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { translations } from "@/lib/translations";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { TOURS } from "@/lib/stripe";
 import { trackTourView, trackWhatsAppClick } from "@/lib/analytics";
 
-const WA_NUMBER = "529987777498";
+const WHATSAPP = "529987777498";
 
 export default function ToursSection() {
   const { locale } = useLanguage();
   const t = translations[locale];
-  const tourRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
-  const viewedTours = useRef<Set<string>>(new Set());
+  const tourRefs = useRef<Record<string, HTMLElement | null>>({});
+  const viewedTours = useRef(new Set<string>());
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const tourId = entry.target.getAttribute('data-tour-id');
-            if (tourId && !viewedTours.current.has(tourId)) {
-              const tour = TOURS.find((t) => t.id === tourId);
-              if (tour) {
-                const name = locale === "es" ? tour.nameEs : tour.nameEn;
-                trackTourView(tour.id, name, tour.priceMXN);
-                viewedTours.current.add(tourId);
-              }
-            }
-          }
+          if (!entry.isIntersecting) return;
+
+          const tourId = entry.target.getAttribute("data-tour-id");
+          if (!tourId || viewedTours.current.has(tourId)) return;
+
+          const tour = TOURS.find((item) => item.id === tourId);
+          if (!tour) return;
+
+          trackTourView(
+            tour.id,
+            locale === "es" ? tour.nameEs : tour.nameEn,
+            tour.priceMXN,
+          );
+          viewedTours.current.add(tourId);
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.45 },
     );
 
-    Object.values(tourRefs.current).forEach((ref) => {
-      if (ref) observer.observe(ref);
+    Object.values(tourRefs.current).forEach((element) => {
+      if (element) observer.observe(element);
     });
 
     return () => observer.disconnect();
   }, [locale]);
 
-  function waLink(tourName: string) {
-    const msg = locale === "es"
-      ? `Hola, me interesa reservar: ${tourName}`
-      : `Hello, I am interested in booking: ${tourName}`;
-    return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
-  }
-
-  const handleBookingClick = (tourName: string) => {
-    trackWhatsAppClick('tour_card', tourName);
-  };
-
   return (
-    <section id="tours" className="bg-gray-50 py-24 px-4">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-14">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-teal-600 mb-3">
-            {t.tours.subtitle}
+    <section id="tours" className="bg-[#062c24] px-4 py-24 text-white sm:px-6 lg:py-32">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-14 grid gap-6 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
+          <div>
+            <p className="mb-4 text-xs font-bold uppercase tracking-[0.28em] text-[#69d8cb]">
+              {locale === "es" ? "Elige cómo vivir Kin-Ha" : "Choose your Kin-Ha experience"}
+            </p>
+            <h2 className="text-balance text-5xl font-medium leading-[0.95] tracking-[-0.035em] md:text-7xl">
+              {t.tours.title}
+            </h2>
+          </div>
+          <p className="max-w-2xl text-lg leading-relaxed text-white/65 lg:justify-self-end">
+            {locale === "es"
+              ? "Desde una visita a los cenotes hasta un día completo de aventura. Selecciona una opción y confirmamos disponibilidad, transportación y precio final contigo."
+              : "From a cenote visit to a full day of adventure. Choose an option and we will confirm availability, transportation and final pricing with you."}
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-            {t.tours.title}
-          </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {TOURS.map((tour) => {
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+          {TOURS.map((tour, index) => {
             const name = locale === "es" ? tour.nameEs : tour.nameEn;
-            const desc = locale === "es" ? tour.descEs : tour.descEn;
+            const description = locale === "es" ? tour.descEs : tour.descEn;
+            const isFeatured = "featured" in tour && tour.featured;
+            const message =
+              locale === "es"
+                ? `Hola, me interesa ${name}. ¿Me ayudan a confirmar disponibilidad, transportación y precio final?`
+                : `Hi, I am interested in ${name}. Can you help me confirm availability, transportation and final pricing?`;
+
             return (
-              <div
+              <article
                 key={tour.id}
-                ref={(el) => { tourRefs.current[tour.id] = el; }}
+                ref={(element) => {
+                  tourRefs.current[tour.id] = element;
+                }}
                 data-tour-id={tour.id}
-                className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col"
+                className={`group overflow-hidden border border-white/12 bg-white/[.055] ${
+                  isFeatured ? "md:col-span-2 md:grid md:grid-cols-[1.2fr_.8fr]" : ""
+                }`}
               >
-                <div className="relative h-56 overflow-hidden">
+                <div className={`relative overflow-hidden ${isFeatured ? "min-h-[360px] md:min-h-[520px]" : "h-72"}`}>
                   <Image
                     src={tour.image}
                     alt={name}
                     fill
-                    className="object-cover transition-transform duration-500 hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover transition duration-700 group-hover:scale-[1.035]"
+                    sizes={isFeatured ? "(max-width: 768px) 100vw, 60vw" : "(max-width: 768px) 100vw, 50vw"}
                   />
-                  <div className="absolute top-4 right-4 bg-teal-500 text-white text-xs font-bold px-3 py-1 rounded-full">
-                    {tour.duration}
-                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#031a15]/65 via-transparent to-transparent" />
+                  <span className="absolute left-5 top-5 border border-white/30 bg-[#031a15]/55 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] backdrop-blur-md">
+                    {isFeatured
+                      ? locale === "es" ? "Experiencia insignia" : "Signature experience"
+                      : `${String(index + 1).padStart(2, "0")} · ${tour.duration}`}
+                  </span>
                 </div>
 
-                <div className="p-6 flex flex-col flex-1">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{name}</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed flex-1 mb-4">{desc}</p>
-
-                  <div className="flex items-center justify-between text-sm text-gray-500 mb-5">
-                    <span className="flex items-center gap-1">
-                      <svg className="w-4 h-4 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                      {t.tours.max}: {tour.maxPeople}
-                    </span>
-                    <span className="text-2xl font-bold text-teal-700">
-                      ${tour.priceMXN.toLocaleString()} MXN
-                    </span>
+                <div className={`flex flex-col justify-between p-7 ${isFeatured ? "md:p-10 lg:p-12" : ""}`}>
+                  <div>
+                    <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-[#69d8cb]">
+                      {tour.duration} · {locale === "es" ? `hasta ${tour.maxPeople} personas` : `up to ${tour.maxPeople} guests`}
+                    </p>
+                    <h3 className={`mb-4 font-medium leading-tight ${isFeatured ? "text-4xl lg:text-5xl" : "text-3xl"}`}>
+                      {name}
+                    </h3>
+                    <p className="mb-8 leading-relaxed text-white/65">{description}</p>
                   </div>
 
-                  <a
-                    href={waLink(name)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => handleBookingClick(name)}
-                    className="w-full bg-green-500 hover:bg-green-400 text-white font-semibold py-3 rounded-xl transition flex items-center justify-center gap-2"
-                  >
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                    </svg>
-                    {t.tours.book}
-                  </a>
+                  <div>
+                    <p className="mb-5 text-sm text-white/55">
+                      {locale === "es" ? "Precio base desde" : "Base price from"}{" "}
+                      <strong className="ml-1 text-2xl font-semibold text-white">
+                        ${tour.priceMXN.toLocaleString()} MXN
+                      </strong>
+                    </p>
+                    <div className="flex flex-col gap-3 sm:flex-row">
+                      <a
+                        href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => trackWhatsAppClick("tour_card", name)}
+                        className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#69d8cb] px-6 py-3 font-bold text-[#062c24] transition hover:bg-white"
+                      >
+                        {t.tours.book}
+                      </a>
+                      <Link
+                        href="/booking"
+                        className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/30 px-6 py-3 font-semibold text-white transition hover:border-white hover:bg-white/10"
+                      >
+                        {locale === "es" ? "Ver detalles" : "View details"}
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </article>
             );
           })}
         </div>

@@ -15,24 +15,24 @@ const TOUR_DETAILS: Record<TourId, {
     badge: { es: "CLÁSICO", en: "CLASSIC" },
     badgeColor: "bg-teal-500",
     includes: {
-      es: ["Acceso a 2 cenotes (Kin-Ha + Blanca Flor)", "Equipo de snorkel completo", "Guía certificado bilingüe", "Chaleco salvavidas", "Estacionamiento gratuito"],
-      en: ["Access to 2 cenotes (Kin-Ha + Blanca Flor)", "Full snorkel gear", "Bilingual certified guide", "Life jacket", "Free parking"],
+      es: ["Acceso a 2 cenotes (Kin-Ha + Blanca Flor)", "Equipo de snorkel completo", "Guía bilingüe", "Chaleco salvavidas", "Regaderas y lockers sin costo", "Estacionamiento gratuito"],
+      en: ["Access to 2 cenotes (Kin-Ha + Blanca Flor)", "Full snorkel gear", "Bilingual guide", "Life jacket", "Complimentary showers and lockers", "Free parking"],
     },
     addons: {
-      es: ["Fotografía subacuática +$200 MXN", "Casillero +$50 MXN"],
-      en: ["Underwater photography +$200 MXN", "Locker +$50 MXN"],
+      es: ["Fotografía subacuática disponible"],
+      en: ["Underwater photography available"],
     },
   },
   "atv-cenotes": {
     badge: { es: "MÁS POPULAR", en: "MOST POPULAR" },
     badgeColor: "bg-amber-500",
     includes: {
-      es: ["ATV por la selva (30 min)", "Tirolesas sobre el cenote", "Acceso a 2 cenotes", "Equipo de snorkel", "Guía certificado bilingüe", "Chaleco salvavidas"],
-      en: ["Jungle ATV (30 min)", "Zip lines over the cenote", "Access to 2 cenotes", "Snorkel gear", "Bilingual certified guide", "Life jacket"],
+      es: ["ATV por la selva", "3 tirolesas", "Cenote Blanca Flor (abierto)", "Cenote Kin-Ha (subterráneo)", "Comida mexicana", "Degustación de tequila", "Guía bilingüe", "Regaderas y lockers sin costo"],
+      en: ["Jungle ATV", "3 zip lines", "Blanca Flor Cenote (open-air)", "Kin-Ha Cenote (underground)", "Mexican lunch", "Tequila tasting", "Bilingual guide", "Complimentary showers and lockers"],
     },
     addons: {
-      es: ["Seguro ATV +$5 USD (~$100 MXN)", "Caballos +$10 USD (~$200 MXN)"],
-      en: ["ATV insurance +$5 USD (~$100 MXN)", "Horses +$10 USD (~$200 MXN)"],
+      es: ["Seguro ATV $5 USD"],
+      en: ["ATV insurance $5 USD"],
     },
   },
   "ecuestre-cenotes": {
@@ -90,7 +90,6 @@ export default function BookingPage() {
 
   const isEs = locale === "es";
   const selectedTour = TOURS.find((t) => t.id === selectedId);
-  const selectedDetails = selectedId ? TOUR_DETAILS[selectedId] : null;
   const total = selectedTour ? selectedTour.priceMXN * people : 0;
 
   const tourName = selectedTour
@@ -113,14 +112,14 @@ export default function BookingPage() {
   const today = new Date().toISOString().split("T")[0];
 
   const TRUST_BADGES = [
-    { icon: "⭐", text: isEs ? "4.9 · 200+ reseñas" : "4.9 · 200+ reviews" },
-    { icon: "🛡️", text: isEs ? "Guías certificados" : "Certified guides" },
-    { icon: "💬", text: isEs ? "Respuesta en < 10 min" : "Response in < 10 min" },
+    { icon: "💧", text: isEs ? "2 cenotes naturales" : "2 natural cenotes" },
+    { icon: "⚡", text: isEs ? "3 tirolesas" : "3 zip lines" },
+    { icon: "🚐", text: isEs ? "Recogida disponible" : "Pickup available" },
     { icon: "📍", text: "Puerto Morelos, Riviera Maya" },
   ];
 
-  const BRING_ES = ["Traje de baño", "Ropa de cambio", "Toalla", "Bloqueador solar biodegradable", "Agua (también hay tienda en el lugar)", "Zapatos cómodos o acuáticos", "Efectivo para add-ons"];
-  const BRING_EN = ["Swimsuit", "Change of clothes", "Towel", "Biodegradable sunscreen", "Water (also available on-site)", "Comfortable or water shoes", "Cash for add-ons"];
+  const BRING_ES = ["Traje de baño", "Ropa de cambio", "Toalla", "Zapatos cómodos o acuáticos", "Agua", "Efectivo para extras", "Importante: no usar bloqueador solar"];
+  const BRING_EN = ["Swimsuit", "Change of clothes", "Towel", "Comfortable or water shoes", "Water", "Cash for extras", "Important: do not use sunscreen"];
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -383,8 +382,8 @@ export default function BookingPage() {
           {selectedId && (
             <p className="text-center text-sm text-slate-500 mt-3">
               {isEs
-                ? "💬 Te respondemos en menos de 10 minutos para confirmar tu reserva"
-                : "💬 We reply in under 10 minutes to confirm your booking"}
+                ? "💬 Confirmaremos disponibilidad, precio final y recogida contigo"
+                : "💬 We will confirm availability, final pricing and pickup with you"}
             </p>
           )}
         </div>
@@ -418,18 +417,18 @@ export default function BookingPage() {
               {[
                 {
                   icon: "🚗",
-                  title: isEs ? "Desde Cancún" : "From Cancún",
-                  desc: isEs ? "~30 min por la Ruta de los Cenotes (Carr. 307)" : "~30 min on the Cenote Route (Hwy 307)",
+                  title: isEs ? "Recogida en Cancún" : "Cancún pickup",
+                  desc: isEs ? "Hotel, Airbnb o punto de encuentro confirmado al reservar" : "Hotel, Airbnb or meeting point confirmed at booking",
                 },
                 {
                   icon: "🛫",
-                  title: isEs ? "Desde el Aeropuerto CUN" : "From CUN Airport",
-                  desc: isEs ? "~25 min, Uber disponible" : "~25 min, Uber available",
+                  title: isEs ? "Recogida en Puerto Morelos" : "Puerto Morelos pickup",
+                  desc: isEs ? "Horario y ubicación exacta según tu hospedaje" : "Exact time and location based on your accommodation",
                 },
                 {
                   icon: "🏖️",
-                  title: isEs ? "Desde Playa del Carmen" : "From Playa del Carmen",
-                  desc: isEs ? "~20 min por la carretera 307" : "~20 min on highway 307",
+                  title: isEs ? "Recogida en Playa del Carmen" : "Playa del Carmen pickup",
+                  desc: isEs ? "Hotel, Airbnb o punto de encuentro confirmado al reservar" : "Hotel, Airbnb or meeting point confirmed at booking",
                 },
               ].map((row) => (
                 <div key={row.title} className="flex gap-3">
@@ -445,8 +444,8 @@ export default function BookingPage() {
                   <span className="flex-shrink-0">📌</span>
                   <span>
                     {isEs
-                      ? "Al confirmar tu reserva por WhatsApp te enviamos el pin exacto en Google Maps."
-                      : "When you confirm your booking via WhatsApp we'll send you the exact Google Maps pin."}
+                      ? "El parque se encuentra en el km 18 de la Ruta de los Cenotes. Al reservar confirmamos si tu experiencia incluye transportación."
+                      : "The park is at km 18 of the Cenote Route. When booking, we confirm whether your experience includes transportation."}
                   </span>
                 </p>
               </div>
