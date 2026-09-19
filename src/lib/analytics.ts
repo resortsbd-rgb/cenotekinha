@@ -2,14 +2,14 @@
 // NO importa nada de Analytics.tsx - funciona de forma independiente
 
 // Meta Pixel tracking
-export const trackEvent = (eventName: string, params?: Record<string, any>) => {
+export const trackEvent = (eventName: string, params?: Record<string, unknown>) => {
   if (typeof window !== 'undefined' && window.fbq) {
     window.fbq('track', eventName, params);
   }
 };
 
 // Google Tag Manager tracking
-export const gtmEvent = (eventName: string, params?: Record<string, any>) => {
+export const gtmEvent = (eventName: string, params?: Record<string, unknown>) => {
   if (typeof window !== 'undefined' && window.dataLayer) {
     window.dataLayer.push({
       event: eventName,
@@ -61,18 +61,24 @@ export const trackWhatsAppClick = (source: string, tourName?: string) => {
 };
 
 // Eventos de interés en tours
-export const trackTourView = (tourId: string, tourName: string, price: number) => {
+export const trackTourView = (
+  tourId: string,
+  tourName: string,
+  price: number,
+  currency: 'MXN' | 'USD' = 'MXN',
+) => {
   trackEvent('ViewContent', {
     content_name: tourName,
     content_ids: [tourId],
     content_type: 'product',
     value: price,
-    currency: 'MXN',
+    currency,
   });
   gtmEvent('tour_view', {
     tour_id: tourId,
     tour_name: tourName,
     price: price,
+    currency,
   });
 };
 
@@ -106,7 +112,7 @@ export const trackCTAClick = (ctaName: string, location: string) => {
 // Declaraciones de tipos para window
 declare global {
   interface Window {
-    fbq?: (command: string, eventName: string, params?: Record<string, any>) => void;
-    dataLayer?: Array<Record<string, any>>;
+    fbq?: (command: string, eventName: string, params?: Record<string, unknown>) => void;
+    dataLayer?: Array<Record<string, unknown>>;
   }
 }

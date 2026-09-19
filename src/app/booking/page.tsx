@@ -15,24 +15,24 @@ const TOUR_DETAILS: Record<TourId, {
     badge: { es: "CLÁSICO", en: "CLASSIC" },
     badgeColor: "bg-teal-500",
     includes: {
-      es: ["Acceso a 2 cenotes (Kin-Ha + Blanca Flor)", "Equipo de snorkel completo", "Guía certificado bilingüe", "Chaleco salvavidas", "Estacionamiento gratuito"],
-      en: ["Access to 2 cenotes (Kin-Ha + Blanca Flor)", "Full snorkel gear", "Bilingual certified guide", "Life jacket", "Free parking"],
+      es: ["Acceso a 2 cenotes (Kin-Ha + Blanca Flor)", "Equipo de snorkel completo", "Guía bilingüe", "Chaleco salvavidas", "Regaderas y lockers sin costo", "Estacionamiento gratuito"],
+      en: ["Access to 2 cenotes (Kin-Ha + Blanca Flor)", "Full snorkel gear", "Bilingual guide", "Life jacket", "Complimentary showers and lockers", "Free parking"],
     },
     addons: {
-      es: ["Fotografía subacuática +$200 MXN", "Casillero +$50 MXN"],
-      en: ["Underwater photography +$200 MXN", "Locker +$50 MXN"],
+      es: ["Fotografía subacuática disponible"],
+      en: ["Underwater photography available"],
     },
   },
   "atv-cenotes": {
     badge: { es: "MÁS POPULAR", en: "MOST POPULAR" },
     badgeColor: "bg-amber-500",
     includes: {
-      es: ["ATV por la selva (30 min)", "Tirolesas sobre el cenote", "Acceso a 2 cenotes", "Equipo de snorkel", "Guía certificado bilingüe", "Chaleco salvavidas"],
-      en: ["Jungle ATV (30 min)", "Zip lines over the cenote", "Access to 2 cenotes", "Snorkel gear", "Bilingual certified guide", "Life jacket"],
+      es: ["ATV por la selva", "3 tirolesas", "Cenote Blanca Flor (abierto)", "Cenote Kin-Ha (subterráneo)", "Comida mexicana", "Degustación de tequila", "Guía bilingüe", "Regaderas y lockers sin costo"],
+      en: ["Jungle ATV", "3 zip lines", "Blanca Flor Cenote (open-air)", "Kin-Ha Cenote (underground)", "Mexican lunch", "Tequila tasting", "Bilingual guide", "Complimentary showers and lockers"],
     },
     addons: {
-      es: ["Seguro ATV +$5 USD (~$100 MXN)", "Caballos +$10 USD (~$200 MXN)"],
-      en: ["ATV insurance +$5 USD (~$100 MXN)", "Horses +$10 USD (~$200 MXN)"],
+      es: ["Seguro ATV $5 USD"],
+      en: ["ATV insurance $5 USD"],
     },
   },
   "ecuestre-cenotes": {
@@ -90,8 +90,11 @@ export default function BookingPage() {
 
   const isEs = locale === "es";
   const selectedTour = TOURS.find((t) => t.id === selectedId);
-  const selectedDetails = selectedId ? TOUR_DETAILS[selectedId] : null;
-  const total = selectedTour ? selectedTour.priceMXN * people : 0;
+  const unitPrice = selectedTour
+    ? isEs ? selectedTour.priceMXN : selectedTour.priceUSD
+    : 0;
+  const total = unitPrice * people;
+  const currency = isEs ? "MXN" : "USD";
 
   const tourName = selectedTour
     ? isEs ? selectedTour.nameEs : selectedTour.nameEn
@@ -103,8 +106,8 @@ export default function BookingPage() {
 
   const waMsg = selectedTour
     ? isEs
-      ? `Hola, quiero reservar el tour *${tourName}* para *${people} persona${people > 1 ? "s" : ""}* el *${dateFormatted}*. Total estimado: *$${total.toLocaleString()} MXN*. ¿Tienen disponibilidad?`
-      : `Hi, I'd like to book the *${tourName}* tour for *${people} person${people > 1 ? "s" : ""}* on *${dateFormatted}*. Estimated total: *$${total.toLocaleString()} MXN*. Do you have availability?`
+      ? `Hola, quiero reservar el tour *${tourName}* para *${people} persona${people > 1 ? "s" : ""}* el *${dateFormatted}*. Total estimado: *$${total.toLocaleString("es-MX")} ${currency}*. ¿Tienen disponibilidad?`
+      : `Hi, I'd like to book the *${tourName}* tour for *${people} person${people > 1 ? "s" : ""}* on *${dateFormatted}*. Estimated total: *$${total.toLocaleString("en-US")} ${currency}*. Do you have availability?`
     : isEs
       ? "Hola, me interesa reservar en Cenotes Kin-Ha. ¿Me pueden dar información sobre los tours disponibles?"
       : "Hi, I'm interested in booking at Cenotes Kin-Ha. Can you tell me about available tours?";
@@ -113,14 +116,14 @@ export default function BookingPage() {
   const today = new Date().toISOString().split("T")[0];
 
   const TRUST_BADGES = [
-    { icon: "⭐", text: isEs ? "4.9 · 200+ reseñas" : "4.9 · 200+ reviews" },
-    { icon: "🛡️", text: isEs ? "Guías certificados" : "Certified guides" },
-    { icon: "💬", text: isEs ? "Respuesta en < 10 min" : "Response in < 10 min" },
+    { icon: "💧", text: isEs ? "2 cenotes naturales" : "2 natural cenotes" },
+    { icon: "⚡", text: isEs ? "3 tirolesas" : "3 zip lines" },
+    { icon: "🚐", text: isEs ? "Recogida disponible" : "Pickup available" },
     { icon: "📍", text: "Puerto Morelos, Riviera Maya" },
   ];
 
-  const BRING_ES = ["Traje de baño", "Ropa de cambio", "Toalla", "Bloqueador solar biodegradable", "Agua (también hay tienda en el lugar)", "Zapatos cómodos o acuáticos", "Efectivo para add-ons"];
-  const BRING_EN = ["Swimsuit", "Change of clothes", "Towel", "Biodegradable sunscreen", "Water (also available on-site)", "Comfortable or water shoes", "Cash for add-ons"];
+  const BRING_ES = ["Traje de baño", "Ropa de cambio", "Toalla", "Zapatos cómodos o acuáticos", "Agua", "Efectivo para extras", "Importante: no usar bloqueador solar"];
+  const BRING_EN = ["Swimsuit", "Change of clothes", "Towel", "Comfortable or water shoes", "Water", "Cash for extras", "Important: do not use sunscreen"];
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -173,6 +176,8 @@ export default function BookingPage() {
               const name = isEs ? tour.nameEs : tour.nameEn;
               const desc = isEs ? tour.descEs : tour.descEn;
               const badge = details.badge[locale];
+              const regularPrice = isEs ? tour.regularPriceMXN : tour.regularPriceUSD;
+              const specialPrice = isEs ? tour.priceMXN : tour.priceUSD;
 
               return (
                 <button
@@ -229,11 +234,19 @@ export default function BookingPage() {
                         </span>
                       </div>
                       <div className="text-right">
-                        <span className="text-xs text-slate-400 block">{isEs ? "Desde" : "From"}</span>
-                        <span className="text-teal-700 font-bold text-xl leading-none">
-                          ${tour.priceMXN.toLocaleString()}
+                        <span className="mb-1 inline-flex rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-amber-800">
+                          {tour.discountPercent}% {isEs ? "de descuento" : "off"}
                         </span>
-                        <span className="text-xs text-slate-400 ml-1">MXN/pax</span>
+                        <span className="block text-xs text-slate-400 line-through decoration-amber-500 decoration-2">
+                          ${regularPrice.toLocaleString(isEs ? "es-MX" : "en-US", { maximumFractionDigits: 2 })} {currency}
+                        </span>
+                        <span className="block text-teal-700 font-extrabold text-2xl leading-tight">
+                          ${specialPrice.toLocaleString(isEs ? "es-MX" : "en-US")}
+                          <span className="ml-1 text-xs font-medium text-slate-500">{currency}/pax</span>
+                        </span>
+                        <span className="text-[10px] font-bold uppercase tracking-wide text-amber-700">
+                          {isEs ? "Oferta especial" : "Special offer"}
+                        </span>
                       </div>
                     </div>
 
@@ -345,15 +358,15 @@ export default function BookingPage() {
                     {isEs ? "Total estimado" : "Estimated total"}
                   </p>
                   <p className="text-sm text-slate-500 mt-0.5">
-                    ${selectedTour.priceMXN.toLocaleString()} MXN × {people} {isEs ? `persona${people > 1 ? "s" : ""}` : `person${people > 1 ? "s" : ""}`}
+                    ${unitPrice.toLocaleString(isEs ? "es-MX" : "en-US")} {currency} × {people} {isEs ? `persona${people > 1 ? "s" : ""}` : `person${people > 1 ? "s" : ""}`}
                   </p>
                   <p className="text-xs text-slate-400">{isEs ? "Antes de add-ons opcionales" : "Before optional add-ons"}</p>
                 </div>
                 <div className="text-left sm:text-right">
                   <p className="text-3xl font-bold text-teal-700">
-                    ${total.toLocaleString()}
+                    ${total.toLocaleString(isEs ? "es-MX" : "en-US")}
                   </p>
-                  <p className="text-xs text-slate-500">MXN</p>
+                  <p className="text-xs text-slate-500">{currency}</p>
                 </div>
               </div>
             )}
@@ -383,8 +396,8 @@ export default function BookingPage() {
           {selectedId && (
             <p className="text-center text-sm text-slate-500 mt-3">
               {isEs
-                ? "💬 Te respondemos en menos de 10 minutos para confirmar tu reserva"
-                : "💬 We reply in under 10 minutes to confirm your booking"}
+                ? "💬 Confirmaremos disponibilidad, precio final y recogida contigo"
+                : "💬 We will confirm availability, final pricing and pickup with you"}
             </p>
           )}
         </div>
@@ -418,18 +431,18 @@ export default function BookingPage() {
               {[
                 {
                   icon: "🚗",
-                  title: isEs ? "Desde Cancún" : "From Cancún",
-                  desc: isEs ? "~30 min por la Ruta de los Cenotes (Carr. 307)" : "~30 min on the Cenote Route (Hwy 307)",
+                  title: isEs ? "Recogida en Cancún" : "Cancún pickup",
+                  desc: isEs ? "Hotel, Airbnb o punto de encuentro confirmado al reservar" : "Hotel, Airbnb or meeting point confirmed at booking",
                 },
                 {
                   icon: "🛫",
-                  title: isEs ? "Desde el Aeropuerto CUN" : "From CUN Airport",
-                  desc: isEs ? "~25 min, Uber disponible" : "~25 min, Uber available",
+                  title: isEs ? "Recogida en Puerto Morelos" : "Puerto Morelos pickup",
+                  desc: isEs ? "Horario y ubicación exacta según tu hospedaje" : "Exact time and location based on your accommodation",
                 },
                 {
                   icon: "🏖️",
-                  title: isEs ? "Desde Playa del Carmen" : "From Playa del Carmen",
-                  desc: isEs ? "~20 min por la carretera 307" : "~20 min on highway 307",
+                  title: isEs ? "Recogida en Playa del Carmen" : "Playa del Carmen pickup",
+                  desc: isEs ? "Hotel, Airbnb o punto de encuentro confirmado al reservar" : "Hotel, Airbnb or meeting point confirmed at booking",
                 },
               ].map((row) => (
                 <div key={row.title} className="flex gap-3">
@@ -445,8 +458,8 @@ export default function BookingPage() {
                   <span className="flex-shrink-0">📌</span>
                   <span>
                     {isEs
-                      ? "Al confirmar tu reserva por WhatsApp te enviamos el pin exacto en Google Maps."
-                      : "When you confirm your booking via WhatsApp we'll send you the exact Google Maps pin."}
+                      ? "El parque se encuentra en el km 18 de la Ruta de los Cenotes. Al reservar confirmamos si tu experiencia incluye transportación."
+                      : "The park is at km 18 of the Cenote Route. When booking, we confirm whether your experience includes transportation."}
                   </span>
                 </p>
               </div>

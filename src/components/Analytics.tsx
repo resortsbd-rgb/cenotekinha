@@ -11,7 +11,7 @@ const GTM_ID = 'GTM-MBBHBPKW';
 // Declaraciones de tipos para window
 declare global {
   interface Window {
-    gtag?: (command: string, eventName: string, params?: Record<string, any>) => void;
+    gtag?: (command: string, eventName: string, params?: Record<string, unknown>) => void;
   }
 }
 
