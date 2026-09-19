@@ -1,9 +1,11 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { translations } from "@/lib/translations";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { TOURS } from "@/lib/stripe";
+import { tourPages, tourSlugs } from "@/lib/tour-pages";
 import { trackTourView, trackWhatsAppClick } from "@/lib/analytics";
 
 const WA_NUMBER = "529987777498";
@@ -68,6 +70,7 @@ export default function ToursSection() {
           {TOURS.map((tour) => {
             const name = locale === "es" ? tour.nameEs : tour.nameEn;
             const desc = locale === "es" ? tour.descEs : tour.descEn;
+            const detailSlug = tourSlugs.find((slug) => tourPages[slug].id === tour.id);
             return (
               <div
                 key={tour.id}
@@ -91,6 +94,8 @@ export default function ToursSection() {
                 <div className="p-6 flex flex-col flex-1">
                   <h3 className="text-xl font-bold text-gray-900 mb-2">{name}</h3>
                   <p className="text-gray-500 text-sm leading-relaxed flex-1 mb-4">{desc}</p>
+
+                  {detailSlug && <Link href={`/tours/${detailSlug}`} className="mb-4 inline-block font-semibold text-teal-700 underline hover:text-teal-900">{locale === "es" ? "Conocer esta experiencia" : "Explore this experience"}</Link>}
 
                   <div className="flex items-center justify-between text-sm text-gray-500 mb-5">
                     <span className="flex items-center gap-1">
