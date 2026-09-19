@@ -90,7 +90,11 @@ export default function BookingPage() {
 
   const isEs = locale === "es";
   const selectedTour = TOURS.find((t) => t.id === selectedId);
-  const total = selectedTour ? selectedTour.priceMXN * people : 0;
+  const unitPrice = selectedTour
+    ? isEs ? selectedTour.priceMXN : selectedTour.priceUSD
+    : 0;
+  const total = unitPrice * people;
+  const currency = isEs ? "MXN" : "USD";
 
   const tourName = selectedTour
     ? isEs ? selectedTour.nameEs : selectedTour.nameEn
@@ -102,8 +106,8 @@ export default function BookingPage() {
 
   const waMsg = selectedTour
     ? isEs
-      ? `Hola, quiero reservar el tour *${tourName}* para *${people} persona${people > 1 ? "s" : ""}* el *${dateFormatted}*. Total estimado: *$${total.toLocaleString()} MXN*. ¿Tienen disponibilidad?`
-      : `Hi, I'd like to book the *${tourName}* tour for *${people} person${people > 1 ? "s" : ""}* on *${dateFormatted}*. Estimated total: *$${total.toLocaleString()} MXN*. Do you have availability?`
+      ? `Hola, quiero reservar el tour *${tourName}* para *${people} persona${people > 1 ? "s" : ""}* el *${dateFormatted}*. Total estimado: *$${total.toLocaleString("es-MX")} ${currency}*. ¿Tienen disponibilidad?`
+      : `Hi, I'd like to book the *${tourName}* tour for *${people} person${people > 1 ? "s" : ""}* on *${dateFormatted}*. Estimated total: *$${total.toLocaleString("en-US")} ${currency}*. Do you have availability?`
     : isEs
       ? "Hola, me interesa reservar en Cenotes Kin-Ha. ¿Me pueden dar información sobre los tours disponibles?"
       : "Hi, I'm interested in booking at Cenotes Kin-Ha. Can you tell me about available tours?";
@@ -172,6 +176,8 @@ export default function BookingPage() {
               const name = isEs ? tour.nameEs : tour.nameEn;
               const desc = isEs ? tour.descEs : tour.descEn;
               const badge = details.badge[locale];
+              const regularPrice = isEs ? tour.regularPriceMXN : tour.regularPriceUSD;
+              const specialPrice = isEs ? tour.priceMXN : tour.priceUSD;
 
               return (
                 <button
@@ -228,11 +234,19 @@ export default function BookingPage() {
                         </span>
                       </div>
                       <div className="text-right">
-                        <span className="text-xs text-slate-400 block">{isEs ? "Desde" : "From"}</span>
-                        <span className="text-teal-700 font-bold text-xl leading-none">
-                          ${tour.priceMXN.toLocaleString()}
+                        <span className="mb-1 inline-flex rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wide text-amber-800">
+                          {tour.discountPercent}% {isEs ? "de descuento" : "off"}
                         </span>
-                        <span className="text-xs text-slate-400 ml-1">MXN/pax</span>
+                        <span className="block text-xs text-slate-400 line-through decoration-amber-500 decoration-2">
+                          ${regularPrice.toLocaleString(isEs ? "es-MX" : "en-US", { maximumFractionDigits: 2 })} {currency}
+                        </span>
+                        <span className="block text-teal-700 font-extrabold text-2xl leading-tight">
+                          ${specialPrice.toLocaleString(isEs ? "es-MX" : "en-US")}
+                          <span className="ml-1 text-xs font-medium text-slate-500">{currency}/pax</span>
+                        </span>
+                        <span className="text-[10px] font-bold uppercase tracking-wide text-amber-700">
+                          {isEs ? "Oferta especial" : "Special offer"}
+                        </span>
                       </div>
                     </div>
 
@@ -344,15 +358,15 @@ export default function BookingPage() {
                     {isEs ? "Total estimado" : "Estimated total"}
                   </p>
                   <p className="text-sm text-slate-500 mt-0.5">
-                    ${selectedTour.priceMXN.toLocaleString()} MXN × {people} {isEs ? `persona${people > 1 ? "s" : ""}` : `person${people > 1 ? "s" : ""}`}
+                    ${unitPrice.toLocaleString(isEs ? "es-MX" : "en-US")} {currency} × {people} {isEs ? `persona${people > 1 ? "s" : ""}` : `person${people > 1 ? "s" : ""}`}
                   </p>
                   <p className="text-xs text-slate-400">{isEs ? "Antes de add-ons opcionales" : "Before optional add-ons"}</p>
                 </div>
                 <div className="text-left sm:text-right">
                   <p className="text-3xl font-bold text-teal-700">
-                    ${total.toLocaleString()}
+                    ${total.toLocaleString(isEs ? "es-MX" : "en-US")}
                   </p>
-                  <p className="text-xs text-slate-500">MXN</p>
+                  <p className="text-xs text-slate-500">{currency}</p>
                 </div>
               </div>
             )}

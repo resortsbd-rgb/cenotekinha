@@ -61,18 +61,24 @@ export const trackWhatsAppClick = (source: string, tourName?: string) => {
 };
 
 // Eventos de interés en tours
-export const trackTourView = (tourId: string, tourName: string, price: number) => {
+export const trackTourView = (
+  tourId: string,
+  tourName: string,
+  price: number,
+  currency: 'MXN' | 'USD' = 'MXN',
+) => {
   trackEvent('ViewContent', {
     content_name: tourName,
     content_ids: [tourId],
     content_type: 'product',
     value: price,
-    currency: 'MXN',
+    currency,
   });
   gtmEvent('tour_view', {
     tour_id: tourId,
     tour_name: tourName,
     price: price,
+    currency,
   });
 };
 

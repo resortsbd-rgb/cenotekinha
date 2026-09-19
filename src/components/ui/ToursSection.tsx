@@ -31,7 +31,8 @@ export default function ToursSection() {
           trackTourView(
             tour.id,
             locale === "es" ? tour.nameEs : tour.nameEn,
-            tour.priceMXN,
+            locale === "es" ? tour.priceMXN : tour.priceUSD,
+            locale === "es" ? "MXN" : "USD",
           );
           viewedTours.current.add(tourId);
         });
@@ -70,6 +71,9 @@ export default function ToursSection() {
             const name = locale === "es" ? tour.nameEs : tour.nameEn;
             const description = locale === "es" ? tour.descEs : tour.descEn;
             const isFeatured = "featured" in tour && tour.featured;
+            const regularPrice = locale === "es" ? tour.regularPriceMXN : tour.regularPriceUSD;
+            const specialPrice = locale === "es" ? tour.priceMXN : tour.priceUSD;
+            const currency = locale === "es" ? "MXN" : "USD";
             const message =
               locale === "es"
                 ? `Hola, me interesa ${name}. ¿Me ayudan a confirmar disponibilidad, transportación y precio final?`
@@ -114,12 +118,28 @@ export default function ToursSection() {
                   </div>
 
                   <div>
-                    <p className="mb-5 text-sm text-white/55">
-                      {locale === "es" ? "Precio base desde" : "Base price from"}{" "}
-                      <strong className="ml-1 text-2xl font-semibold text-white">
-                        ${tour.priceMXN.toLocaleString()} MXN
-                      </strong>
-                    </p>
+                    <div className="mb-6 border-l-2 border-[#d7b56d] pl-4">
+                      <div className="mb-2 flex flex-wrap items-center gap-2">
+                        <span className="rounded-full bg-[#d7b56d] px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.14em] text-[#062c24]">
+                          {locale === "es" ? "Oferta especial" : "Special offer"}
+                        </span>
+                        <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#d7b56d]">
+                          {tour.discountPercent}% {locale === "es" ? "de descuento" : "off"}
+                        </span>
+                      </div>
+                      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                        <span className="text-sm text-white/45 line-through decoration-[#d7b56d] decoration-2">
+                          ${regularPrice.toLocaleString(locale === "es" ? "es-MX" : "en-US", { maximumFractionDigits: 2 })} {currency}
+                        </span>
+                        <strong className="text-3xl font-semibold text-white">
+                          ${specialPrice.toLocaleString(locale === "es" ? "es-MX" : "en-US")} {currency}
+                        </strong>
+                        <span className="text-xs text-white/50">/{locale === "es" ? "persona" : "person"}</span>
+                      </div>
+                      <p className="mt-1 text-xs text-white/45">
+                        {locale === "es" ? "Precio promocional por tiempo limitado" : "Limited-time promotional price"}
+                      </p>
+                    </div>
                     <div className="flex flex-col gap-3 sm:flex-row">
                       <a
                         href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`}
