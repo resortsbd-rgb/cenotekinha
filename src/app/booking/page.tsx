@@ -19,8 +19,8 @@ const TOUR_DETAILS: Record<TourId, {
       en: ["Access to 2 cenotes (Kin-Ha + Blanca Flor)", "Full snorkel gear", "Bilingual certified guide", "Life jacket", "Free parking"],
     },
     addons: {
-      es: ["Fotografía subacuática +$200 MXN", "Casillero +$50 MXN"],
-      en: ["Underwater photography +$200 MXN", "Locker +$50 MXN"],
+      es: ["Fotografía subacuática +$200 MXN"],
+      en: ["Underwater photography +$200 MXN"],
     },
   },
   "atv-cenotes": {
@@ -43,8 +43,8 @@ const TOUR_DETAILS: Record<TourId, {
       en: ["Horseback ride (45 min)", "Access to 2 cenotes", "Snorkel gear", "Bilingual certified guide", "Life jacket", "Free parking"],
     },
     addons: {
-      es: ["Fotografía del paseo +$200 MXN", "Casillero +$50 MXN"],
-      en: ["Ride photography +$200 MXN", "Locker +$50 MXN"],
+      es: ["Fotografía del paseo +$200 MXN"],
+      en: ["Ride photography +$200 MXN"],
     },
   },
   "experiencia-completa": {
@@ -119,8 +119,8 @@ export default function BookingPage() {
     { icon: "📍", text: "Puerto Morelos, Riviera Maya" },
   ];
 
-  const BRING_ES = ["Traje de baño", "Ropa de cambio", "Toalla", "Bloqueador solar biodegradable", "Agua (también hay tienda en el lugar)", "Zapatos cómodos o acuáticos", "Efectivo para add-ons"];
-  const BRING_EN = ["Swimsuit", "Change of clothes", "Towel", "Biodegradable sunscreen", "Water (also available on-site)", "Comfortable or water shoes", "Cash for add-ons"];
+  const BRING_ES = ["Traje de baño", "Ropa de cambio", "Toalla", "No usar bloqueador solar antes de entrar a los cenotes", "Casilleros gratuitos disponibles", "Agua (también hay tienda en el lugar)", "Zapatos cómodos o acuáticos", "Efectivo para extras"];
+  const BRING_EN = ["Swimsuit", "Change of clothes", "Towel", "Do not use sunscreen before entering the cenotes", "Free lockers available", "Water (also available on-site)", "Comfortable or water shoes", "Cash for extras"];
 
   return (
     <div className="min-h-screen bg-slate-50">
