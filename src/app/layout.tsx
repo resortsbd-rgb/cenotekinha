@@ -19,9 +19,19 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://cenotekinha.com"),
   title: "Cenotes Kin-Ha | ATV, Tirolesas y Cenotes en Puerto Morelos",
   description:
     "Dos cenotes naturales, cuatrimotos, tirolesas y caballos en la Ruta de los Cenotes, Puerto Morelos. A 30 min de Cancún. Reserva por WhatsApp.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "es_MX",
+    siteName: "Cenotes Kin-Ha",
+    title: "Cenotes Kin-Ha | Aventuras en Puerto Morelos",
+    description: "Explora dos cenotes, ATVs y tirolesas en la Ruta de los Cenotes, Puerto Morelos.",
+    url: "/",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
