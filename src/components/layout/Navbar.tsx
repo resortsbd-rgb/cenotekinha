@@ -95,6 +95,13 @@ export default function Navbar() {
           </Link>
         </div>
 
+        <div className="flex items-center gap-2 lg:hidden">
+          <div className="flex items-center rounded-full border border-white/25 bg-black/20 text-xs font-bold">
+            <button type="button" onClick={() => handleSetLocale("es")} aria-label="Español"
+              className={`px-3 py-1.5 rounded-full ${locale === "es" ? "bg-[#69d8cb] text-[#062c24]" : "text-white/80"}`}>ES</button>
+            <button type="button" onClick={() => handleSetLocale("en")} aria-label="English"
+              className={`px-3 py-1.5 rounded-full ${locale === "en" ? "bg-[#69d8cb] text-[#062c24]" : "text-white/80"}`}>EN</button>
+          </div>
         <button
           type="button"
           className="lg:hidden p-2 text-white"
@@ -112,6 +119,7 @@ export default function Navbar() {
             </svg>
           )}
         </button>
+        </div>
       </div>
 
       {open && (

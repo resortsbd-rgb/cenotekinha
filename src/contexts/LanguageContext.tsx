@@ -15,7 +15,11 @@ if (typeof window !== "undefined") {
   const stored = localStorage.getItem("kin-ha-locale") as Locale | null;
   if (stored === "es" || stored === "en") {
     _locale = stored;
+  } else {
+    // Primera visita: español solo si el navegador está en español.
+    _locale = (navigator.language || "").toLowerCase().startsWith("es") ? "es" : "en";
   }
+  document.documentElement.lang = _locale;
 }
 
 export function setLocale(l: Locale) {
@@ -23,6 +27,7 @@ export function setLocale(l: Locale) {
   _locale = l;
   if (typeof window !== "undefined") {
     localStorage.setItem("kin-ha-locale", l);
+    document.documentElement.lang = l;
   }
   console.log("[LanguageStore] locale →", l, `(${_listeners.size} subscribers)`);
   _notify();

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   BOKUN_LOADER_SRC,
   WHATSAPP_FALLBACK,
@@ -50,6 +50,7 @@ export default function BokunButton({
 }: BokunButtonProps) {
   const { locale } = useLanguage();
   const productId = getBokunProductId(tourId);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (productId != null) ensureBokunLoader();
@@ -80,9 +81,14 @@ export default function BokunButton({
       className={`bokunButton ${className}`}
       data-src={bokunExperienceSrc(productId, locale)}
       data-testid="widget-book-button"
-      onClick={onInteract}
+      onClick={() => {
+        onInteract?.();
+        setLoading(true);
+        window.setTimeout(() => setLoading(false), 8000);
+      }}
+      aria-busy={loading}
     >
-      {label}
+      {loading ? (locale === "en" ? "Loading calendar…" : "Cargando calendario…") : label}
     </button>
   );
 }

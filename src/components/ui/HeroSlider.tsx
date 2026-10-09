@@ -54,8 +54,8 @@ const copy = {
     secondary: "Ver los cenotes",
     priceLabel: "Desde",
     pricePer: "por persona",
-    social: "Historias reales de viajeros",
-    direct: "Reserva directa · mejor precio",
+    social: "Cancelación gratis hasta 24 h antes",
+    direct: "Pago seguro en línea",
     highlights: ["2 cenotes", "3 tirolesas", "ATV en la selva", "Comida yucateca"],
   },
   en: {
@@ -66,8 +66,8 @@ const copy = {
     secondary: "See the cenotes",
     priceLabel: "From",
     pricePer: "per person",
-    social: "Real traveler stories",
-    direct: "Book direct · best price",
+    social: "Free cancellation up to 24h before",
+    direct: "Secure online booking",
     highlights: ["2 cenotes", "3 zip lines", "Jungle ATV", "Yucatecan lunch"],
   },
 };
@@ -151,7 +151,7 @@ export default function HeroSlider() {
           {/* Precio + prueba social */}
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
             <span className="inline-flex items-center gap-2 text-white/90">
-              <span className="tracking-[0.08em] text-[#e0a85c]">★★★★★</span>
+              <span className="text-[#5dcaa5]">✓</span>
               {t.social}
             </span>
             <span className="inline-flex items-center gap-2 text-white/90">

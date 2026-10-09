@@ -1,9 +1,17 @@
+// Precio "Desde" redondo por tour (MXN y USD a ~17.4). Si cambia la tarifa en Bókun, actualizar aquí.
+// Tours sin fromMXN no muestran precio.
 // Catálogo de tours SIN precios: el precio lo muestra Bókun (o se cotiza por WhatsApp).
 // Stripe temporarily disabled — enable when STRIPE_SECRET_KEY is configured
 // import Stripe from 'stripe';
 // export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2026-03-25.dahlia' });
 
-export const TOURS = [
+export type Tour = {
+  id: string; nameEs: string; nameEn: string; descEs: string; descEn: string;
+  duration: string; maxPeople: number; image: string; featured?: boolean;
+  fromMXN?: number; fromUSD?: number;
+};
+
+export const TOURS: Tour[] = [
   {
     id: 'atv-cenotes',
     nameEs: 'Aventura Kin-Ha',
@@ -17,6 +25,8 @@ export const TOURS = [
   },
   {
     id: 'cenote-dual',
+    fromMXN: 600,   // precio regular Bókun (oferta 480 hasta 31-oct la muestra Bókun)
+    fromUSD: 35,
     nameEs: 'Dos Cenotes Kin-Ha',
     nameEn: 'Kin-Ha Two Cenotes',
     descEs: 'Descubre Blanca Flor, abierto al cielo, y la caverna subterránea de Kin-Ha. Incluye guía y degustación de tequila.',
@@ -37,6 +47,8 @@ export const TOURS = [
   },
   {
     id: 'experiencia-completa',
+    fromMXN: 1400,  // adulto Bókun 1226446
+    fromUSD: 80,
     nameEs: 'Aventura Completa Kin-Ha',
     nameEn: 'Kin-Ha Complete Adventure',
     descEs: 'Sistema dual + ATV + caballos + almuerzo yucateco.',

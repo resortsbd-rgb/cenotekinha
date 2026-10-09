@@ -114,19 +114,28 @@ export default function ToursSection({ asPageTitle = false }: { asPageTitle?: bo
                   </div>
 
                   <div>
+                    {tour.fromMXN != null && (
+                      <p className="mb-2 border-l-2 border-[#d7b56d] pl-4">
+                        <span className="text-sm text-white/60">{locale === "es" ? "Desde " : "From "}</span>
+                        <strong className="text-3xl font-semibold text-white">
+                          {locale === "es" ? `$${tour.fromMXN.toLocaleString("es-MX")} MXN` : `$${tour.fromUSD} USD`}
+                        </strong>
+                        <span className="text-xs text-white/50"> /{locale === "es" ? "persona" : "person"}</span>
+                      </p>
+                    )}
                     <p className="mb-6 border-l-2 border-[#d7b56d] pl-4 text-sm text-white/70">
                       {onlineBooking
                         ? locale === "es"
-                          ? "Precios, ofertas y fechas disponibles en el calendario de reserva."
-                          : "Prices, offers and available dates in the booking calendar."
+                          ? "Reserva en línea · cancelación gratis hasta 24 h antes."
+                          : "Book online · free cancellation up to 24 hours before."
                         : locale === "es"
-                          ? "Reserva por WhatsApp: te confirmamos fecha, transportación y precio."
-                          : "Book via WhatsApp: we confirm date, transportation and price."}
+                          ? "Reserva por WhatsApp: te confirmamos fecha, transporte y precio."
+                          : "Book on WhatsApp: we reply with date, pickup and price."}
                     </p>
                     <div className="flex flex-col gap-3 sm:flex-row">
                       <BokunButton
                         tourId={tour.id}
-                        label={t.tours.book}
+                        label={onlineBooking ? (locale === "es" ? "Reservar en línea" : "Book online") : (locale === "es" ? "Reservar por WhatsApp" : "Book on WhatsApp")}
                         whatsappMessage={message}
                         onInteract={() => trackWhatsAppClick("tour_card", name)}
                         className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#c9792e] px-6 py-3 font-bold text-white transition hover:bg-[#d99a4e]"

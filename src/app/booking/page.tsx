@@ -124,7 +124,7 @@ export default function BookingPage() {
   const TRUST_BADGES = [
     { icon: "💧", text: isEs ? "2 cenotes naturales" : "2 natural cenotes" },
     { icon: "⚡", text: isEs ? "3 tirolesas" : "3 zip lines" },
-    { icon: "🚐", text: isEs ? "Recogida disponible" : "Pickup available" },
+    { icon: "✅", text: isEs ? "Cancelación gratis 24 h" : "Free cancellation 24h" },
     { icon: "📍", text: "Puerto Morelos, Riviera Maya" },
   ];
 
@@ -238,10 +238,17 @@ export default function BookingPage() {
                           {isEs ? "Grupos de cualquier tamaño" : "Any group size"}
                         </span>
                       </div>
+                      <span className="text-right">
+                      {tour.fromMXN != null && (
+                        <span className="block text-lg font-extrabold text-teal-700">
+                          {isEs ? `Desde $${tour.fromMXN.toLocaleString("es-MX")} MXN` : `From $${tour.fromUSD} USD`}
+                        </span>
+                      )}
                       <span className={`text-[11px] font-bold uppercase tracking-wide ${online ? "text-teal-700" : "text-green-700"}`}>
                         {online
                           ? isEs ? "Reserva en línea" : "Book online"
                           : isEs ? "Reserva por WhatsApp" : "Book via WhatsApp"}
+                      </span>
                       </span>
                     </div>
 
@@ -448,8 +455,8 @@ export default function BookingPage() {
                   <span className="flex-shrink-0">📌</span>
                   <span>
                     {isEs
-                      ? "El parque se encuentra en el km 18 de la Ruta de los Cenotes. Al reservar confirmamos si tu experiencia incluye transportación."
-                      : "The park is at km 18 of the Cenote Route. When booking, we confirm whether your experience includes transportation."}
+                      ? "Dos Cenotes es con llegada propia: el parque está en el km 18 de la Ruta de los Cenotes, con estacionamiento gratis. La Aventura Completa y los tours por WhatsApp incluyen recogida."
+                      : "Two Cenotes is self-drive: the park is at km 18 of the Cenote Route, with free parking. The Complete Adventure and WhatsApp tours include pickup."}
                   </span>
                 </p>
               </div>
