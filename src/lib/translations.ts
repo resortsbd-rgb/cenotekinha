@@ -22,7 +22,7 @@ export const translations = {
       certified: 'Protocolos de seguridad',
     },
     tours: {
-      title: 'Tours y Precios',
+      title: 'Tours y Experiencias',
       subtitle: 'Portales hacia el mundo ancestral maya',
       book: 'Reservar este tour',
       duration: 'Duración',
@@ -45,22 +45,22 @@ export const translations = {
     faq: {
       title: 'Preguntas Frecuentes',
       items: [
-        { q: '¿Qué incluye la entrada básica?', a: 'Acceso a ambos cenotes, equipo de snorkel, salvavidas y guía.' },
+        { q: '¿Qué incluye la entrada básica?', a: 'Acceso a ambos cenotes, chaleco salvavidas, guía y degustación de tequila.' },
         { q: '¿Puedo llevar niños?', a: 'Sí, niños mayores de 5 años pueden participar con chaleco salvavidas.' },
         { q: '¿Hay que saber nadar?', a: 'No es obligatorio, proporcionamos chalecos salvavidas para todos.' },
         { q: '¿Puedo usar bloqueador solar?', a: 'No. Para proteger el agua de los cenotes no se permite ningún bloqueador, incluso si es biodegradable. Dúchate antes de entrar.' },
         { q: '¿Incluyen transportación?', a: 'La aventura principal ofrece recogida en Cancún, Puerto Morelos y Playa del Carmen. Confirmamos el punto y horario exactos según tu ubicación.' },
         { q: '¿Dónde están ubicados?', a: 'En el kilómetro 18 de la Ruta de los Cenotes, Puerto Morelos, Quintana Roo.' },
-        { q: '¿Cuál es el horario?', a: 'Abrimos de 8am a 5pm todos los días del año.' },
+        { q: '¿Cuál es el horario?', a: 'Abrimos de 9am a 5pm todos los días del año.' },
         { q: '¿Cómo reservo?', a: 'Selecciona tu experiencia y envíanos la solicitud. Confirmaremos disponibilidad, transportación y forma de pago por WhatsApp.' },
       ],
     },
     contact: {
       title: 'Contáctanos',
       address: 'Puerto Morelos, Quintana Roo, México',
-      schedule: 'Lun-Dom: 8:00am - 5:00pm',
-      phone: '+52 998 777 7498',
-      email: 'reserva@cenotekinha.com',
+      schedule: 'Lun-Dom: 9:00am - 5:00pm',
+      phone: '+52 998 205 3527',
+      email: 'luis@kinhaexperience.com',
     },
     footer: {
       tagline: 'Portales Ancestrales Maya',
@@ -115,7 +115,7 @@ export const translations = {
       certified: 'Safety protocols',
     },
     tours: {
-      title: 'Tours & Prices',
+      title: 'Tours & Experiences',
       subtitle: 'Portals to the ancient Mayan world',
       book: 'Book this tour',
       duration: 'Duration',
@@ -138,22 +138,22 @@ export const translations = {
     faq: {
       title: 'Frequently Asked Questions',
       items: [
-        { q: 'What does basic entry include?', a: 'Access to both cenotes, snorkel gear, life jacket and guide.' },
+        { q: 'What does basic entry include?', a: 'Access to both cenotes, life jacket, guide and tequila tasting.' },
         { q: 'Can I bring children?', a: 'Yes, children over 5 years old can participate with life jackets.' },
         { q: 'Do I need to know how to swim?', a: 'Not required, we provide life jackets for everyone.' },
         { q: 'Can I use sunscreen?', a: 'No. To protect the cenote water, no sunscreen is permitted, including biodegradable products. Please shower before entering.' },
         { q: 'Is transportation included?', a: 'The flagship adventure offers pickup in Cancún, Puerto Morelos and Playa del Carmen. We confirm the exact point and time based on your location.' },
         { q: 'Where are you located?', a: 'At kilometer 18 of the Cenote Route in Puerto Morelos, Quintana Roo.' },
-        { q: 'What are your hours?', a: 'We are open 8am to 5pm every day of the year.' },
+        { q: 'What are your hours?', a: 'We are open 9am to 5pm every day of the year.' },
         { q: 'How do I book?', a: 'Choose your experience and send your request. We will confirm availability, transportation and payment method via WhatsApp.' },
       ],
     },
     contact: {
       title: 'Contact Us',
       address: 'Puerto Morelos, Quintana Roo, Mexico',
-      schedule: 'Mon-Sun: 8:00am - 5:00pm',
-      phone: '+52 998 777 7498',
-      email: 'reserva@cenotekinha.com',
+      schedule: 'Mon-Sun: 9:00am - 5:00pm',
+      phone: '+52 998 205 3527',
+      email: 'luis@kinhaexperience.com',
     },
     footer: {
       tagline: 'Ancient Mayan Portals',

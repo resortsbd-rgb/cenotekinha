@@ -44,7 +44,7 @@ export default function Footer() {
               </svg>
             </a>
             <a
-              href={`https://wa.me/529987777498?text=${encodeURIComponent(t.whatsapp_msg)}`}
+              href={`https://wa.me/529982053527?text=${encodeURIComponent(t.whatsapp_msg)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="w-9 h-9 bg-green-700 rounded-full flex items-center justify-center hover:bg-green-500 transition"

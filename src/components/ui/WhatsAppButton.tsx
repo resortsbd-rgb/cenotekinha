@@ -14,7 +14,7 @@ export default function WhatsAppButton() {
 
   return (
     <a
-      href={`https://wa.me/529987777498?text=${encodeURIComponent(t.whatsapp_msg)}`}
+      href={`https://wa.me/529982053527?text=${encodeURIComponent(t.whatsapp_msg)}`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"

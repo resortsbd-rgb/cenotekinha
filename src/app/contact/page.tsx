@@ -2,7 +2,7 @@
 
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const WHATSAPP = "529987777498";
+const WHATSAPP = "529982053527";
 
 export default function ContactPage() {
   const { locale } = useLanguage();
@@ -39,14 +39,14 @@ export default function ContactPage() {
               rel="noopener noreferrer"
               className="flex min-h-16 items-center justify-between rounded-full bg-[#69d8cb] px-6 font-bold text-[#062c24] transition hover:bg-white"
             >
-              <span>WhatsApp · +52 998 777 7498</span>
+              <span>WhatsApp · +52 998 205 3527</span>
               <span aria-hidden="true">↗</span>
             </a>
             <a
-              href="mailto:reserva@cenotekinha.com"
+              href="mailto:luis@kinhaexperience.com"
               className="flex min-h-16 items-center justify-between border-b border-white/15 px-2 text-white/80 transition hover:text-white"
             >
-              <span>reserva@cenotekinha.com</span>
+              <span>luis@kinhaexperience.com</span>
               <span aria-hidden="true">↗</span>
             </a>
             <div className="grid gap-5 border-b border-white/15 px-2 py-5 sm:grid-cols-2">
@@ -54,7 +54,7 @@ export default function ContactPage() {
                 <p className="text-xs font-bold uppercase tracking-[.18em] text-[#69d8cb]">
                   {isSpanish ? "Horario" : "Hours"}
                 </p>
-                <p className="mt-2 text-white/75">8:00–17:00 · {isSpanish ? "todos los días" : "daily"}</p>
+                <p className="mt-2 text-white/75">9:00–17:00 · {isSpanish ? "todos los días" : "daily"}</p>
               </div>
               <div>
                 <p className="text-xs font-bold uppercase tracking-[.18em] text-[#69d8cb]">

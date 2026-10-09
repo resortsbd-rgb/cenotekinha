@@ -4,7 +4,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { translations } from "@/lib/translations";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-export default function FAQSection() {
+export default function FAQSection({ asPageTitle = false }: { asPageTitle?: boolean }) {
+  const Heading = asPageTitle ? "h1" : "h2";
   const { locale } = useLanguage();
   const t = translations[locale];
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -18,7 +19,7 @@ export default function FAQSection() {
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-14">
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-teal-600 mb-3">FAQ</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900">{t.faq.title}</h2>
+          <Heading className="text-4xl md:text-5xl font-bold text-gray-900">{t.faq.title}</Heading>
         </div>
 
         <div className="space-y-3">

@@ -38,7 +38,7 @@ export default function CTASection() {
             {t.cta_final.btn}
           </Link>
           <a
-            href={`https://wa.me/529987777498?text=${encodeURIComponent(t.whatsapp_msg)}`}
+            href={`https://wa.me/529982053527?text=${encodeURIComponent(t.whatsapp_msg)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex min-h-14 items-center gap-2 border border-white/35 bg-white/10 hover:bg-white hover:text-[#062c24] text-white font-bold px-8 py-4 rounded-full transition text-base shadow-lg backdrop-blur-md"

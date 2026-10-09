@@ -77,7 +77,7 @@ export default function Navbar() {
           </div>
 
           <a
-            href={`https://wa.me/529987777498?text=${encodeURIComponent(t.whatsapp_msg)}`}
+            href={`https://wa.me/529982053527?text=${encodeURIComponent(t.whatsapp_msg)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 border border-white/25 bg-white/10 hover:bg-white/20 text-white text-xs font-semibold px-4 py-2.5 rounded-full transition"

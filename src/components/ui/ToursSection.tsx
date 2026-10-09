@@ -7,10 +7,13 @@ import { translations } from "@/lib/translations";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { TOURS } from "@/lib/stripe";
 import { trackTourView, trackWhatsAppClick } from "@/lib/analytics";
+import BokunButton from "@/components/booking/BokunButton";
+import { getBokunProductId } from "@/lib/bokun";
 
-const WHATSAPP = "529987777498";
+const WHATSAPP = "529982053527";
 
-export default function ToursSection() {
+export default function ToursSection({ asPageTitle = false }: { asPageTitle?: boolean }) {
+  const Heading = asPageTitle ? "h1" : "h2";
   const { locale } = useLanguage();
   const t = translations[locale];
   const tourRefs = useRef<Record<string, HTMLElement | null>>({});
@@ -28,12 +31,7 @@ export default function ToursSection() {
           const tour = TOURS.find((item) => item.id === tourId);
           if (!tour) return;
 
-          trackTourView(
-            tour.id,
-            locale === "es" ? tour.nameEs : tour.nameEn,
-            locale === "es" ? tour.priceMXN : tour.priceUSD,
-            locale === "es" ? "MXN" : "USD",
-          );
+          trackTourView(tour.id, locale === "es" ? tour.nameEs : tour.nameEn);
           viewedTours.current.add(tourId);
         });
       },
@@ -55,14 +53,14 @@ export default function ToursSection() {
             <p className="mb-4 text-xs font-bold uppercase tracking-[0.28em] text-[#69d8cb]">
               {locale === "es" ? "Elige cómo vivir Kin-Ha" : "Choose your Kin-Ha experience"}
             </p>
-            <h2 className="text-balance text-5xl font-medium leading-[0.95] tracking-[-0.035em] md:text-7xl">
+            <Heading className="text-balance text-5xl font-medium leading-[0.95] tracking-[-0.035em] md:text-7xl">
               {t.tours.title}
-            </h2>
+            </Heading>
           </div>
           <p className="max-w-2xl text-lg leading-relaxed text-white/65 lg:justify-self-end">
             {locale === "es"
-              ? "Desde una visita a los cenotes hasta un día completo de aventura. Selecciona una opción y confirmamos disponibilidad, transportación y precio final contigo."
-              : "From a cenote visit to a full day of adventure. Choose an option and we will confirm availability, transportation and final pricing with you."}
+              ? "Desde una visita a los cenotes hasta un día completo de aventura. Reserva en línea con calendario y pago seguro, o escríbenos por WhatsApp."
+              : "From a cenote visit to a full day of adventure. Book online with live availability and secure payment, or message us on WhatsApp."}
           </p>
         </div>
 
@@ -71,9 +69,7 @@ export default function ToursSection() {
             const name = locale === "es" ? tour.nameEs : tour.nameEn;
             const description = locale === "es" ? tour.descEs : tour.descEn;
             const isFeatured = "featured" in tour && tour.featured;
-            const regularPrice = locale === "es" ? tour.regularPriceMXN : tour.regularPriceUSD;
-            const specialPrice = locale === "es" ? tour.priceMXN : tour.priceUSD;
-            const currency = locale === "es" ? "MXN" : "USD";
+            const onlineBooking = getBokunProductId(tour.id) != null;
             const message =
               locale === "es"
                 ? `Hola, me interesa ${name}. ¿Me ayudan a confirmar disponibilidad, transportación y precio final?`
@@ -109,7 +105,7 @@ export default function ToursSection() {
                 <div className={`flex flex-col justify-between p-7 ${isFeatured ? "md:p-10 lg:p-12" : ""}`}>
                   <div>
                     <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-[#69d8cb]">
-                      {tour.duration} · {locale === "es" ? `hasta ${tour.maxPeople} personas` : `up to ${tour.maxPeople} guests`}
+                      {tour.duration}
                     </p>
                     <h3 className={`mb-4 font-medium leading-tight ${isFeatured ? "text-4xl lg:text-5xl" : "text-3xl"}`}>
                       {name}
@@ -118,40 +114,25 @@ export default function ToursSection() {
                   </div>
 
                   <div>
-                    <div className="mb-6 border-l-2 border-[#d7b56d] pl-4">
-                      <div className="mb-2 flex flex-wrap items-center gap-2">
-                        <span className="rounded-full bg-[#d7b56d] px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.14em] text-[#062c24]">
-                          {locale === "es" ? "Oferta especial" : "Special offer"}
-                        </span>
-                        <span className="text-xs font-bold uppercase tracking-[0.14em] text-[#d7b56d]">
-                          {tour.discountPercent}% {locale === "es" ? "de descuento" : "off"}
-                        </span>
-                      </div>
-                      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                        <span className="text-sm text-white/45 line-through decoration-[#d7b56d] decoration-2">
-                          ${regularPrice.toLocaleString(locale === "es" ? "es-MX" : "en-US", { maximumFractionDigits: 2 })} {currency}
-                        </span>
-                        <strong className="text-3xl font-semibold text-white">
-                          ${specialPrice.toLocaleString(locale === "es" ? "es-MX" : "en-US")} {currency}
-                        </strong>
-                        <span className="text-xs text-white/50">/{locale === "es" ? "persona" : "person"}</span>
-                      </div>
-                      <p className="mt-1 text-xs text-white/45">
-                        {locale === "es" ? "Precio promocional por tiempo limitado" : "Limited-time promotional price"}
-                      </p>
-                    </div>
+                    <p className="mb-6 border-l-2 border-[#d7b56d] pl-4 text-sm text-white/70">
+                      {onlineBooking
+                        ? locale === "es"
+                          ? "Precios, ofertas y fechas disponibles en el calendario de reserva."
+                          : "Prices, offers and available dates in the booking calendar."
+                        : locale === "es"
+                          ? "Reserva por WhatsApp: te confirmamos fecha, transportación y precio."
+                          : "Book via WhatsApp: we confirm date, transportation and price."}
+                    </p>
                     <div className="flex flex-col gap-3 sm:flex-row">
-                      <a
-                        href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={() => trackWhatsAppClick("tour_card", name)}
-                        className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#69d8cb] px-6 py-3 font-bold text-[#062c24] transition hover:bg-white"
-                      >
-                        {t.tours.book}
-                      </a>
+                      <BokunButton
+                        tourId={tour.id}
+                        label={t.tours.book}
+                        whatsappMessage={message}
+                        onInteract={() => trackWhatsAppClick("tour_card", name)}
+                        className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#c9792e] px-6 py-3 font-bold text-white transition hover:bg-[#d99a4e]"
+                      />
                       <Link
-                        href="/booking"
+                        href={`/booking?tour=${tour.id}`}
                         className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/30 px-6 py-3 font-semibold text-white transition hover:border-white hover:bg-white/10"
                       >
                         {locale === "es" ? "Ver detalles" : "View details"}

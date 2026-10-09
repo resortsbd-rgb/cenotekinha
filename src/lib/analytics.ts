@@ -64,7 +64,7 @@ export const trackWhatsAppClick = (source: string, tourName?: string) => {
 export const trackTourView = (
   tourId: string,
   tourName: string,
-  price: number,
+  price?: number,
   currency: 'MXN' | 'USD' = 'MXN',
 ) => {
   trackEvent('ViewContent', {

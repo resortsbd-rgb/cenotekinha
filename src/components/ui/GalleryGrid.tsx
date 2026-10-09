@@ -18,7 +18,8 @@ const images = [
   { src: BASE_URL + "cenote-underground_157ca0cf.jpg", alt: "Underground cenote" },
 ];
 
-export default function GalleryGrid() {
+export default function GalleryGrid({ asPageTitle = false }: { asPageTitle?: boolean }) {
+  const Heading = asPageTitle ? "h1" : "h2";
   const { locale } = useLanguage();
   const t = translations[locale];
 
@@ -29,9 +30,9 @@ export default function GalleryGrid() {
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-teal-600 mb-3">
             {t.gallery.subtitle}
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+          <Heading className="text-4xl md:text-5xl font-bold text-gray-900">
             {t.gallery.title}
-          </h2>
+          </Heading>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
