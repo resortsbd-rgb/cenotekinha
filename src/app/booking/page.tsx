@@ -64,12 +64,12 @@ const TOUR_DETAILS: Record<TourId, {
     badge: { es: "NATURALEZA", en: "NATURE" },
     badgeColor: "bg-green-600",
     includes: {
-      es: ["Paseo a caballo (45 min)", "Cenote Kin-Ha y Cenote Blanca Flor", "Traslado de un cenote a otro", "Degustación de tequila", "Guía certificado bilingüe", "Chaleco salvavidas", "Lockers, baños y regaderas", "Estacionamiento gratuito"],
-      en: ["Horseback ride (45 min)", "Kin-Ha and Blanca Flor cenotes", "Ride between the two cenotes", "Tequila tasting", "Bilingual certified guide", "Life jacket", "Lockers, restrooms and showers", "Free parking"],
+      es: ["Transporte desde tu hotel (Cancún, Puerto Morelos, Playa del Carmen)", "Paseo a caballo (45 min)", "Cenote Kin-Ha (caverna) y Cenote Blanca Flor (abierto)", "Traslado de un cenote a otro", "Comida mexicana", "Degustación de tequila", "Guía certificado bilingüe", "Chaleco salvavidas", "Lockers, baños y regaderas"],
+      en: ["Hotel pickup (Cancún, Puerto Morelos, Playa del Carmen)", "Horseback ride (45 min)", "Kin-Ha Cenote (cavern) and Blanca Flor Cenote (open-air)", "Ride between the two cenotes", "Mexican lunch", "Tequila tasting", "Bilingual certified guide", "Life jacket", "Lockers, restrooms and showers"],
     },
     addons: {
-      es: ["Transporte desde tu hotel (te lo cotizamos por WhatsApp)", "Fotografía del paseo (opcional)"],
-      en: ["Hotel pickup (quoted on WhatsApp)", "Ride photography (optional)"],
+      es: ["Fotografía del paseo (opcional)"],
+      en: ["Ride photography (optional)"],
     },
   },
   "experiencia-completa": {
@@ -420,8 +420,8 @@ export default function BookingPage() {
               </a>
               <p className="text-center text-sm text-slate-500 mt-3">
                 {isEs
-                  ? "💬 Te confirmamos disponibilidad, precio y transportación por WhatsApp"
-                  : "💬 We confirm availability, price and transportation on WhatsApp"}
+                  ? "💬 Te confirmamos disponibilidad y hora de recogida por WhatsApp"
+                  : "💬 We confirm availability and your pickup time on WhatsApp"}
               </p>
             </>
           )}

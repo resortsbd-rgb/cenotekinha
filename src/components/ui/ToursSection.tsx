@@ -106,8 +106,8 @@ export default function ToursSection({ asPageTitle = false }: { asPageTitle?: bo
           </ul>
           <p className="mt-3 text-sm text-white/55">
             {locale === "es"
-              ? "Transporte desde Cancún, Puerto Morelos y Playa del Carmen incluido en el Tour ecológico, el tour de ATV y la Aventura completa."
-              : "Pickup from Cancún, Puerto Morelos and Playa del Carmen included on the Eco Tour, the ATV tour and the Full Adventure."}
+              ? "Transporte desde Cancún, Puerto Morelos y Playa del Carmen incluido en el Tour ecológico, el ATV, el paseo a caballo y la Aventura completa."
+              : "Pickup from Cancún, Puerto Morelos and Playa del Carmen included on the Eco Tour, the ATV tour, the horseback ride and the Full Adventure."}
           </p>
         </div>
 
@@ -119,8 +119,8 @@ export default function ToursSection({ asPageTitle = false }: { asPageTitle?: bo
             const onlineBooking = getBokunProductId(tour.id) != null;
             const message =
               locale === "es"
-                ? `Hola, me interesa ${name}. ¿Me ayudan a confirmar disponibilidad, transportación y precio final?`
-                : `Hi, I am interested in ${name}. Can you help me confirm availability, transportation and final pricing?`;
+                ? `Hola, me interesa ${name}. ¿Me ayudan a confirmar disponibilidad para reservar?`
+                : `Hi, I am interested in ${name}. Can you help me check availability and book?`;
             const transportMessage =
               locale === "es"
                 ? `Hola, quiero ${name} con transporte. ¿Me ayudan con fecha y punto de recogida?`
@@ -211,8 +211,8 @@ export default function ToursSection({ asPageTitle = false }: { asPageTitle?: bo
                           ? "Reserva en línea · cancelación gratis hasta 24 h antes."
                           : "Book online · free cancellation up to 24 hours before."
                         : locale === "es"
-                          ? "Reserva por WhatsApp: te confirmamos fecha, transporte y precio."
-                          : "Book on WhatsApp: we reply with date, pickup and price."}
+                          ? "Reserva por WhatsApp: te confirmamos fecha y hora de recogida."
+                          : "Book on WhatsApp: we confirm your date and pickup time."}
                     </p>
                     <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                       <BokunButton

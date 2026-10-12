@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { OG_IMAGES } from "@/lib/seo";
 import { Playfair_Display, Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import Script from "next/script";
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
+    images: OG_IMAGES,
     type: "website",
     locale: "es_MX",
     siteName: "Cenotes Kin-Ha",
@@ -35,6 +37,7 @@ export const metadata: Metadata = {
       "Cenote Kin-Ha y Cenote Blanca Flor: ATV, tirolesas y transporte desde Cancún y Playa del Carmen. Puerto Morelos, Riviera Maya.",
     url: "/",
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

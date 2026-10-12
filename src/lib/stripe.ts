@@ -1,7 +1,7 @@
 // Catálogo de experiencias del sitio (tarjetas en home, /experiences y /booking).
 // Precios "Desde": redondos, MXN en español y USD en inglés, sin centavos.
 //   · Solo se muestra precio si fromMXN está definido.
-//   · ATV y Caballos van SIN precio hasta que Luis los apruebe.
+//   · Precios aprobados por Luis: ATV (11-oct-2026) y Caballos (12-oct-2026).
 //   · Si cambia la tarifa en Bókun, actualizar aquí.
 // Stripe temporarily disabled — enable when STRIPE_SECRET_KEY is configured
 // import Stripe from 'stripe';
@@ -78,15 +78,17 @@ export const TOURS: Tour[] = [
   },
   {
     id: 'ecuestre-cenotes',
+    fromMXN: 1000,  // aprobado por Luis 12-oct-2026: incluye recogida en hotel y comida (WhatsApp; Bókun 1321346 inactivo)
+    fromUSD: 55,
     nameEs: 'Paseo a caballo y dos cenotes',
     nameEn: 'Horseback Ride & Two Cenotes',
-    descEs: 'Cabalgata guiada por la selva y nado en el Cenote Kin-Ha y el Cenote Blanca Flor. Escríbenos y te confirmamos horario, transporte y precio.',
-    descEn: 'Guided horseback ride through the jungle plus a swim in Kin-Ha and Blanca Flor cenotes. Message us and we confirm times, pickup and price.',
-    duration: '4 h',
+    descEs: 'Cabalgata guiada de 45 minutos por la selva y nado en el Cenote Kin-Ha y el Cenote Blanca Flor. Incluye transporte desde tu hotel, comida mexicana y degustación de tequila.',
+    descEn: 'A 45-minute guided horseback ride through the jungle plus a swim in Kin-Ha and Blanca Flor cenotes. Includes hotel pickup, Mexican lunch and a tequila tasting.',
+    duration: '4–5 h',
     maxPeople: 15,
     image: `${BASE_PATH}/images/tour-caballos-cenotes.webp`,
     imagePosition: 'object-[50%_18%]',
-    transport: 'on-request',
+    transport: 'pickup',
   },
   {
     id: 'experiencia-completa',
@@ -98,8 +100,8 @@ export const TOURS: Tour[] = [
     descEn: 'Everything in one day: ATV, horseback ride, zip lines and the Kin-Ha and Blanca Flor cenotes. Includes hotel pickup, bilingual guide, Mexican lunch and a tequila tasting. From 2 people.',
     duration: '5 h',
     maxPeople: 15,
-    image: `${BASE_PATH}/images/tour-aventura-completa.webp`,
-    imagePosition: 'object-[30%_30%]',
+    image: `${BASE_PATH}/images/tour-aventura-completa-tirolesa.webp`,  // la foto que mejor vende (Luis, 12-oct-2026)
+    imagePosition: 'object-[52%_35%]',
     featured: true,
     badge: { es: 'Día completo · comida y transporte', en: 'Full day · lunch & pickup' },
     transport: 'pickup',

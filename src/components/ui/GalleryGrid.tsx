@@ -7,6 +7,11 @@ import BASE_PATH from "@/lib/basePath";
 // Fotos reales de Kin-Ha (carpeta PICTURES de Luis), convertidas a webp.
 const images = [
   {
+    src: `${BASE_PATH}/images/galeria-tirolesa-casco.webp`,
+    alt: { es: "Visitante con casco y arnés volando en la tirolesa sobre la selva de Kin-Ha", en: "Guest in helmet and harness flying on the zip line over the Kin-Ha jungle" },
+    featured: true,
+  },
+  {
     src: `${BASE_PATH}/images/galeria-blanca-flor.webp`,
     alt: { es: "Vista desde arriba del agua turquesa del cenote Blanca Flor", en: "Looking down into the turquoise water of Blanca Flor cenote" },
   },
@@ -35,10 +40,6 @@ const images = [
     alt: { es: "Paseo a caballo por un sendero de la selva", en: "Horseback ride on a jungle trail" },
   },
   {
-    src: `${BASE_PATH}/images/galeria-comida.webp`,
-    alt: { es: "Visitantes comiendo en el comedor de Kin-Ha", en: "Guests having lunch at the Kin-Ha dining area" },
-  },
-  {
     src: `${BASE_PATH}/images/galeria-grupo-cenote.webp`,
     alt: { es: "Grupo grande con chalecos salvavidas dentro del cenote", en: "Large group in life jackets inside the cenote" },
   },
@@ -65,14 +66,14 @@ export default function GalleryGrid({ asPageTitle = false }: { asPageTitle?: boo
           {images.map((img, i) => (
             <div
               key={i}
-              className="relative aspect-square overflow-hidden rounded-xl group cursor-pointer"
+              className={`relative aspect-square overflow-hidden rounded-xl group cursor-pointer${img.featured ? " col-span-2 row-span-2" : ""}`}
             >
               <Image
                 src={img.src}
                 alt={img.alt[locale]}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
-                sizes="(max-width: 768px) 50vw, 33vw"
+                sizes={img.featured ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 50vw, 33vw"}
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
             </div>
