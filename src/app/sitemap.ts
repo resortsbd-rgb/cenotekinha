@@ -6,7 +6,7 @@ const routes = ["", "/experiences", "/booking", "/gallery", "/about", "/faq", "/
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return routes.map((route) => ({
-    url: `https://cenotekinha.com${route}`,
+    url: `https://www.cenotekinha.com${route}`,
     changeFrequency: route === "" ? "weekly" : "monthly",
     priority: route === "" ? 1 : route === "/booking" ? 0.9 : 0.7,
   }));

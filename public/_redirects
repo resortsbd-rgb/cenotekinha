@@ -1,0 +1,16 @@
+# Direcciones del sitio anterior (sitio de Bókun y versión de octubre) que Google y Bing
+# todavía muestran. Cada una lleva a la página equivalente del sitio actual (301 = permanente).
+# Cuando existan las páginas por tour (Fase 4), actualizar los destinos.
+/en / 301
+/es-mx / 301
+/es-mx/tours /experiences 301
+/tours /experiences 301
+/tours/atv-tirolesas-cenotes /booking?tour=atv-cenotes 301
+/tours/aventura-completa-kin-ha /booking?tour=experiencia-completa 301
+/tours/caballos-y-cenotes /booking?tour=ecuestre-cenotes 301
+/tour/puerto-morelos-kin-ha-cave-blanca-flor-cenotes-own-transportation /booking?tour=cenote-dual 301
+/tour/atv-and-horseback-combo-with-cenotes-ziplines-in-cancun /booking?tour=experiencia-completa 301
+/tours/* /experiences 301
+/tour/* /experiences 301
+/en/* /experiences 301
+/es-mx/* /experiences 301

@@ -20,7 +20,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://cenotekinha.com"),
+  metadataBase: new URL("https://www.cenotekinha.com"),
   title: "Cenotes Kin-Ha | ATV, Tirolesas y Cenotes en Puerto Morelos",
   description:
     "Cenote Kin-Ha y Cenote Blanca Flor en la Ruta de los Cenotes, Puerto Morelos: ATV, 3 tirolesas, degustación de tequila y transporte desde Cancún y Playa del Carmen.",
