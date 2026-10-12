@@ -7,41 +7,63 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import BASE_PATH from "@/lib/basePath";
 
 // Cada slide cuenta su propia historia: cueva, laguna, tirolesa, ATV, grupo.
+// Solo fotos reales de Kin-Ha, luminosas y con gente disfrutando la actividad.
 const slides = [
   {
-    src: `${BASE_PATH}/images/hero-cenote-cueva.webp`,
-    alt: "Agua azul brillando en la cueva del cenote Kin-Ha",
-    position: "object-[center_42%]",
+    src: `${BASE_PATH}/images/hero-cueva-columpio.webp`,
+    alt: {
+      es: "Visitante en el columpio sobre el agua azul de la cueva del cenote Kin-Ha",
+      en: "Guest on the rope swing over the glowing blue water of the Kin-Ha cave cenote",
+    },
+    position: "object-[50%_60%]",
+    // Escritorio: acerca y corre la foto a la derecha para que la persona no quede detrás del texto.
+    desktop: "md:scale-[1.2] md:translate-x-[10%]",
     es: { line1: "Salta a la cueva.", line2: "Vive la aventura." },
     en: { line1: "Dive into the cave.", line2: "Live the adventure." },
   },
   {
-    src: `${BASE_PATH}/images/hero-blanca-flor.webp`,
-    alt: "Laguna abierta de Blanca Flor rodeada de selva",
-    position: "object-center",
+    src: `${BASE_PATH}/images/hero-blanca-flor-plataformas.webp`,
+    alt: {
+      es: "Cenote Blanca Flor abierto al cielo, con plataformas de salto y selva alrededor",
+      en: "Open-air Blanca Flor cenote with jumping platforms and jungle all around",
+    },
+    position: "object-[58%_50%]",
+    desktop: "",
     es: { line1: "Agua que brilla.", line2: "Selva que respira." },
     en: { line1: "Water that glows.", line2: "Jungle that breathes." },
   },
   {
-    src: `${BASE_PATH}/images/hero-tirolesa.webp`,
-    alt: "Visitante en tirolesa sobre el agua del cenote",
-    position: "object-[center_40%]",
-    es: { line1: "Vuela sobre", line2: "el agua turquesa." },
-    en: { line1: "Fly over", line2: "the turquoise water." },
+    src: `${BASE_PATH}/images/hero-tirolesa-selva.webp`,
+    alt: {
+      es: "Visitante de cabeza en la tirolesa sobre la selva de Kin-Ha",
+      en: "Guest hanging upside down on a zip line above the Kin-Ha jungle",
+    },
+    position: "object-[55%_35%]",
+    desktop: "md:scale-[1.2] md:translate-x-[10%]",
+    es: { line1: "Vuela sobre", line2: "la selva." },
+    en: { line1: "Fly over", line2: "the jungle." },
   },
   {
-    src: `${BASE_PATH}/images/hero-atv.webp`,
-    alt: "Pareja en cuatrimoto salpicando agua en la selva",
-    position: "object-[center_45%]",
-    es: { line1: "Selva, lodo,", line2: "adrenalina pura." },
-    en: { line1: "Jungle, mud,", line2: "pure adrenaline." },
+    src: `${BASE_PATH}/images/hero-atv-selva.webp`,
+    alt: {
+      es: "Pareja feliz en cuatrimoto por un camino de la selva",
+      en: "Happy couple riding an ATV on a jungle trail",
+    },
+    position: "object-[62%_50%]",
+    desktop: "md:origin-top md:scale-[1.15] md:translate-x-[7.5%]",
+    es: { line1: "Acelera en la selva.", line2: "Pura adrenalina." },
+    en: { line1: "Ride the jungle.", line2: "Pure adrenaline." },
   },
   {
     src: `${BASE_PATH}/images/hero-grupo.webp`,
-    alt: "Amigas felices sobre la plataforma del cenote",
-    position: "object-[center_35%]",
+    alt: {
+      es: "Amigas felices en la plataforma sobre el cenote Blanca Flor",
+      en: "Smiling friends on the platform above Blanca Flor cenote",
+    },
+    position: "object-[55%_40%]",
+    desktop: "md:scale-[1.2] md:translate-x-[10%]",
     es: { line1: "El día que", line2: "contarás por años." },
-    en: { line1: "The day you'll", line2: "tell for years." },
+    en: { line1: "The day you'll", line2: "talk about for years." },
   },
 ];
 
@@ -49,26 +71,30 @@ const copy = {
   es: {
     eyebrow: "Ruta de los Cenotes · Puerto Morelos",
     subtitle:
-      "Dos cenotes en un solo día: la cueva de luz de Kin-Ha y la laguna abierta de Blanca Flor. Tirolesas, saltos y ATV, a 30 minutos de Cancún.",
+      "Dos cenotes en un día: la cueva de luz de Kin-Ha y la laguna abierta de Blanca Flor. Tirolesas, saltos y ATV, con transporte desde Cancún, Puerto Morelos y Playa del Carmen.",
+    subtitleShort:
+      "Cenotes, tirolesas y ATV con transporte desde Cancún, Puerto Morelos y Playa del Carmen.",
     primary: "Reservar mi aventura",
-    secondary: "Ver los cenotes",
+    secondary: "Ver experiencias y precios",
     priceLabel: "Desde",
     pricePer: "por persona",
     social: "Cancelación gratis hasta 24 h antes",
     direct: "Pago seguro en línea",
-    highlights: ["2 cenotes", "3 tirolesas", "ATV en la selva", "Comida yucateca"],
+    highlights: ["2 cenotes", "3 tirolesas", "ATV en la selva", "Comida y tequila"],
   },
   en: {
     eyebrow: "Cenote Route · Puerto Morelos",
     subtitle:
-      "Two cenotes in one day: Kin-Ha's cave of light and Blanca Flor's open lagoon. Zip lines, jumps and ATV, 30 minutes from Cancún.",
+      "Two cenotes in one day: Kin-Ha's cave of light and Blanca Flor's open-air lagoon. Zip lines, cliff jumps and ATVs, with pickup from Cancún, Puerto Morelos and Playa del Carmen.",
+    subtitleShort:
+      "Cenotes, zip lines and ATVs with pickup from Cancún, Puerto Morelos and Playa del Carmen.",
     primary: "Book my adventure",
-    secondary: "See the cenotes",
+    secondary: "See tours & prices",
     priceLabel: "From",
     pricePer: "per person",
     social: "Free cancellation up to 24h before",
     direct: "Secure online booking",
-    highlights: ["2 cenotes", "3 zip lines", "Jungle ATV", "Yucatecan lunch"],
+    highlights: ["2 cenotes", "3 zip lines", "Jungle ATV", "Lunch & tequila"],
   },
 };
 
@@ -77,14 +103,22 @@ export default function HeroSlider() {
   const t = copy[locale];
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
+  // Solo se montan las fotos hasta la siguiente slide: el resto se descarga después.
+  const [mountedUpTo, setMountedUpTo] = useState(1);
 
   useEffect(() => {
     if (paused) return;
     const timer = window.setInterval(() => {
       setCurrent((previous) => (previous + 1) % slides.length);
+      setMountedUpTo((previous) => Math.min(slides.length - 1, previous + 1));
     }, 5000);
     return () => window.clearInterval(timer);
   }, [paused]);
+
+  const goTo = (index: number) => {
+    setCurrent(index);
+    setMountedUpTo((previous) => Math.max(previous, Math.min(slides.length - 1, index + 1)));
+  };
 
   const headline = slides[current][locale];
 
@@ -101,34 +135,41 @@ export default function HeroSlider() {
             index === current ? "opacity-100" : "opacity-0"
           }`}
         >
-          <Image
-            src={slide.src}
-            alt={slide.alt}
-            fill
-            className={`scale-[1.02] object-cover ${slide.position}`}
-            priority={index === 0}
-            sizes="100vw"
-          />
+          {index <= mountedUpTo && (
+            <Image
+              src={slide.src}
+              alt={slide.alt[locale]}
+              fill
+              className={`scale-[1.02] object-cover ${slide.position} ${slide.desktop}`}
+              priority={index === 0}
+              sizes="100vw"
+            />
+          )}
         </div>
       ))}
 
-      {/* Overlays: jade oscuro de un lado, oscurecido abajo para legibilidad */}
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,25,22,.92)_0%,rgba(6,25,22,.62)_45%,rgba(6,25,22,.15)_80%)]" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#06292a]/92 via-transparent to-black/25" />
+      {/* Overlays suaves: la foto se ve luminosa; solo se oscurece donde va el texto.
+          Móvil: degradado vertical (el texto ocupa todo el ancho). Escritorio: degradado lateral. */}
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,30,26,.38)_0%,rgba(4,30,26,.32)_40%,rgba(4,30,26,.55)_72%,rgba(4,30,26,.8)_100%)] md:bg-[linear-gradient(90deg,rgba(4,30,26,.7)_0%,rgba(4,30,26,.42)_38%,rgba(4,30,26,.08)_66%,rgba(4,30,26,0)_100%)]" />
+      <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-[#06292a]/80 to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-black/30 to-transparent" />
 
-      <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-center px-5 pb-52 pt-28 text-white sm:px-8 sm:pb-40 lg:px-10">
-        <div className="max-w-3xl">
-          <p className="mb-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.26em] text-[#d99a4e] sm:text-sm">
-            <span className="h-px w-10 bg-[#d99a4e]" />
+      <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-center px-5 pb-24 pt-28 text-white sm:px-8 sm:pb-40 lg:px-10">
+        <div className="max-w-3xl [text-shadow:0_2px_16px_rgba(0,0,0,.45)]">
+          <p className="mb-6 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#e8b06a] sm:text-sm sm:tracking-[0.26em]">
+            <span className="hidden h-px w-10 bg-[#d99a4e] sm:block" />
             {t.eyebrow}
           </p>
 
-          <h1 className="text-balance mb-6 font-serif text-[clamp(3rem,7.5vw,6.8rem)] font-medium leading-[0.92] tracking-[-0.03em] drop-shadow-2xl">
+          <h1 className="text-balance mb-6 font-serif text-[clamp(2.75rem,6.2vw,5.6rem)] font-medium leading-[0.95] tracking-[-0.03em] drop-shadow-2xl">
             {headline.line1}{" "}
             <span className="italic text-[#e0a85c]">{headline.line2}</span>
           </h1>
 
-          <p className="mb-8 max-w-2xl text-lg leading-relaxed text-white/85 md:text-xl">
+          <p className="mb-8 max-w-xl text-lg leading-relaxed text-white/90 sm:hidden">
+            {t.subtitleShort}
+          </p>
+          <p className="mb-8 hidden max-w-xl text-lg leading-relaxed text-white/90 sm:block md:text-xl">
             {t.subtitle}
           </p>
 
@@ -141,7 +182,7 @@ export default function HeroSlider() {
               <span aria-hidden="true" className="ml-3">→</span>
             </Link>
             <Link
-              href="/#cenotes"
+              href="/#tours"
               className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/40 bg-white/10 px-7 py-4 font-semibold text-white backdrop-blur-md transition hover:bg-white/20"
             >
               {t.secondary}
@@ -163,12 +204,12 @@ export default function HeroSlider() {
       </div>
 
       {/* Puntos de navegación */}
-      <div className="absolute bottom-44 right-5 z-20 flex gap-2 sm:bottom-32 sm:right-8 lg:right-10">
+      <div className="absolute bottom-8 left-5 z-20 flex gap-2 sm:bottom-32 sm:left-auto sm:right-8 lg:right-10">
         {slides.map((slide, index) => (
           <button
             key={slide.src}
             type="button"
-            onClick={() => setCurrent(index)}
+            onClick={() => goTo(index)}
             className={`h-1.5 rounded-full transition-all duration-300 ${
               index === current ? "w-10 bg-[#e0a85c]" : "w-2.5 bg-white/50 hover:bg-white/80"
             }`}
@@ -178,7 +219,7 @@ export default function HeroSlider() {
       </div>
 
       {/* Barra de highlights */}
-      <div className="absolute inset-x-0 bottom-0 z-10 border-t border-white/15 bg-[#06292a]/80 backdrop-blur-xl">
+      <div className="absolute inset-x-0 bottom-0 z-10 hidden border-t border-white/15 bg-[#06292a]/80 backdrop-blur-xl sm:block">
         <div className="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-white/10 px-4 sm:grid-cols-4 sm:px-8 lg:px-10">
           {t.highlights.map((item, index) => (
             <div key={item} className="flex min-h-20 items-center gap-3 px-3 py-4 sm:min-h-24 sm:px-6">

@@ -3,9 +3,20 @@ import { useEffect, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { TOURS } from "@/lib/stripe";
 import BokunButton from "@/components/booking/BokunButton";
+import PromoLine from "@/components/ui/PromoLine";
 import { getBokunProductId } from "@/lib/bokun";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
-type TourId = "cenote-dual" | "atv-cenotes" | "ecuestre-cenotes" | "experiencia-completa";
+const TRANSPORT_SHORT = {
+  pickup: { es: "Recogida incluida", en: "Pickup included" },
+  own: { es: "Llegas en tu auto", en: "Drive in" },
+  "on-request": { es: "Transporte disponible", en: "Pickup available" },
+} as const;
+
+// Punto exacto de Cenotes Kin-Ha en Google Maps (la ficha no indica kilómetro).
+const MAPS_DIRECTIONS = "https://www.google.com/maps/dir/?api=1&destination=20.851221,-87.1276722";
+
+type TourId = "cenote-dual" | "atv-cenotes" | "ecuestre-cenotes" | "experiencia-completa" | "tour-ecologico";
 
 const TOUR_DETAILS: Record<TourId, {
   badge: { es: string; en: string };
@@ -17,8 +28,20 @@ const TOUR_DETAILS: Record<TourId, {
     badge: { es: "CLÁSICO", en: "CLASSIC" },
     badgeColor: "bg-teal-500",
     includes: {
-      es: ["Acceso a 2 cenotes (Kin-Ha + Blanca Flor)", "Degustación de tequila", "Guía bilingüe", "Chaleco salvavidas", "Regaderas y lockers sin costo", "Estacionamiento gratuito"],
-      en: ["Access to 2 cenotes (Kin-Ha + Blanca Flor)", "Tequila tasting", "Bilingual guide", "Life jacket", "Complimentary showers and lockers", "Free parking"],
+      es: ["Cenote Kin-Ha (caverna) y Cenote Blanca Flor (abierto)", "Traslado de un cenote a otro", "Chaleco salvavidas", "Degustación de tequila", "Guía bilingüe", "Lockers, baños y regaderas", "Estacionamiento gratuito"],
+      en: ["Kin-Ha Cenote (cavern) and Blanca Flor Cenote (open-air)", "Ride between the two cenotes", "Life jacket", "Tequila tasting", "Bilingual guide", "Lockers, restrooms and showers", "Free parking"],
+    },
+    addons: {
+      es: ["Paquete de fotos (opcional)"],
+      en: ["Photo package (optional)"],
+    },
+  },
+  "tour-ecologico": {
+    badge: { es: "ECOLÓGICO", en: "ECO TOUR" },
+    badgeColor: "bg-emerald-600",
+    includes: {
+      es: ["Transporte desde tu hotel (Cancún, Puerto Morelos, Playa del Carmen)", "Cenote Kin-Ha (caverna) y Cenote Blanca Flor (abierto)", "Traslado de un cenote a otro", "Comida mexicana", "Degustación de tequila", "Chaleco salvavidas", "Lockers, baños y regaderas"],
+      en: ["Hotel pickup (Cancún, Puerto Morelos, Playa del Carmen)", "Kin-Ha Cenote (cavern) and Blanca Flor Cenote (open-air)", "Ride between the two cenotes", "Mexican lunch", "Tequila tasting", "Life jacket", "Lockers, restrooms and showers"],
     },
     addons: {
       es: ["Paquete de fotos (opcional)"],
@@ -29,8 +52,8 @@ const TOUR_DETAILS: Record<TourId, {
     badge: { es: "MÁS POPULAR", en: "MOST POPULAR" },
     badgeColor: "bg-amber-500",
     includes: {
-      es: ["ATV por la selva", "3 tirolesas", "Cenote Blanca Flor (abierto)", "Cenote Kin-Ha (subterráneo)", "Comida mexicana", "Degustación de tequila", "Guía bilingüe", "Regaderas y lockers sin costo"],
-      en: ["Jungle ATV", "3 zip lines", "Blanca Flor Cenote (open-air)", "Kin-Ha Cenote (underground)", "Mexican lunch", "Tequila tasting", "Bilingual guide", "Complimentary showers and lockers"],
+      es: ["Transporte desde tu hotel (Cancún, Puerto Morelos, Playa del Carmen)", "ATV por la selva", "3 tirolesas", "Cenote Kin-Ha (caverna) y Cenote Blanca Flor (abierto)", "Traslado de un cenote a otro", "Comida mexicana", "Degustación de tequila", "Chaleco salvavidas", "Guía bilingüe", "Lockers, baños y regaderas"],
+      en: ["Hotel pickup (Cancún, Puerto Morelos, Playa del Carmen)", "Jungle ATV", "3 zip lines", "Kin-Ha Cenote (cavern) and Blanca Flor Cenote (open-air)", "Ride between the two cenotes", "Mexican lunch", "Tequila tasting", "Life jacket", "Bilingual guide", "Lockers, restrooms and showers"],
     },
     addons: {
       es: ["ATV individual (opcional)"],
@@ -41,20 +64,20 @@ const TOUR_DETAILS: Record<TourId, {
     badge: { es: "NATURALEZA", en: "NATURE" },
     badgeColor: "bg-green-600",
     includes: {
-      es: ["Paseo a caballo (45 min)", "Acceso a 2 cenotes", "Degustación de tequila", "Guía certificado bilingüe", "Chaleco salvavidas", "Estacionamiento gratuito"],
-      en: ["Horseback ride (45 min)", "Access to 2 cenotes", "Tequila tasting", "Bilingual certified guide", "Life jacket", "Free parking"],
+      es: ["Paseo a caballo (45 min)", "Cenote Kin-Ha y Cenote Blanca Flor", "Traslado de un cenote a otro", "Degustación de tequila", "Guía certificado bilingüe", "Chaleco salvavidas", "Lockers, baños y regaderas", "Estacionamiento gratuito"],
+      en: ["Horseback ride (45 min)", "Kin-Ha and Blanca Flor cenotes", "Ride between the two cenotes", "Tequila tasting", "Bilingual certified guide", "Life jacket", "Lockers, restrooms and showers", "Free parking"],
     },
     addons: {
-      es: ["Fotografía del paseo (opcional)"],
-      en: ["Ride photography (optional)"],
+      es: ["Transporte desde tu hotel (te lo cotizamos por WhatsApp)", "Fotografía del paseo (opcional)"],
+      en: ["Hotel pickup (quoted on WhatsApp)", "Ride photography (optional)"],
     },
   },
   "experiencia-completa": {
     badge: { es: "MEJOR VALOR", en: "BEST VALUE" },
     badgeColor: "bg-purple-500",
     includes: {
-      es: ["Sistema dual de cenotes", "ATV por la selva (30 min)", "Tirolesas", "Paseo a caballo", "Almuerzo yucateco", "Guía certificado bilingüe", "Todo el equipo necesario"],
-      en: ["Dual cenote system", "Jungle ATV (30 min)", "Zip lines", "Horseback ride", "Yucatecan lunch", "Bilingual certified guide", "All necessary equipment"],
+      es: ["Transporte de ida y vuelta a tu hotel", "ATV por la selva (40 min)", "Paseo a caballo (40 min)", "Tirolesas", "Cenote Kin-Ha (caverna) y Cenote Blanca Flor (abierto)", "Traslado de un cenote a otro", "Comida mexicana tradicional y agua", "Degustación de tequila", "Chaleco salvavidas y equipo de seguridad", "Guía bilingüe", "Lockers, baños y regaderas"],
+      en: ["Round-trip hotel pickup", "Jungle ATV (40 min)", "Horseback ride (40 min)", "Zip lines", "Kin-Ha Cenote (cavern) and Blanca Flor Cenote (open-air)", "Ride between the two cenotes", "Traditional Mexican lunch and water", "Tequila tasting", "Life jacket and safety gear", "Bilingual guide", "Lockers, restrooms and showers"],
     },
     addons: {
       es: [],
@@ -188,7 +211,7 @@ export default function BookingPage() {
                 <button
                   key={tour.id}
                   onClick={() => setSelectedId(isSelected ? null : (tour.id as TourId))}
-                  className={`text-left rounded-2xl overflow-hidden border-2 transition-all duration-300 shadow-sm hover:shadow-xl focus:outline-none w-full ${
+                  className={`self-start text-left rounded-2xl overflow-hidden border-2 transition-all duration-300 shadow-sm hover:shadow-xl focus:outline-none w-full ${
                     isSelected
                       ? "border-teal-500 shadow-teal-100"
                       : "border-transparent bg-white hover:border-teal-200"
@@ -199,7 +222,7 @@ export default function BookingPage() {
                     <img
                       src={tour.image}
                       alt={name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className={`w-full h-full object-cover ${tour.imagePosition ?? "object-center"} transition-transform duration-500 group-hover:scale-105`}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 to-transparent" />
                     <span
@@ -233,9 +256,10 @@ export default function BookingPage() {
                         </span>
                         <span className="flex items-center gap-1">
                           <svg className="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                           </svg>
-                          {isEs ? "Grupos de cualquier tamaño" : "Any group size"}
+                          {TRANSPORT_SHORT[tour.transport][locale]}
                         </span>
                       </div>
                       <span className="text-right">
@@ -244,6 +268,7 @@ export default function BookingPage() {
                           {isEs ? `Desde $${tour.fromMXN.toLocaleString("es-MX")} MXN` : `From $${tour.fromUSD} USD`}
                         </span>
                       )}
+                      <PromoLine promo={tour.promo} className="max-w-[14rem] text-[11px] font-semibold text-amber-600" />
                       <span className={`text-[11px] font-bold uppercase tracking-wide ${online ? "text-teal-700" : "text-green-700"}`}>
                         {online
                           ? isEs ? "Reserva en línea" : "Book online"
@@ -346,7 +371,7 @@ export default function BookingPage() {
                 </div>
                 {selectedTour && (
                   <p className="text-xs text-slate-400 mt-1">
-                    {isEs ? "¿Grupo grande? Enviamos las camionetas necesarias." : "Large group? We send as many vans as needed."}
+                    {isEs ? "¿Grupo grande? Escríbenos por WhatsApp y te cotizamos." : "Large group? Message us on WhatsApp for a group quote."}
                   </p>
                 )}
               </div>
@@ -369,6 +394,8 @@ export default function BookingPage() {
                 tourId={selectedId}
                 label={isEs ? "Ver fechas y reservar" : "See dates & book"}
                 whatsappMessage={waMsg}
+                tourName={tourName}
+                source="booking_page"
                 className="flex items-center justify-center gap-3 w-full py-5 rounded-2xl bg-[#c9792e] text-white text-lg font-bold shadow-lg transition-all duration-300 hover:bg-[#d99a4e] hover:shadow-[0_14px_45px_rgba(201,121,46,.35)] hover:scale-[1.015] active:scale-[0.99] cursor-pointer"
               />
               <p className="text-center text-sm text-slate-500 mt-3">
@@ -385,6 +412,7 @@ export default function BookingPage() {
                 href={waUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackWhatsAppClick("booking_page", tourName)}
                 className="flex items-center justify-center gap-3 w-full py-5 rounded-2xl bg-green-500 text-white text-lg font-bold shadow-lg transition-all duration-300 hover:bg-green-400 hover:shadow-green-300/60 hover:scale-[1.015] active:scale-[0.99] cursor-pointer"
               >
                 {WA_ICON}
@@ -455,8 +483,16 @@ export default function BookingPage() {
                   <span className="flex-shrink-0">📌</span>
                   <span>
                     {isEs
-                      ? "Dos Cenotes es con llegada propia: el parque está en el km 18 de la Ruta de los Cenotes, con estacionamiento gratis. La Aventura Completa y los tours por WhatsApp incluyen recogida."
-                      : "Two Cenotes is self-drive: the park is at km 18 of the Cenote Route, with free parking. The Complete Adventure and WhatsApp tours include pickup."}
+                      ? "El Tour ecológico, el tour de ATV y la Aventura completa incluyen transporte desde tu hotel. Si vienes en tu auto, hay estacionamiento gratis. "
+                      : "The Eco Tour, the ATV tour and the Full Adventure include hotel pickup. If you drive, parking is free. "}
+                    <a
+                      href={MAPS_DIRECTIONS}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-teal-700 underline underline-offset-2"
+                    >
+                      {isEs ? "Cómo llegar (Google Maps)" : "Get directions (Google Maps)"}
+                    </a>
                   </span>
                 </p>
               </div>

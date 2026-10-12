@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://cenotekinha.com"),
   title: "Cenotes Kin-Ha | ATV, Tirolesas y Cenotes en Puerto Morelos",
   description:
-    "ATV por la selva, 3 tirolesas, dos cenotes naturales, comida mexicana y transportación disponible en la Ruta de los Cenotes, Puerto Morelos.",
+    "Cenote Kin-Ha y Cenote Blanca Flor en la Ruta de los Cenotes, Puerto Morelos: ATV, 3 tirolesas, degustación de tequila y transporte desde Cancún y Playa del Carmen.",
   alternates: {
     canonical: "/",
   },
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     siteName: "Cenotes Kin-Ha",
     title: "Cenotes Kin-Ha | Aventura en la Ruta de los Cenotes",
     description:
-      "ATV por la selva, 3 tirolesas y dos cenotes naturales en Puerto Morelos, Riviera Maya.",
+      "Cenote Kin-Ha y Cenote Blanca Flor: ATV, tirolesas y transporte desde Cancún y Playa del Carmen. Puerto Morelos, Riviera Maya.",
     url: "/",
   },
 };

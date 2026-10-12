@@ -2,6 +2,7 @@
 import HeroSlider from "@/components/ui/HeroSlider";
 import StatsSection from "@/components/ui/StatsSection";
 import ToursSection from "@/components/ui/ToursSection";
+import ReviewsSection from "@/components/ui/ReviewsSection";
 import FeaturesSection from "@/components/ui/FeaturesSection";
 import GalleryGrid from "@/components/ui/GalleryGrid";
 import FAQSection from "@/components/ui/FAQSection";
@@ -14,6 +15,7 @@ export default function HomePage() {
       <HeroSlider />
       <StatsSection />
       <ToursSection />
+      <ReviewsSection />
       <FeaturesSection />
       <GalleryGrid />
       <FAQSection />

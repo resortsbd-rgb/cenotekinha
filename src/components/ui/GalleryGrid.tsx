@@ -2,20 +2,46 @@
 import Image from "next/image";
 import { translations } from "@/lib/translations";
 import { useLanguage } from "@/contexts/LanguageContext";
+import BASE_PATH from "@/lib/basePath";
 
-const BASE_URL =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663403066106/Zp7c8E6uddmsrRA2xBjMah/";
-
+// Fotos reales de Kin-Ha (carpeta PICTURES de Luis), convertidas a webp.
 const images = [
-  { src: BASE_URL + "cenote-kinha-1_354574cd.jpg", alt: "Cenote Kin-Ha turquoise water" },
-  { src: BASE_URL + "cenote-kinha-2_c5d7c755.jpg", alt: "Cenote Kin-Ha view" },
-  { src: BASE_URL + "zipline-cenote_0c385721.jpg", alt: "Zipline over cenote" },
-  { src: BASE_URL + "zipline-water_b7ba34e0.jpg", alt: "Zipline water action" },
-  { src: BASE_URL + "atv-jungle_3b7c5d3f.jpg", alt: "ATV jungle tour" },
-  { src: BASE_URL + "atv-tour_9bf62408.jpg", alt: "ATV tour group" },
-  { src: BASE_URL + "horses-jungle_34a1d854.jpg", alt: "Horses in the jungle" },
-  { src: BASE_URL + "cenote-cave_02f834b4.jpg", alt: "Cave cenote stalactites" },
-  { src: BASE_URL + "cenote-underground_157ca0cf.jpg", alt: "Underground cenote" },
+  {
+    src: `${BASE_PATH}/images/galeria-blanca-flor.webp`,
+    alt: { es: "Vista desde arriba del agua turquesa del cenote Blanca Flor", en: "Looking down into the turquoise water of Blanca Flor cenote" },
+  },
+  {
+    src: `${BASE_PATH}/images/galeria-cueva-luz.webp`,
+    alt: { es: "Entrada de luz natural sobre el agua azul de la cueva Kin-Ha", en: "Natural light pouring into the blue water of the Kin-Ha cave" },
+  },
+  {
+    src: `${BASE_PATH}/images/galeria-familia-cenote.webp`,
+    alt: { es: "Familia con chalecos salvavidas nadando en el cenote Kin-Ha", en: "Family in life jackets swimming in the Kin-Ha cenote" },
+  },
+  {
+    src: `${BASE_PATH}/images/galeria-plataforma-salto.webp`,
+    alt: { es: "Plataformas de salto de madera sobre el cenote Blanca Flor", en: "Wooden jumping platforms above Blanca Flor cenote" },
+  },
+  {
+    src: `${BASE_PATH}/images/galeria-tirolesa.webp`,
+    alt: { es: "Niño feliz en la tirolesa entre la selva", en: "Happy kid on the zip line through the jungle" },
+  },
+  {
+    src: `${BASE_PATH}/images/galeria-atv.webp`,
+    alt: { es: "Visitante en cuatrimoto por un camino de la selva", en: "Guest riding an ATV on a jungle trail" },
+  },
+  {
+    src: `${BASE_PATH}/images/galeria-caballo.webp`,
+    alt: { es: "Paseo a caballo por un sendero de la selva", en: "Horseback ride on a jungle trail" },
+  },
+  {
+    src: `${BASE_PATH}/images/galeria-comida.webp`,
+    alt: { es: "Visitantes comiendo en el comedor de Kin-Ha", en: "Guests having lunch at the Kin-Ha dining area" },
+  },
+  {
+    src: `${BASE_PATH}/images/galeria-grupo-cenote.webp`,
+    alt: { es: "Grupo grande con chalecos salvavidas dentro del cenote", en: "Large group in life jackets inside the cenote" },
+  },
 ];
 
 export default function GalleryGrid({ asPageTitle = false }: { asPageTitle?: boolean }) {
@@ -43,15 +69,10 @@ export default function GalleryGrid({ asPageTitle = false }: { asPageTitle?: boo
             >
               <Image
                 src={img.src}
-                alt={img.alt}
+                alt={img.alt[locale]}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
                 sizes="(max-width: 768px) 50vw, 33vw"
-                onError={(e) => {
-                  const el = e.target as HTMLImageElement;
-                  const fallbacks = ["/images/hero1.png", "/images/hero2.png", "/images/hero3.png"];
-                  el.src = fallbacks[i % fallbacks.length];
-                }}
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
             </div>

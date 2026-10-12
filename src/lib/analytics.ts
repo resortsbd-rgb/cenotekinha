@@ -47,6 +47,38 @@ export const trackBookingComplete = (tourId: string, tourName: string, value: nu
   });
 };
 
+// Reserva en línea (Bókun): clic en "Reservar en línea" → abre el calendario.
+// booking_click = intención; calendar_open = el calendario sí se mostró;
+// calendar_error = no se mostró en 15 s (se ofrece WhatsApp como respaldo).
+export const trackBookingClick = (tourId: string, tourName: string, source: string) => {
+  trackEvent('InitiateCheckout', {
+    content_name: tourName,
+    content_ids: [tourId],
+    content_type: 'product',
+  });
+  gtmEvent('booking_click', {
+    tour_id: tourId,
+    tour_name: tourName,
+    source,
+    channel: 'bokun',
+  });
+};
+
+export const trackCalendarOpen = (tourId: string, tourName: string, loadMs: number) => {
+  gtmEvent('calendar_open', {
+    tour_id: tourId,
+    tour_name: tourName,
+    load_ms: loadMs,
+  });
+};
+
+export const trackCalendarError = (tourId: string, tourName: string) => {
+  gtmEvent('calendar_error', {
+    tour_id: tourId,
+    tour_name: tourName,
+  });
+};
+
 // Eventos de WhatsApp
 export const trackWhatsAppClick = (source: string, tourName?: string) => {
   trackEvent('Contact', {

@@ -1,8 +1,11 @@
 "use client";
 
 import { useLanguage } from "@/contexts/LanguageContext";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 const WHATSAPP = "529982053527";
+// Punto exacto de Cenotes Kin-Ha en Google Maps (la ficha no indica kilómetro).
+const MAPS_DIRECTIONS = "https://www.google.com/maps/dir/?api=1&destination=20.851221,-87.1276722";
 
 export default function ContactPage() {
   const { locale } = useLanguage();
@@ -37,6 +40,7 @@ export default function ContactPage() {
               href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackWhatsAppClick("contact_page")}
               className="flex min-h-16 items-center justify-between rounded-full bg-[#69d8cb] px-6 font-bold text-[#062c24] transition hover:bg-white"
             >
               <span>WhatsApp · +52 998 205 3527</span>
@@ -60,7 +64,15 @@ export default function ContactPage() {
                 <p className="text-xs font-bold uppercase tracking-[.18em] text-[#69d8cb]">
                   {isSpanish ? "Ubicación" : "Location"}
                 </p>
-                <p className="mt-2 text-white/75">Ruta de los Cenotes km 18 · Puerto Morelos</p>
+                <p className="mt-2 text-white/75">Ruta de los Cenotes · Puerto Morelos</p>
+                <a
+                  href={MAPS_DIRECTIONS}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2 inline-block text-sm font-semibold text-[#69d8cb] underline underline-offset-4 hover:text-white"
+                >
+                  {isSpanish ? "Cómo llegar (Google Maps) ↗" : "Get directions (Google Maps) ↗"}
+                </a>
               </div>
             </div>
           </div>

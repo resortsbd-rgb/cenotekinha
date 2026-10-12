@@ -13,8 +13,8 @@ export default function AboutPage() {
       <section className="mx-auto grid max-w-7xl gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:items-center">
         <div className="relative min-h-[520px] overflow-hidden">
           <Image
-            src="/images/hero4.png"
-            alt="Cenote Blanca Flor rodeado por la selva"
+            src="/images/cta-blanca-flor.webp"
+            alt={isSpanish ? "Visitantes nadando en el cenote Blanca Flor, rodeado por la selva" : "Guests swimming in Blanca Flor cenote, surrounded by jungle"}
             fill
             className="object-cover"
             priority

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { translations } from "@/lib/translations";
 import { useLanguage } from "@/contexts/LanguageContext";
 import BASE_PATH from "@/lib/basePath";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 export default function CTASection() {
   const { locale } = useLanguage();
@@ -13,8 +14,8 @@ export default function CTASection() {
     <section className="relative overflow-hidden px-4 py-28 sm:px-6 lg:py-36">
       <div className="absolute inset-0">
         <Image
-          src={`${BASE_PATH}/images/hero4.png`}
-          alt="Cenote Kin-Ha"
+          src={`${BASE_PATH}/images/cta-blanca-flor.webp`}
+          alt={locale === "es" ? "Visitantes nadando en el cenote Blanca Flor" : "Guests swimming in Blanca Flor cenote"}
           fill
           className="object-cover"
           sizes="100vw"
@@ -41,6 +42,7 @@ export default function CTASection() {
             href={`https://wa.me/529982053527?text=${encodeURIComponent(t.whatsapp_msg)}`}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackWhatsAppClick("cta_section")}
             className="inline-flex min-h-14 items-center gap-2 border border-white/35 bg-white/10 hover:bg-white hover:text-[#062c24] text-white font-bold px-8 py-4 rounded-full transition text-base shadow-lg backdrop-blur-md"
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">

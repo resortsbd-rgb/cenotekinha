@@ -25,8 +25,9 @@ export const WHATSAPP_FALLBACK = "529982053527";
 export const BOKUN_PRODUCT_BY_TOUR: Record<string, number | null> = {
   "cenote-dual": 1321347,           // Dos Cenotes Kin-Ha (llegada propia)
   "experiencia-completa": 1226446,  // Aventura Completa = Combo completo
-  "atv-cenotes": null,              // ATV + dos cenotes → WhatsApp
-  "ecuestre-cenotes": null,         // Cabalgata + dos cenotes → WhatsApp
+  "atv-cenotes": 1321345,           // ATV + dos cenotes + comida + pickup (activado por Luis 11-oct-2026)
+  "ecuestre-cenotes": null,         // Cabalgata + dos cenotes → WhatsApp (Bókun 1321346 inactivo)
+  "tour-ecologico": null,           // Cenotes + transporte + comida → WhatsApp (sin producto en Bókun)
 };
 
 export function getBokunProductId(tourId: string): number | null {
