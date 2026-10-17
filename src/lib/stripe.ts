@@ -33,7 +33,7 @@ export const TOURS: Tour[] = [
     fromMXN: 1100,  // ATV compartido por persona: precio único permanente (sin tarifa "regular" + "promo")
     fromUSD: 60,    // ≤ GetYourGuide ($64 con descuento / $80 regular): el sitio siempre es el mejor precio
     nameEs: 'ATV, tirolesas y dos cenotes',
-    nameEn: 'ATV, Zip Lines & Two Cenotes',
+    nameEn: 'ATV Tour from Cancún: Zip Lines & Two Cenotes',
     descEs: 'Recorre la selva en ATV, vuela en 3 tirolesas y nada en el Cenote Kin-Ha y el Cenote Blanca Flor. Incluye transporte desde tu hotel, comida mexicana y degustación de tequila. Opción de ATV individual. Desde 2 personas.',
     descEn: 'Ride an ATV through the jungle, fly on 3 zip lines and swim in Kin-Ha and Blanca Flor cenotes. Includes hotel pickup, Mexican lunch and a tequila tasting. Solo ATV option available. From 2 people.',
     duration: '4–5 h',
@@ -81,7 +81,7 @@ export const TOURS: Tour[] = [
     fromMXN: 1000,  // aprobado por Luis 12-oct-2026: incluye recogida en hotel y comida (WhatsApp; Bókun 1321346 inactivo)
     fromUSD: 55,
     nameEs: 'Paseo a caballo y dos cenotes',
-    nameEn: 'Horseback Ride & Two Cenotes',
+    nameEn: 'Horseback Riding & Two Cenotes',
     descEs: 'Cabalgata guiada de 45 minutos por la selva y nado en el Cenote Kin-Ha y el Cenote Blanca Flor. Incluye transporte desde tu hotel, comida mexicana y degustación de tequila.',
     descEn: 'A 45-minute guided horseback ride through the jungle plus a swim in Kin-Ha and Blanca Flor cenotes. Includes hotel pickup, Mexican lunch and a tequila tasting.',
     duration: '4–5 h',

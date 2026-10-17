@@ -1,20 +1,28 @@
 import type { Metadata } from "next";
 import { OG_IMAGES } from "@/lib/seo";
+import { toursJsonLd } from "@/lib/structuredData";
+import JsonLd from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Tours en Cenotes Kin-Ha | ATV, Tirolesas y Cenotes en Puerto Morelos",
-  description: "Tours al Cenote Kin-Ha y al Cenote Blanca Flor: tour ecológico con comida, ATV, tirolesas y cabalgata, con transporte desde Cancún. Puerto Morelos.",
+  title: "Tours de cenotes, ATV y caballos cerca de Cancún | Kin-Ha",
+  description: "Tours al Cenote Kin-Ha y al Cenote Blanca Flor con ATV, tirolesas, paseo a caballo o tour ecológico. Transporte desde Cancún y Playa del Carmen.",
   alternates: { canonical: "/experiences" },
   openGraph: {
     images: OG_IMAGES,
     siteName: "Cenotes Kin-Ha",
     locale: "es_MX",
-    title: "Tours en Cenotes Kin-Ha | ATV, Tirolesas y Cenotes en Puerto Morelos",
-    description: "Tours al Cenote Kin-Ha y al Cenote Blanca Flor: tour ecológico con comida, ATV, tirolesas y cabalgata, con transporte desde Cancún. Puerto Morelos.",
+    title: "Tours de cenotes, ATV y caballos cerca de Cancún | Kin-Ha",
+    description: "Tours al Cenote Kin-Ha y al Cenote Blanca Flor con ATV, tirolesas, paseo a caballo o tour ecológico. Transporte desde Cancún y Playa del Carmen.",
     url: "/experiences",
   },
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <>
+      {/* Tours con precio para Google */}
+      <JsonLd data={toursJsonLd} />
+      {children}
+    </>
+  );
 }

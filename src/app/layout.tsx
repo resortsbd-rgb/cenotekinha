@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { OG_IMAGES } from "@/lib/seo";
+import { businessJsonLd } from "@/lib/structuredData";
+import JsonLd from "@/components/seo/JsonLd";
 import { Playfair_Display, Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import Script from "next/script";
@@ -21,9 +23,9 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.cenotekinha.com"),
-  title: "Cenotes Kin-Ha | ATV, Tirolesas y Cenotes en Puerto Morelos",
+  title: "Cenotes Kin-Ha | Tours de cenotes y ATV cerca de Cancún",
   description:
-    "Cenote Kin-Ha y Cenote Blanca Flor en la Ruta de los Cenotes, Puerto Morelos: ATV, 3 tirolesas, degustación de tequila y transporte desde Cancún y Playa del Carmen.",
+    "Cenote Kin-Ha y Cenote Blanca Flor en la Ruta de los Cenotes, cerca de Cancún: ATV, tirolesas y paseo a caballo con transporte desde tu hotel.",
   alternates: {
     canonical: "/",
   },
@@ -32,9 +34,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_MX",
     siteName: "Cenotes Kin-Ha",
-    title: "Cenotes Kin-Ha | Aventura en la Ruta de los Cenotes",
+    title: "Cenotes Kin-Ha | Tours de cenotes y ATV cerca de Cancún",
     description:
-      "Cenote Kin-Ha y Cenote Blanca Flor: ATV, tirolesas y transporte desde Cancún y Playa del Carmen. Puerto Morelos, Riviera Maya.",
+      "Cenote Kin-Ha y Cenote Blanca Flor en la Ruta de los Cenotes de Puerto Morelos: ATV, tirolesas y caballos con transporte desde Cancún.",
     url: "/",
   },
   twitter: { card: "summary_large_image" },
@@ -44,6 +46,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" className={`${playfair.variable} ${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
+        {/* Datos del negocio para Google (dirección, horario, mapa, redes) */}
+        <JsonLd data={businessJsonLd} />
         {/* Meta Pixel */}
         <Script
           id="meta-pixel"

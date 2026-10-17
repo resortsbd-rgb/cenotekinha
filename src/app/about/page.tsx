@@ -26,7 +26,11 @@ export default function AboutPage() {
             {isSpanish ? "Nuestra esencia" : "Our essence"}
           </p>
           <h1 className="text-balance text-5xl font-medium leading-[.95] tracking-[-.035em] md:text-7xl">
-            {isSpanish ? "Dos cenotes. Una selva viva." : "Two cenotes. One living jungle."}
+            {isSpanish ? (
+              <><span className="whitespace-nowrap">Cenotes Kin-Ha:</span> dos cenotes y una selva viva.</>
+            ) : (
+              <><span className="whitespace-nowrap">Kin-Ha Cenotes:</span> two cenotes, one living jungle.</>
+            )}
           </h1>
           <p className="mt-7 text-lg leading-relaxed text-[#10231e]/70">
             {isSpanish
@@ -37,6 +41,11 @@ export default function AboutPage() {
             {isSpanish
               ? "Aquí la aventura no reemplaza a la naturaleza: te acerca a ella. Por eso cuidamos el agua, mantenemos grupos manejables y explicamos cómo disfrutar los cenotes con respeto."
               : "Here, adventure does not replace nature—it brings you closer to it. That is why we protect the water, keep groups manageable and show guests how to enjoy the cenotes responsibly."}
+          </p>
+          <p className="mt-5 text-lg leading-relaxed text-[#10231e]/70">
+            {isSpanish
+              ? "Además de nadar en los dos cenotes, puedes cruzar la selva en tres tirolesas, manejar un ATV o recorrerla en un paseo a caballo, con transporte desde Cancún, Puerto Morelos y Playa del Carmen."
+              : "Besides swimming in both cenotes, you can fly over the jungle on three zip lines, ride an ATV or explore it on a horseback riding tour, with pickup from Cancún, Puerto Morelos and Playa del Carmen."}
           </p>
           <Link
             href="/booking"

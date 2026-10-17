@@ -69,11 +69,11 @@ const slides = [
 
 const copy = {
   es: {
-    eyebrow: "Ruta de los Cenotes · Puerto Morelos",
+    eyebrow: "Cenotes Kin-Ha · Ruta de los Cenotes, Puerto\u00a0Morelos",
     subtitle:
-      "Dos cenotes en un día: la cueva de luz de Kin-Ha y la laguna abierta de Blanca Flor. Tirolesas, saltos y ATV, con transporte desde Cancún, Puerto Morelos y Playa del Carmen.",
+      "Dos cenotes en un día: la cueva de luz de Kin-Ha y la laguna abierta de Blanca Flor. Tirolesas, saltos, ATV y paseo a caballo, con transporte desde Cancún, Puerto Morelos y Playa del Carmen.",
     subtitleShort:
-      "Cenotes, tirolesas y ATV con transporte desde Cancún, Puerto Morelos y Playa del Carmen.",
+      "Cenotes, tirolesas, ATV y caballos con transporte desde Cancún, Puerto Morelos y Playa del Carmen.",
     primary: "Reservar mi aventura",
     secondary: "Ver experiencias y precios",
     priceLabel: "Desde",
@@ -83,11 +83,11 @@ const copy = {
     highlights: ["2 cenotes", "3 tirolesas", "ATV en la selva", "Comida y tequila"],
   },
   en: {
-    eyebrow: "Cenote Route · Puerto Morelos",
+    eyebrow: "Kin-Ha Cenotes · Ruta de los Cenotes near\u00a0Cancún",
     subtitle:
-      "Two cenotes in one day: Kin-Ha's cave of light and Blanca Flor's open-air lagoon. Zip lines, cliff jumps and ATVs, with pickup from Cancún, Puerto Morelos and Playa del Carmen.",
+      "Two cenotes in one day: Kin-Ha's cave of light and Blanca Flor's open-air lagoon. Zip lines, cliff jumps, ATVs and horseback riding, with pickup from Cancún, Puerto Morelos and Playa del Carmen.",
     subtitleShort:
-      "Cenotes, zip lines and ATVs with pickup from Cancún, Puerto Morelos and Playa del Carmen.",
+      "Cenotes, zip lines, ATVs and horseback riding with pickup from Cancún, Puerto Morelos and Playa del Carmen.",
     primary: "Book my adventure",
     secondary: "See tours & prices",
     priceLabel: "From",
@@ -156,15 +156,23 @@ export default function HeroSlider() {
 
       <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-center px-5 pb-24 pt-28 text-white sm:px-8 sm:pb-40 lg:px-10">
         <div className="max-w-3xl [text-shadow:0_2px_16px_rgba(0,0,0,.45)]">
-          <p className="mb-6 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#e8b06a] sm:text-sm sm:tracking-[0.26em]">
-            <span className="hidden h-px w-10 bg-[#d99a4e] sm:block" />
+          {/* H1 con lo que la gente busca (cenotes, Ruta de los Cenotes, Puerto Morelos);
+              la frase de cada foto va debajo, con el mismo estilo de siempre. */}
+          <h1
+            className="mb-6 flex max-w-xl items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#e8b06a] sm:text-sm sm:tracking-[0.26em]"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            <span className="hidden h-px w-10 shrink-0 bg-[#d99a4e] sm:block" />
             {t.eyebrow}
-          </p>
+          </h1>
 
-          <h1 className="text-balance mb-6 font-serif text-[clamp(2.75rem,6.2vw,5.6rem)] font-medium leading-[0.95] tracking-[-0.03em] drop-shadow-2xl">
+          <p
+            className="text-balance mb-6 font-serif text-[clamp(2.75rem,6.2vw,5.6rem)] font-medium leading-[0.95] tracking-[-0.03em] drop-shadow-2xl"
+            style={{ fontFamily: "var(--font-heading)" }}
+          >
             {headline.line1}{" "}
             <span className="italic text-[#e0a85c]">{headline.line2}</span>
-          </h1>
+          </p>
 
           <p className="mb-8 max-w-xl text-lg leading-relaxed text-white/90 sm:hidden">
             {t.subtitleShort}
