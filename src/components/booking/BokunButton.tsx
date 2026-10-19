@@ -135,7 +135,10 @@ export default function BokunButton({
   // Producto activo → botón que Bokun convierte en modal de calendario + pago.
   return (
     <>
+      {/* key: al cambiar de idioma React crea un botón NUEVO. Bókun deja de abrir el
+          calendario si se le cambia el data-src a un botón que ya enganchó. */}
       <button
+        key={`${productId}-${locale}`}
         type="button"
         className={`bokunButton ${className}`}
         data-src={bokunExperienceSrc(productId, locale)}
