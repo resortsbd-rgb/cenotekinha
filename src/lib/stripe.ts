@@ -25,7 +25,14 @@ export type Tour = {
   promo?: { es: string; en: string; until: string };
   /** Variante con transporte que se reserva por WhatsApp (sin producto en Bókun todavía). */
   withTransport?: { fromMXN: number; fromUSD: number };
+  /** Variante de otro tour (mismo precio). No lleva tarjeta propia: se ofrece dentro de la tarjeta de ese tour. */
+  variantOf?: string;
+  /** Extra opcional de caballo que Bókun ofrece al pagar (por persona, sin centavos). */
+  horseAddon?: { mxn: number; usd: number };
 };
+
+/** Las 4 experiencias principales (tarjetas). Las variantes se ofrecen dentro de su tarjeta. */
+export const MAIN_TOURS_FILTER = (tour: Tour) => !tour.variantOf;
 
 export const TOURS: Tour[] = [
   {
@@ -34,8 +41,8 @@ export const TOURS: Tour[] = [
     fromUSD: 60,    // ≤ GetYourGuide ($64 con descuento / $80 regular): el sitio siempre es el mejor precio
     nameEs: 'ATV, tirolesas y dos cenotes',
     nameEn: 'ATV Tour from Cancún: Zip Lines & Two Cenotes',
-    descEs: 'Recorre la selva en ATV, vuela en 3 tirolesas y nada en el Cenote Kin-Ha y el Cenote Blanca Flor. Incluye transporte desde tu hotel, comida mexicana y degustación de tequila. Opción de ATV individual. Desde 2 personas.',
-    descEn: 'Ride an ATV through the jungle, fly on 3 zip lines and swim in Kin-Ha and Blanca Flor cenotes. Includes hotel pickup, Mexican lunch and a tequila tasting. Solo ATV option available. From 2 people.',
+    descEs: 'Recorre la selva en ATV, vuela en 3 tirolesas y nada en el Cenote Kin-Ha y el Cenote Blanca Flor. Incluye transporte desde tu hotel, comida mexicana y degustación de tequila. Opción de ATV individual; también puedes ir solo.',
+    descEn: 'Ride an ATV through the jungle, fly on 3 zip lines and swim in Kin-Ha and Blanca Flor cenotes. Includes hotel pickup, Mexican lunch and a tequila tasting. Individual ATV option; solo travelers welcome.',
     duration: '4–5 h',
     maxPeople: 15,
     image: `${BASE_PATH}/images/tour-atv-cenotes.webp`,
@@ -49,8 +56,8 @@ export const TOURS: Tour[] = [
     fromUSD: 45,
     nameEs: 'Tour ecológico: cenotes con transporte y comida',
     nameEn: 'Eco Tour: Cenotes with Pickup & Lunch',
-    descEs: 'Te recogemos en tu hotel, nadas en el Cenote Kin-Ha y el Cenote Blanca Flor y disfrutas una comida mexicana con degustación de tequila. Un día de naturaleza a tu ritmo, ideal para familias.',
-    descEn: 'We pick you up at your hotel, you swim in Kin-Ha and Blanca Flor cenotes and enjoy a Mexican lunch with a tequila tasting. A laid-back nature day, perfect for families.',
+    descEs: 'Te recogemos en tu hotel, nadas en el Cenote Kin-Ha y el Cenote Blanca Flor y disfrutas una comida mexicana con degustación de tequila. Un día de naturaleza a tu ritmo, ideal para familias. No incluye ATV ni tirolesas.',
+    descEn: 'We pick you up at your hotel, you swim in Kin-Ha and Blanca Flor cenotes and enjoy a Mexican lunch with a tequila tasting. A laid-back nature day, perfect for families. No ATV or zip lines.',
     duration: '4–5 h',
     maxPeople: 20,
     image: `${BASE_PATH}/images/tour-ecologico.webp`,
@@ -70,25 +77,12 @@ export const TOURS: Tour[] = [
     image: `${BASE_PATH}/images/tour-dos-cenotes.webp`,
     imagePosition: 'object-[50%_35%]',
     transport: 'own',
+    horseAddon: { mxn: 300, usd: 17 },  // extra opcional en Bókun 1321347 (regla de Luis: caballo +300)
     promo: {
       es: 'Oferta de octubre: 20% de descuento pagando en línea antes del 31 de octubre.',
       en: 'October deal: 20% off when you pay online by October 31.',
       until: '2026-11-01T05:00:00Z', // 31-oct 23:59 hora de Cancún (oferta de Bókun 1321347)
     },
-  },
-  {
-    id: 'ecuestre-cenotes',
-    fromMXN: 1000,  // aprobado por Luis 12-oct-2026: incluye recogida en hotel y comida (WhatsApp; Bókun 1321346 inactivo)
-    fromUSD: 55,
-    nameEs: 'Paseo a caballo y dos cenotes',
-    nameEn: 'Horseback Riding & Two Cenotes',
-    descEs: 'Cabalgata guiada de 45 minutos por la selva y nado en el Cenote Kin-Ha y el Cenote Blanca Flor. Incluye transporte desde tu hotel, comida mexicana y degustación de tequila.',
-    descEn: 'A 45-minute guided horseback ride through the jungle plus a swim in Kin-Ha and Blanca Flor cenotes. Includes hotel pickup, Mexican lunch and a tequila tasting.',
-    duration: '4–5 h',
-    maxPeople: 15,
-    image: `${BASE_PATH}/images/tour-caballos-cenotes.webp`,
-    imagePosition: 'object-[50%_18%]',
-    transport: 'pickup',
   },
   {
     id: 'experiencia-completa',
@@ -104,6 +98,22 @@ export const TOURS: Tour[] = [
     imagePosition: 'object-[52%_35%]',
     featured: true,
     badge: { es: 'Día completo · comida y transporte', en: 'Full day · lunch & pickup' },
+    transport: 'pickup',
+  },
+  {
+    // Variante del ATV: mismo precio, caballo en lugar de ATV (Luis, 18-oct-2026). Sin tarjeta propia.
+    id: 'ecuestre-cenotes',
+    variantOf: 'atv-cenotes',
+    fromMXN: 1100,  // Bókun 1321346: adulto y niño, igual que el ATV
+    fromUSD: 60,
+    nameEs: 'Paseo a caballo, tirolesas y dos cenotes',
+    nameEn: 'Horseback Riding, Zip Lines & Two Cenotes',
+    descEs: 'Cabalgata guiada de 45 minutos por la selva, 3 tirolesas y nado en el Cenote Kin-Ha y el Cenote Blanca Flor. Incluye transporte desde tu hotel, comida mexicana y degustación de tequila. Hasta 6 personas por salida.',
+    descEn: 'A 45-minute guided horseback ride through the jungle, 3 zip lines and a swim in Kin-Ha and Blanca Flor cenotes. Includes hotel pickup, Mexican lunch and a tequila tasting. Up to 6 people per departure.',
+    duration: '4–5 h',
+    maxPeople: 6,
+    image: `${BASE_PATH}/images/tour-caballos-cenotes.webp`,
+    imagePosition: 'object-[50%_18%]',
     transport: 'pickup',
   },
 ];

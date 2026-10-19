@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { translations } from "@/lib/translations";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { TOURS } from "@/lib/stripe";
+import { TOURS, MAIN_TOURS_FILTER } from "@/lib/stripe";
 import { trackTourView, trackWhatsAppClick } from "@/lib/analytics";
 import BokunButton from "@/components/booking/BokunButton";
 import PromoLine from "@/components/ui/PromoLine";
@@ -106,13 +106,14 @@ export default function ToursSection({ asPageTitle = false }: { asPageTitle?: bo
           </ul>
           <p className="mt-3 text-sm text-white/55">
             {locale === "es"
-              ? "Transporte desde Cancún, Puerto Morelos y Playa del Carmen incluido en el Tour ecológico, el ATV, el paseo a caballo y la Aventura completa."
-              : "Pickup from Cancún, Puerto Morelos and Playa del Carmen included on the Eco Tour, the ATV tour, the horseback ride and the Full Adventure."}
+              ? "Transporte desde Cancún, Puerto Morelos y Playa del Carmen incluido en el Tour ecológico, el ATV (o con caballo) y la Aventura completa."
+              : "Pickup from Cancún, Puerto Morelos and Playa del Carmen included on the Eco Tour, the ATV tour (or horseback version) and the Full Adventure."}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {TOURS.map((tour, index) => {
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+          {TOURS.filter(MAIN_TOURS_FILTER).map((tour, index) => {
+            const variant = TOURS.find((item) => item.variantOf === tour.id);
             const name = locale === "es" ? tour.nameEs : tour.nameEn;
             const description = locale === "es" ? tour.descEs : tour.descEn;
             const isFeatured = "featured" in tour && tour.featured;
@@ -134,7 +135,7 @@ export default function ToursSection({ asPageTitle = false }: { asPageTitle?: bo
                 }}
                 data-tour-id={tour.id}
                 className={`group overflow-hidden border border-white/12 bg-white/[.055] ${
-                  isFeatured ? "md:col-span-2 md:grid md:grid-cols-[1.2fr_.8fr] lg:col-span-3" : ""
+                  isFeatured ? "md:col-span-2 md:grid md:grid-cols-[1.2fr_.8fr]" : ""
                 }`}
               >
                 <div className={`relative overflow-hidden ${isFeatured ? "min-h-[360px] md:min-h-[520px]" : "h-72"}`}>
@@ -185,6 +186,13 @@ export default function ToursSection({ asPageTitle = false }: { asPageTitle?: bo
                       </p>
                     )}
                     <PromoLine promo={tour.promo} className="mb-2 pl-4 text-sm font-semibold text-[#d7b56d]" />
+                    {tour.horseAddon && (
+                      <p className="mb-2 pl-4 text-sm text-white/60">
+                        {locale === "es"
+                          ? `Opcional al pagar: paseo a caballo +$${tour.horseAddon.mxn} MXN por persona.`
+                          : `Optional at checkout: horseback ride +$${tour.horseAddon.usd} USD per person.`}
+                      </p>
+                    )}
                     {tour.withTransport && (
                       <p className="mb-2 pl-4 text-sm text-white/70">
                         {locale === "es" ? "Con transporte desde tu hotel: " : "With hotel pickup: "}
@@ -230,6 +238,25 @@ export default function ToursSection({ asPageTitle = false }: { asPageTitle?: bo
                         {locale === "es" ? "Ver detalles" : "View details"}
                       </Link>
                     </div>
+                    {variant && (
+                      <p className="mt-5 text-sm text-white/60">
+                        {locale === "es"
+                          ? "¿Prefieres caballo? Mismo precio, cambias el ATV por una cabalgata de 45 min (hasta 6 por salida). "
+                          : "Prefer horses? Same price: swap the ATV for a 45-min horseback ride (up to 6 per departure). "}
+                        <BokunButton
+                          tourId={variant.id}
+                          label={locale === "es" ? "Reservar con caballo" : "Book with horses"}
+                          whatsappMessage={
+                            locale === "es"
+                              ? `Hola, me interesa ${variant.nameEs}. ¿Me ayudan a confirmar disponibilidad para reservar?`
+                              : `Hi, I am interested in ${variant.nameEn}. Can you help me check availability and book?`
+                          }
+                          tourName={locale === "es" ? variant.nameEs : variant.nameEn}
+                          source="tour_card_variant"
+                          className="font-semibold text-[#69d8cb] underline underline-offset-4 hover:text-white"
+                        />
+                      </p>
+                    )}
                   </div>
                 </div>
               </article>

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { TOURS } from "@/lib/stripe";
+import { TOURS, MAIN_TOURS_FILTER } from "@/lib/stripe";
 import BokunButton from "@/components/booking/BokunButton";
 import PromoLine from "@/components/ui/PromoLine";
 import { getBokunProductId } from "@/lib/bokun";
@@ -32,8 +32,8 @@ const TOUR_DETAILS: Record<TourId, {
       en: ["Kin-Ha Cenote (cavern) and Blanca Flor Cenote (open-air)", "Ride between the two cenotes", "Life jacket", "Tequila tasting", "Bilingual guide", "Lockers, restrooms and showers", "Free parking"],
     },
     addons: {
-      es: ["Paquete de fotos (opcional)"],
-      en: ["Photo package (optional)"],
+      es: ["Paseo a caballo: +$300 MXN por persona (al pagar)", "Paquete de fotos (opcional)"],
+      en: ["Horseback ride: +$17 USD per person (at checkout)", "Photo package (optional)"],
     },
   },
   "tour-ecologico": {
@@ -56,16 +56,16 @@ const TOUR_DETAILS: Record<TourId, {
       en: ["Hotel pickup (Cancún, Puerto Morelos, Playa del Carmen)", "Jungle ATV", "3 zip lines", "Kin-Ha Cenote (cavern) and Blanca Flor Cenote (open-air)", "Ride between the two cenotes", "Mexican lunch", "Tequila tasting", "Life jacket", "Bilingual guide", "Lockers, restrooms and showers"],
     },
     addons: {
-      es: ["ATV individual (opcional)"],
-      en: ["Individual ATV (optional)"],
+      es: ["ATV individual (opcional)", "¿Prefieres caballo? Mismo precio, abajo"],
+      en: ["Individual ATV (optional)", "Prefer horses? Same price, see below"],
     },
   },
   "ecuestre-cenotes": {
-    badge: { es: "NATURALEZA", en: "NATURE" },
-    badgeColor: "bg-green-600",
+    badge: { es: "CON CABALLO", en: "WITH HORSES" },
+    badgeColor: "bg-amber-500",
     includes: {
-      es: ["Transporte desde tu hotel (Cancún, Puerto Morelos, Playa del Carmen)", "Paseo a caballo (45 min)", "Cenote Kin-Ha (caverna) y Cenote Blanca Flor (abierto)", "Traslado de un cenote a otro", "Comida mexicana", "Degustación de tequila", "Guía certificado bilingüe", "Chaleco salvavidas", "Lockers, baños y regaderas"],
-      en: ["Hotel pickup (Cancún, Puerto Morelos, Playa del Carmen)", "Horseback ride (45 min)", "Kin-Ha Cenote (cavern) and Blanca Flor Cenote (open-air)", "Ride between the two cenotes", "Mexican lunch", "Tequila tasting", "Bilingual certified guide", "Life jacket", "Lockers, restrooms and showers"],
+      es: ["Transporte desde tu hotel (Cancún, Puerto Morelos, Playa del Carmen)", "Paseo a caballo (45 min)", "3 tirolesas", "Cenote Kin-Ha (caverna) y Cenote Blanca Flor (abierto)", "Traslado de un cenote a otro", "Comida mexicana", "Degustación de tequila", "Guía certificado bilingüe", "Chaleco salvavidas", "Lockers, baños y regaderas"],
+      en: ["Hotel pickup (Cancún, Puerto Morelos, Playa del Carmen)", "Horseback ride (45 min)", "3 zip lines", "Kin-Ha Cenote (cavern) and Blanca Flor Cenote (open-air)", "Ride between the two cenotes", "Mexican lunch", "Tequila tasting", "Bilingual certified guide", "Life jacket", "Lockers, restrooms and showers"],
     },
     addons: {
       es: ["Fotografía del paseo (opcional)"],
@@ -199,7 +199,7 @@ export default function BookingPage() {
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {TOURS.map((tour) => {
+            {TOURS.filter((tour) => MAIN_TOURS_FILTER(tour) || tour.id === selectedId).map((tour) => {
               const details = TOUR_DETAILS[tour.id as TourId];
               const isSelected = selectedId === tour.id;
               const name = isEs ? tour.nameEs : tour.nameEn;
@@ -315,6 +315,20 @@ export default function BookingPage() {
               );
             })}
           </div>
+          {(selectedId === "atv-cenotes" || selectedId === "ecuestre-cenotes") && (
+            <p className="mt-4 text-sm text-slate-600">
+              {selectedId === "atv-cenotes"
+                ? isEs ? "¿Prefieres caballo? Mismo precio, con cabalgata de 45 min en lugar de ATV (hasta 6 por salida). " : "Prefer horses? Same price, with a 45-min horseback ride instead of the ATV (up to 6 per departure). "
+                : isEs ? "¿Prefieres ATV? Mismo precio. " : "Prefer the ATV? Same price. "}
+              <button
+                type="button"
+                onClick={() => setSelectedId(selectedId === "atv-cenotes" ? "ecuestre-cenotes" : "atv-cenotes")}
+                className="font-semibold text-teal-700 underline underline-offset-2"
+              >
+                {selectedId === "atv-cenotes" ? (isEs ? "Cambiar a caballo" : "Switch to horses") : (isEs ? "Cambiar a ATV" : "Switch to ATV")}
+              </button>
+            </p>
+          )}
         </div>
 
         {/* ── Step 2: Date & People ── */}
@@ -483,8 +497,8 @@ export default function BookingPage() {
                   <span className="flex-shrink-0">📌</span>
                   <span>
                     {isEs
-                      ? "El Tour ecológico, el tour de ATV y la Aventura completa incluyen transporte desde tu hotel. Si vienes en tu auto, hay estacionamiento gratis. "
-                      : "The Eco Tour, the ATV tour and the Full Adventure include hotel pickup. If you drive, parking is free. "}
+                      ? "El Tour ecológico, el tour de ATV (o con caballo) y la Aventura completa incluyen transporte desde tu hotel. Si vienes en tu auto, hay estacionamiento gratis. "
+                      : "The Eco Tour, the ATV tour (or horseback version) and the Full Adventure include hotel pickup. If you drive, parking is free. "}
                     <a
                       href={MAPS_DIRECTIONS}
                       target="_blank"

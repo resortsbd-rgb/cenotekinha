@@ -20,13 +20,15 @@ export const WHATSAPP_FALLBACK = "529982053527";
 // Experiencias Bókun (9-oct-2026):
 //   #1321347  Dos cenotes · llegada propia        ACTIVA
 //   #1226446  Combo completo de aventura           ACTIVA
-//   #1225604, #1321345, #1321346                    INACTIVAS — no usar
+//   #1321345  ATV + tirolesas + dos cenotes       ACTIVA
+//   #1321346  Caballo + tirolesas + dos cenotes   ACTIVA (1,100 MXN / 60 USD, máx 6)
+//   #1225604                                       INACTIVA — no usar
 // ─────────────────────────────────────────────────────────────
 export const BOKUN_PRODUCT_BY_TOUR: Record<string, number | null> = {
   "cenote-dual": 1321347,           // Dos Cenotes Kin-Ha (llegada propia)
   "experiencia-completa": 1226446,  // Aventura Completa = Combo completo
   "atv-cenotes": 1321345,           // ATV + dos cenotes + comida + pickup (activado por Luis 11-oct-2026)
-  "ecuestre-cenotes": null,         // Cabalgata + dos cenotes → WhatsApp (Bókun 1321346 inactivo)
+  "ecuestre-cenotes": 1321346,      // Caballo + tirolesas + dos cenotes (variante del ATV, mismo precio)
   "tour-ecologico": null,           // Cenotes + transporte + comida → WhatsApp (sin producto en Bókun)
 };
 
