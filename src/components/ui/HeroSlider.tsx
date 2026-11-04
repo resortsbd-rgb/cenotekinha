@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { localizedHref } from "@/lib/routes";
 import { useLanguage } from "@/contexts/LanguageContext";
 import BASE_PATH from "@/lib/basePath";
 
@@ -183,14 +184,14 @@ export default function HeroSlider() {
 
           <div className="mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
             <Link
-              href="/booking"
+              href={localizedHref("/booking", locale)}
               className="inline-flex min-h-14 items-center justify-center rounded-full bg-[#c9792e] px-8 py-4 text-base font-semibold text-white shadow-[0_14px_45px_rgba(201,121,46,.3)] transition hover:-translate-y-0.5 hover:bg-[#d99a4e]"
             >
               {t.primary}
               <span aria-hidden="true" className="ml-3">→</span>
             </Link>
             <Link
-              href="/#tours"
+              href={localizedHref("/#tours", locale)}
               className="inline-flex min-h-14 items-center justify-center rounded-full border border-white/40 bg-white/10 px-7 py-4 font-semibold text-white backdrop-blur-md transition hover:bg-white/20"
             >
               {t.secondary}

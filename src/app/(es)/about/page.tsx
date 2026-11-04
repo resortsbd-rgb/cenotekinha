@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { localizedHref } from "@/lib/routes";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function AboutPage() {
@@ -48,7 +49,7 @@ export default function AboutPage() {
               : "Besides swimming in both cenotes, you can fly over the jungle on three zip lines, ride an ATV or explore it on a horseback riding tour, with pickup from Cancún, Puerto Morelos and Playa del Carmen."}
           </p>
           <Link
-            href="/booking"
+            href={localizedHref("/experiences", locale)}
             className="mt-9 inline-flex min-h-14 items-center rounded-full bg-[#0b4638] px-8 py-4 font-bold text-white transition hover:bg-[#19b77a] hover:text-[#062c24]"
           >
             {isSpanish ? "Conocer las experiencias" : "Explore the experiences"}

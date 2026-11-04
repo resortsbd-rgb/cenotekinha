@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { localizedHref } from "@/lib/routes";
 import { translations } from "@/lib/translations";
 import { useLanguage } from "@/contexts/LanguageContext";
 import BASE_PATH from "@/lib/basePath";
@@ -33,7 +34,7 @@ export default function CTASection() {
         <p className="text-white/70 mb-9 text-lg">{t.cta_final.subtitle}</p>
         <div className="flex flex-wrap justify-center gap-4">
           <Link
-            href="/booking"
+            href={localizedHref("/booking", locale)}
             className="inline-flex min-h-14 items-center bg-[#69d8cb] text-[#062c24] font-bold px-10 py-4 rounded-full hover:bg-white transition text-base shadow-lg"
           >
             {t.cta_final.btn}

@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
-import { OG_IMAGES } from "@/lib/seo";
-import { businessJsonLd } from "@/lib/structuredData";
-import JsonLd from "@/components/seo/JsonLd";
 import { Playfair_Display, Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import Script from "next/script";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import "./globals.css";
+import LanguagePreference from "@/components/layout/LanguagePreference";
+import JsonLd from "@/components/seo/JsonLd";
+import { LanguageProvider } from "@/contexts/LanguageContext";
+import { businessJsonLd, websiteJsonLd } from "@/lib/structuredData";
+import type { Locale } from "@/lib/translations";
+import "@/app/globals.css";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -21,33 +22,15 @@ const inter = Inter({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://www.cenotekinha.com"),
-  title: "Cenotes Kin-Ha | Tours de cenotes y ATV cerca de Cancún",
-  description:
-    "Cenote Kin-Ha y Cenote Blanca Flor en la Ruta de los Cenotes, cerca de Cancún: ATV, tirolesas y paseo a caballo con transporte desde tu hotel.",
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    images: OG_IMAGES,
-    type: "website",
-    locale: "es_MX",
-    siteName: "Cenotes Kin-Ha",
-    title: "Cenotes Kin-Ha | Tours de cenotes y ATV cerca de Cancún",
-    description:
-      "Cenote Kin-Ha y Cenote Blanca Flor en la Ruta de los Cenotes de Puerto Morelos: ATV, tirolesas y caballos con transporte desde Cancún.",
-    url: "/",
-  },
-  twitter: { card: "summary_large_image" },
-};
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+// Estructura común de todas las páginas. Cada idioma tiene su propio layout raíz
+// para que <html lang> salga correcto en el HTML desde el servidor.
+export default function SiteShell({ locale, children }: { locale: Locale; children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${playfair.variable} ${inter.variable} h-full antialiased`}>
+    <html lang={locale} className={`${playfair.variable} ${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        {/* Datos del negocio para Google (dirección, horario, mapa, redes) */}
-        <JsonLd data={businessJsonLd} />
+        {/* Datos del negocio para buscadores (dirección, horario, mapa, redes) */}
+        <JsonLd data={businessJsonLd(locale)} />
+        <JsonLd data={websiteJsonLd(locale)} />
         {/* Meta Pixel */}
         <Script
           id="meta-pixel"
@@ -71,7 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <img
             height="1"
             width="1"
-            style={{ display: 'none' }}
+            style={{ display: "none" }}
             src="https://www.facebook.com/tr?id=840518511778515&ev=PageView&noscript=1"
             alt=""
           />
@@ -96,13 +79,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             src="https://www.googletagmanager.com/ns.html?id=GTM-MBBHBPKW"
             height="0"
             width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
+            style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
 
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <LanguageProvider locale={locale}>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <LanguagePreference />
+        </LanguageProvider>
         <Toaster position="bottom-center" />
       </body>
     </html>
