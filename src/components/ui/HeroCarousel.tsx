@@ -53,7 +53,7 @@ export default function HeroCarousel({
     <section
       aria-roledescription={isEs ? "carrusel" : "carousel"}
       aria-label={isEs ? "Fotos de Cenotes Kin-Ha" : "Photos of Kin-Ha Cenotes"}
-      className="relative h-[100svh] min-h-[640px] w-full overflow-hidden bg-[#06292a]"
+      className="relative h-[100svh] min-h-[500px] w-full overflow-hidden bg-[#06292a]"
     >
       {slides.map((slide, index) => {
         const active = index === current;
@@ -85,14 +85,14 @@ export default function HeroCarousel({
 
       <div className="absolute inset-x-0 bottom-0">
         <div className={`mx-auto max-w-6xl px-5 text-white sm:px-8 ${actions ? "pb-24" : "pb-8 sm:pb-10"}`}>
-          <h1 className="mb-4 max-w-3xl text-xs font-semibold uppercase tracking-[0.16em] text-[#e8b06a] [text-shadow:0_2px_12px_rgba(0,0,0,.5)] sm:text-sm">
+          <h1 className="mb-3 max-w-3xl font-sans text-xs font-semibold uppercase tracking-[0.14em] text-white [text-shadow:0_1px_10px_rgba(0,0,0,.8)] sm:text-sm">
             {title}
           </h1>
-          <p className="max-w-4xl text-balance font-serif text-[clamp(2.75rem,6.4vw,5.8rem)] font-medium leading-[0.95] tracking-[-0.03em] [text-shadow:0_4px_24px_rgba(0,0,0,.45)]">
+          <p className="max-w-4xl text-balance font-serif text-[clamp(2.5rem,min(6.4vw,11svh),5.8rem)] font-medium leading-[0.95] tracking-[-0.03em] [text-shadow:0_4px_24px_rgba(0,0,0,.45)]">
             {headline.line1} <span className="italic text-[#e0a85c]">{headline.line2}</span>
           </p>
-          {actions && <div className="mt-7">{actions}</div>}
-          <div className="mt-5 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+          {actions && <div className="mt-4">{actions}</div>}
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
             <p className="w-full text-sm text-white/85 sm:w-auto" aria-live="off">{slides[current].caption[locale]}</p>
             <div className="flex shrink-0 items-center gap-1">
               {slides.map((slide, index) => (

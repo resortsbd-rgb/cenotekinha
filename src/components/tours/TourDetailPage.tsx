@@ -141,8 +141,6 @@ export default function TourDetailPage({ tourId, locale }: { tourId: TourId; loc
     ...(tour.transport === "own" ? [] : ([[t.lastMinute, t.lastMinuteValue]] as [string, string][])),
     [t.cancellation, t.free],
   ];
-  const buttonClass =
-    "inline-flex min-h-14 w-full items-center justify-center rounded-full bg-[#c9792e] px-8 py-4 text-center font-bold text-white transition hover:bg-[#d99a4e]";
 
   return (
     <div className="bg-[#f6f1e7] pb-24 text-[#10231e]">
@@ -154,21 +152,9 @@ export default function TourDetailPage({ tourId, locale }: { tourId: TourId; loc
         slides={TOUR_SLIDES[tourId]}
         title={name}
         actions={
-          <div className="hidden flex-wrap items-center gap-5 lg:flex">
-            <div className="w-64">
-              <BokunButton
-                tourId={tour.id}
-                label={online ? t.bookOnline : t.bookWhatsapp}
-                whatsappMessage={t.message(name)}
-                tourName={name}
-                source="tour_page_hero"
-                className={buttonClass}
-              />
-            </div>
-            <p className="text-lg text-white/90">
-              {t.from} <strong className="font-semibold text-white">{price}</strong> {t.person} · {t.free}
-            </p>
-          </div>
+          <p className="hidden text-lg text-white/95 [text-shadow:0_1px_10px_rgba(0,0,0,.7)] sm:block">
+            {t.from} <strong className="font-semibold text-white">{price}</strong> {t.person} · {t.free}
+          </p>
         }
       />
 
