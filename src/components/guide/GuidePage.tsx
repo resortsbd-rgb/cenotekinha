@@ -133,9 +133,7 @@ export default function GuidePage({ locale }: { locale: Locale }) {
       />
       <JsonLd data={faqJsonLd(t.faqs)} />
 
-      <HeroCarousel slides={GUIDE_SLIDES}>
-        <h1 className="max-w-3xl text-balance text-4xl font-medium leading-[1.02] tracking-[-0.03em] [text-shadow:0_2px_16px_rgba(0,0,0,.45)] md:text-6xl">{t.title}</h1>
-      </HeroCarousel>
+      <HeroCarousel slides={GUIDE_SLIDES} title={t.title} />
 
       <div className="mx-auto max-w-3xl px-5 pt-10 sm:px-8">
         <p className="text-lg leading-relaxed text-[#10231e]/80">{t.lead}</p>

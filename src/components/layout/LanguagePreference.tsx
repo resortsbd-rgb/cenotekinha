@@ -32,7 +32,7 @@ export default function LanguagePreference() {
     <div
       role="region"
       aria-label={suggested === "en" ? "Language suggestion" : "Sugerencia de idioma"}
-      className="fixed inset-x-3 bottom-24 z-40 mx-auto flex max-w-md items-center justify-between gap-3 rounded-2xl border border-white/15 bg-[#062c24] px-4 py-3 text-sm text-white shadow-2xl sm:bottom-6"
+      className="fixed inset-x-3 bottom-24 z-40 mx-auto flex max-w-md items-center justify-between gap-3 rounded-2xl border border-white/15 bg-[#062c24] px-4 py-3 text-sm text-white shadow-2xl"
     >
       <a
         href={alternatePath(pathname, suggested)}

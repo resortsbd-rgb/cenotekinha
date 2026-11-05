@@ -26,7 +26,7 @@ const inter = Inter({
 // para que <html lang> salga correcto en el HTML desde el servidor.
 export default function SiteShell({ locale, children }: { locale: Locale; children: React.ReactNode }) {
   return (
-    <html lang={locale} className={`${playfair.variable} ${inter.variable} h-full antialiased`}>
+    <html lang={locale} data-scroll-behavior="smooth" className={`${playfair.variable} ${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         {/* Datos del negocio para buscadores (dirección, horario, mapa, redes) */}
         <JsonLd data={businessJsonLd(locale)} />

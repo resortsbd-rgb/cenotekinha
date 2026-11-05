@@ -8,7 +8,15 @@ const INTERVAL_MS = 5500;
 
 // Encabezado inmersivo: fotos a pantalla completa con cambio suave.
 // La primera foto viene en el HTML; las demás se cargan cuando van a mostrarse.
-export default function HeroCarousel({ slides, children }: { slides: HeroSlide[]; children?: React.ReactNode }) {
+export default function HeroCarousel({
+  slides,
+  title,
+  actions,
+}: {
+  slides: HeroSlide[];
+  title: string;
+  actions?: React.ReactNode;
+}) {
   const { locale } = useLanguage();
   const [current, setCurrent] = useState(0);
   const [mountedUpTo, setMountedUpTo] = useState(1);
@@ -39,12 +47,13 @@ export default function HeroCarousel({ slides, children }: { slides: HeroSlide[]
   }
 
   const isEs = locale === "es";
+  const headline = slides[current].headline[locale];
 
   return (
     <section
       aria-roledescription={isEs ? "carrusel" : "carousel"}
       aria-label={isEs ? "Fotos de Cenotes Kin-Ha" : "Photos of Kin-Ha Cenotes"}
-      className="relative h-[78svh] min-h-[560px] w-full overflow-hidden bg-[#06292a]"
+      className="relative h-[100svh] min-h-[640px] w-full overflow-hidden bg-[#06292a]"
     >
       {slides.map((slide, index) => {
         const active = index === current;
@@ -75,8 +84,14 @@ export default function HeroCarousel({ slides, children }: { slides: HeroSlide[]
       <div className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-[#031a15]/95 via-[#031a15]/55 to-transparent" />
 
       <div className="absolute inset-x-0 bottom-0">
-        <div className="mx-auto max-w-6xl px-5 pb-8 text-white sm:px-8 sm:pb-10">
-          {children}
+        <div className={`mx-auto max-w-6xl px-5 text-white sm:px-8 ${actions ? "pb-24" : "pb-8 sm:pb-10"}`}>
+          <h1 className="mb-4 max-w-3xl text-xs font-semibold uppercase tracking-[0.16em] text-[#e8b06a] [text-shadow:0_2px_12px_rgba(0,0,0,.5)] sm:text-sm">
+            {title}
+          </h1>
+          <p className="max-w-4xl text-balance font-serif text-[clamp(2.75rem,6.4vw,5.8rem)] font-medium leading-[0.95] tracking-[-0.03em] [text-shadow:0_4px_24px_rgba(0,0,0,.45)]">
+            {headline.line1} <span className="italic text-[#e0a85c]">{headline.line2}</span>
+          </p>
+          {actions && <div className="mt-7">{actions}</div>}
           <div className="mt-5 flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
             <p className="w-full text-sm text-white/85 sm:w-auto" aria-live="off">{slides[current].caption[locale]}</p>
             <div className="flex shrink-0 items-center gap-1">
