@@ -1,6 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import JsonLd from "@/components/seo/JsonLd";
+import HeroCarousel from "@/components/ui/HeroCarousel";
+import { GUIDE_SLIDES } from "@/lib/heroSlides";
 import { STATIC_ROUTES, tourPath } from "@/lib/routes";
 import { TOURS, MAIN_TOURS_FILTER } from "@/lib/stripe";
 import { articleJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/lib/structuredData";
@@ -132,21 +133,12 @@ export default function GuidePage({ locale }: { locale: Locale }) {
       />
       <JsonLd data={faqJsonLd(t.faqs)} />
 
-      <div className="relative h-[46vh] min-h-[340px] w-full">
-        <Image
-          src="/images/hero-blanca-flor-plataformas.webp"
-          alt={locale === "es" ? "Cenote Blanca Flor abierto al cielo, con plataformas de salto" : "Open-air Blanca Flor Cenote with jumping platforms"}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#031a15]/55 to-transparent" />
-      </div>
+      <HeroCarousel slides={GUIDE_SLIDES}>
+        <h1 className="max-w-3xl text-balance text-4xl font-medium leading-[1.02] tracking-[-0.03em] [text-shadow:0_2px_16px_rgba(0,0,0,.45)] md:text-6xl">{t.title}</h1>
+      </HeroCarousel>
 
       <div className="mx-auto max-w-3xl px-5 pt-10 sm:px-8">
-        <h1 className="text-balance text-4xl font-medium leading-[1.02] tracking-[-0.03em] md:text-6xl">{t.title}</h1>
-        <p className="mt-6 text-lg leading-relaxed text-[#10231e]/80">{t.lead}</p>
+        <p className="text-lg leading-relaxed text-[#10231e]/80">{t.lead}</p>
         <p className="mt-4 text-sm text-[#10231e]/55">{t.updated}</p>
 
         <H2>{t.chooseTitle}</H2>

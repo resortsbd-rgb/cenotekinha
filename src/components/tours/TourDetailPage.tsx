@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import BokunButton from "@/components/booking/BokunButton";
 import JsonLd from "@/components/seo/JsonLd";
+import HeroCarousel from "@/components/ui/HeroCarousel";
+import { TOUR_SLIDES } from "@/lib/heroSlides";
 import { getBokunProductId } from "@/lib/bokun";
 import { STATIC_ROUTES, localizedHref, tourPath } from "@/lib/routes";
 import { TOURS, MAIN_TOURS_FILTER } from "@/lib/stripe";
@@ -136,17 +138,9 @@ export default function TourDetailPage({ tourId, locale }: { tourId: TourId; loc
       <JsonLd data={breadcrumbJsonLd(breadcrumbs)} />
       <JsonLd data={faqJsonLd(content.faqs[locale])} />
 
-      <div className="relative h-[52vh] min-h-[380px] w-full">
-        <Image
-          src={tour.image}
-          alt={name}
-          fill
-          priority
-          sizes="100vw"
-          className={`object-cover ${tour.imagePosition ?? "object-[50%_30%]"}`}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#031a15]/70 via-[#031a15]/10 to-[#031a15]/45" />
-      </div>
+      <HeroCarousel slides={TOUR_SLIDES[tourId]}>
+        <h1 className="max-w-3xl text-balance text-4xl font-medium leading-[1.02] tracking-[-0.03em] [text-shadow:0_2px_16px_rgba(0,0,0,.45)] md:text-6xl">{name}</h1>
+      </HeroCarousel>
 
       <div className="mx-auto max-w-6xl px-5 pb-20 pt-8 sm:px-8">
         <nav aria-label={locale === "es" ? "Ruta de navegación" : "Breadcrumb"} className="mb-6 text-sm text-[#10231e]/60">
@@ -159,8 +153,7 @@ export default function TourDetailPage({ tourId, locale }: { tourId: TourId; loc
 
         <div className="grid gap-12 lg:grid-cols-[1.25fr_.75fr] lg:items-start">
           <div className="min-w-0">
-            <h1 className="text-balance text-4xl font-medium leading-[1.02] tracking-[-0.03em] md:text-6xl">{name}</h1>
-            <p className="mt-6 text-lg leading-relaxed text-[#10231e]/80">{fillPrice(content.answer[locale], tour, locale)}</p>
+            <p className="text-lg leading-relaxed text-[#10231e]/80">{fillPrice(content.answer[locale], tour, locale)}</p>
             <p className="mt-4 text-sm text-[#10231e]/65">
               <a href={GOOGLE_MAPS_URL} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-[#0b7760]">
                 {t.rating}

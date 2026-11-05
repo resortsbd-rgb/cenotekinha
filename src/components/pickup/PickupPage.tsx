@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import JsonLd from "@/components/seo/JsonLd";
+import HeroCarousel from "@/components/ui/HeroCarousel";
+import { PICKUP_SLIDES } from "@/lib/heroSlides";
 import { STATIC_ROUTES, tourPath } from "@/lib/routes";
 import { TOURS, MAIN_TOURS_FILTER } from "@/lib/stripe";
 import { breadcrumbJsonLd, faqJsonLd } from "@/lib/structuredData";
@@ -20,6 +22,8 @@ const COPY = {
       { id: "playa", title: "Desde Playa del Carmen y Playacar", text: "La van sale de Playacar y recoge en el camino hacia Puerto Morelos antes de subir a la Ruta de los Cenotes." },
       { id: "puerto-morelos", title: "Desde Puerto Morelos", text: "Puerto Morelos queda en el camino hacia la Ruta de los Cenotes. Si tienes auto, también puedes llegar por tu cuenta y reservar solo la entrada a los dos cenotes." },
     ],
+    vanAlt: "Van de transporte en la entrada de Cenotes Kin-Ha",
+    vanCaption: "Una de las vans en la entrada de Kin-Ha.",
     southTitle: "¿Te hospedas al sur de Playacar o fuera de estas zonas?",
     south: "Escríbenos por WhatsApp antes de reservar para confirmar si podemos recogerte.",
     southCta: "Preguntar por WhatsApp",
@@ -48,6 +52,8 @@ const COPY = {
       { id: "playa", title: "From Playa del Carmen and Playacar", text: "The van starts in Playacar and picks up along the way to Puerto Morelos before heading up the Ruta de los Cenotes." },
       { id: "puerto-morelos", title: "From Puerto Morelos", text: "Puerto Morelos is on the way to the Ruta de los Cenotes. If you have a car, you can also drive yourself and book two-cenote admission only." },
     ],
+    vanAlt: "Transport van at the entrance of Kin-Ha Cenotes",
+    vanCaption: "One of the vans at the Kin-Ha entrance.",
     southTitle: "Staying south of Playacar or outside these areas?",
     south: "Message us on WhatsApp before booking so we can confirm whether we can pick you up.",
     southCta: "Ask on WhatsApp",
@@ -83,21 +89,12 @@ export default function PickupPage({ locale }: { locale: Locale }) {
       />
       <JsonLd data={faqJsonLd(t.faqs)} />
 
-      <div className="relative h-[42vh] min-h-[300px] w-full">
-        <Image
-          src="/images/tour-ecologico.webp"
-          alt={locale === "es" ? "Visitantes en el Cenote Blanca Flor" : "Guests at Blanca Flor Cenote"}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-[50%_78%]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#031a15]/60 to-transparent" />
-      </div>
+      <HeroCarousel slides={PICKUP_SLIDES}>
+        <h1 className="max-w-3xl text-balance text-4xl font-medium leading-[1.02] tracking-[-0.03em] [text-shadow:0_2px_16px_rgba(0,0,0,.45)] md:text-6xl">{t.title}</h1>
+      </HeroCarousel>
 
       <div className="mx-auto max-w-3xl px-5 pt-10 sm:px-8">
-        <h1 className="text-balance text-4xl font-medium leading-[1.02] tracking-[-0.03em] md:text-6xl">{t.title}</h1>
-        <p className="mt-6 text-lg leading-relaxed text-[#10231e]/80">{t.lead}</p>
+        <p className="text-lg leading-relaxed text-[#10231e]/80">{t.lead}</p>
 
         {t.zones.map((zone) => (
           <section key={zone.id} id={zone.id} className="mt-12 scroll-mt-24">
@@ -105,6 +102,19 @@ export default function PickupPage({ locale }: { locale: Locale }) {
             <p className="text-lg leading-relaxed text-[#10231e]/80">{zone.text}</p>
           </section>
         ))}
+
+        <figure className="mt-12">
+          <div className="relative aspect-[3/2] w-full overflow-hidden">
+            <Image
+              src="/images/transporte-van-kinha.webp"
+              alt={t.vanAlt}
+              fill
+              sizes="(max-width: 768px) 100vw, 720px"
+              className="object-cover"
+            />
+          </div>
+          <figcaption className="mt-2 text-sm text-[#10231e]/65">{t.vanCaption}</figcaption>
+        </figure>
 
         <section className="mt-12 border border-[#10231e]/12 bg-white p-6 sm:p-8">
           <h2 className="text-2xl font-medium leading-tight">{t.southTitle}</h2>

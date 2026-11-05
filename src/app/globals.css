@@ -60,3 +60,15 @@ html {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Acercamiento lento en los carruseles de encabezado */
+@keyframes hero-kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.07); }
+}
+.hero-kenburns {
+  animation: hero-kenburns 9s ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-kenburns { animation: none; }
+}
