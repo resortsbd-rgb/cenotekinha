@@ -6,6 +6,7 @@ import BokunButton from "@/components/booking/BokunButton";
 import PromoLine from "@/components/ui/PromoLine";
 import { getBokunProductId } from "@/lib/bokun";
 import { trackWhatsAppClick } from "@/lib/analytics";
+import { TOUR_DETAILS, type TourId } from "@/lib/tourContent";
 
 const TRANSPORT_SHORT = {
   pickup: { es: "Recogida incluida", en: "Pickup included" },
@@ -16,75 +17,6 @@ const TRANSPORT_SHORT = {
 // Punto exacto de Cenotes Kin-Ha en Google Maps (la ficha no indica kilómetro).
 const MAPS_DIRECTIONS = "https://www.google.com/maps/dir/?api=1&destination=20.851221,-87.1276722";
 
-type TourId = "cenote-dual" | "atv-cenotes" | "ecuestre-cenotes" | "experiencia-completa" | "tour-ecologico";
-
-const TOUR_DETAILS: Record<TourId, {
-  badge: { es: string; en: string };
-  badgeColor: string;
-  includes: { es: string[]; en: string[] };
-  addons: { es: string[]; en: string[] };
-}> = {
-  "cenote-dual": {
-    badge: { es: "CLÁSICO", en: "CLASSIC" },
-    badgeColor: "bg-teal-500",
-    includes: {
-      es: ["Cenote Kin-Ha (caverna) y Cenote Blanca Flor (abierto)", "Traslado de un cenote a otro", "Chaleco salvavidas", "Degustación de tequila", "Guía bilingüe", "Lockers, baños y regaderas", "Estacionamiento gratuito"],
-      en: ["Kin-Ha Cenote (cavern) and Blanca Flor Cenote (open-air)", "Ride between the two cenotes", "Life jacket", "Tequila tasting", "Bilingual guide", "Lockers, restrooms and showers", "Free parking"],
-    },
-    addons: {
-      es: ["Paseo a caballo: +$300 MXN por persona (al pagar)", "Paquete de fotos (opcional)"],
-      en: ["Horseback ride: +$17 USD per person (at checkout)", "Photo package (optional)"],
-    },
-  },
-  "tour-ecologico": {
-    badge: { es: "ECOLÓGICO", en: "ECO TOUR" },
-    badgeColor: "bg-emerald-600",
-    includes: {
-      es: ["Transporte desde tu hotel (Cancún, Puerto Morelos, Playa del Carmen)", "Cenote Kin-Ha (caverna) y Cenote Blanca Flor (abierto)", "Traslado de un cenote a otro", "Comida mexicana", "Degustación de tequila", "Chaleco salvavidas", "Lockers, baños y regaderas"],
-      en: ["Hotel pickup (Cancún, Puerto Morelos, Playa del Carmen)", "Kin-Ha Cenote (cavern) and Blanca Flor Cenote (open-air)", "Ride between the two cenotes", "Mexican lunch", "Tequila tasting", "Life jacket", "Lockers, restrooms and showers"],
-    },
-    addons: {
-      es: ["Paquete de fotos (opcional)"],
-      en: ["Photo package (optional)"],
-    },
-  },
-  "atv-cenotes": {
-    badge: { es: "MÁS POPULAR", en: "MOST POPULAR" },
-    badgeColor: "bg-amber-500",
-    includes: {
-      es: ["Transporte desde tu hotel (Cancún, Puerto Morelos, Playa del Carmen)", "ATV por la selva", "3 tirolesas", "Cenote Kin-Ha (caverna) y Cenote Blanca Flor (abierto)", "Traslado de un cenote a otro", "Comida mexicana", "Degustación de tequila", "Chaleco salvavidas", "Guía bilingüe", "Lockers, baños y regaderas"],
-      en: ["Hotel pickup (Cancún, Puerto Morelos, Playa del Carmen)", "Jungle ATV", "3 zip lines", "Kin-Ha Cenote (cavern) and Blanca Flor Cenote (open-air)", "Ride between the two cenotes", "Mexican lunch", "Tequila tasting", "Life jacket", "Bilingual guide", "Lockers, restrooms and showers"],
-    },
-    addons: {
-      es: ["ATV individual (opcional)", "¿Prefieres caballo? Mismo precio, abajo"],
-      en: ["Individual ATV (optional)", "Prefer horses? Same price, see below"],
-    },
-  },
-  "ecuestre-cenotes": {
-    badge: { es: "CON CABALLO", en: "WITH HORSES" },
-    badgeColor: "bg-amber-500",
-    includes: {
-      es: ["Transporte desde tu hotel (Cancún, Puerto Morelos, Playa del Carmen)", "Paseo a caballo (45 min)", "3 tirolesas", "Cenote Kin-Ha (caverna) y Cenote Blanca Flor (abierto)", "Traslado de un cenote a otro", "Comida mexicana", "Degustación de tequila", "Guía certificado bilingüe", "Chaleco salvavidas", "Lockers, baños y regaderas"],
-      en: ["Hotel pickup (Cancún, Puerto Morelos, Playa del Carmen)", "Horseback ride (45 min)", "3 zip lines", "Kin-Ha Cenote (cavern) and Blanca Flor Cenote (open-air)", "Ride between the two cenotes", "Mexican lunch", "Tequila tasting", "Bilingual certified guide", "Life jacket", "Lockers, restrooms and showers"],
-    },
-    addons: {
-      es: ["Fotografía del paseo (opcional)"],
-      en: ["Ride photography (optional)"],
-    },
-  },
-  "experiencia-completa": {
-    badge: { es: "MEJOR VALOR", en: "BEST VALUE" },
-    badgeColor: "bg-purple-500",
-    includes: {
-      es: ["Transporte de ida y vuelta a tu hotel", "ATV por la selva (40 min)", "Paseo a caballo (40 min)", "Tirolesas", "Cenote Kin-Ha (caverna) y Cenote Blanca Flor (abierto)", "Traslado de un cenote a otro", "Comida mexicana tradicional y agua", "Degustación de tequila", "Chaleco salvavidas y equipo de seguridad", "Guía bilingüe", "Lockers, baños y regaderas"],
-      en: ["Round-trip hotel pickup", "Jungle ATV (40 min)", "Horseback ride (40 min)", "Zip lines", "Kin-Ha Cenote (cavern) and Blanca Flor Cenote (open-air)", "Ride between the two cenotes", "Traditional Mexican lunch and water", "Tequila tasting", "Life jacket and safety gear", "Bilingual guide", "Lockers, restrooms and showers"],
-    },
-    addons: {
-      es: [],
-      en: [],
-    },
-  },
-};
 
 const WHATSAPP = "529982053527";
 

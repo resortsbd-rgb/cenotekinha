@@ -1,6 +1,7 @@
 "use client";
 import HeroSlider from "@/components/ui/HeroSlider";
 import StatsSection from "@/components/ui/StatsSection";
+import QuickFacts from "@/components/ui/QuickFacts";
 import ToursSection from "@/components/ui/ToursSection";
 import ReviewsSection from "@/components/ui/ReviewsSection";
 import FeaturesSection from "@/components/ui/FeaturesSection";
@@ -14,6 +15,7 @@ export default function HomePage() {
     <div className="flex flex-col">
       <HeroSlider />
       <StatsSection />
+      <QuickFacts />
       <ToursSection />
       <ReviewsSection />
       <FeaturesSection />

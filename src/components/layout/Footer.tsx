@@ -2,21 +2,28 @@
 import Link from "next/link";
 import { translations } from "@/lib/translations";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { TOURS, MAIN_TOURS_FILTER } from "@/lib/stripe";
+import { STATIC_ROUTES, localizedHref, tourPath } from "@/lib/routes";
 
 export default function Footer() {
   const { locale } = useLanguage();
   const t = translations[locale];
 
-  const tourLinks = [
-    { href: "/experiences", label: t.nav.tours },
-    { href: "/gallery", label: t.nav.gallery },
-    { href: "/booking", label: t.footer.book },
-  ];
+  const lp = (href: string) => localizedHref(href, locale);
+
+  // Cada tour tiene su página: estos enlaces ayudan a que se descubran y se indexen.
+  const tourLinks = TOURS.filter(MAIN_TOURS_FILTER).map((tour) => ({
+    href: tourPath(tour.id, locale),
+    label: locale === "es" ? tour.nameEs : tour.nameEn,
+  }));
 
   const infoLinks = [
-    { href: "/about", label: t.footer.about },
-    { href: "/faq", label: "FAQ" },
-    { href: "/contact", label: t.nav.contact },
+    { href: STATIC_ROUTES.guide[locale], label: locale === "es" ? "Guía: cenotes cerca de Cancún" : "Guide: cenotes near Cancún" },
+    { href: lp("/booking"), label: t.footer.book },
+    { href: lp("/gallery"), label: t.nav.gallery },
+    { href: lp("/about"), label: t.footer.about },
+    { href: lp("/faq"), label: "FAQ" },
+    { href: lp("/contact"), label: t.nav.contact },
   ];
 
   return (

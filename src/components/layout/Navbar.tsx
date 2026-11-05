@@ -2,13 +2,18 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { translations } from "@/lib/translations";
-import { useLanguage, setLocale } from "@/contexts/LanguageContext";
+import { usePathname } from "next/navigation";
+import { useLanguage, rememberLocale } from "@/contexts/LanguageContext";
+import { alternatePath, localizedHref } from "@/lib/routes";
+import type { Locale } from "@/lib/translations";
 
 export default function Navbar() {
   const { locale } = useLanguage();
   const t = translations[locale];
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const lp = (href: string) => localizedHref(href, locale);
 
   const navLinks = [
     { href: "/experiences", label: t.nav.tours },
@@ -23,8 +28,11 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  function handleSetLocale(l: "es" | "en") {
-    setLocale(l);
+  // Enlaces reales entre idiomas. Se conservan la consulta (?tour=) y el ancla al hacer clic.
+  function switchLocale(event: React.MouseEvent<HTMLAnchorElement>, target: Locale) {
+    rememberLocale(target);
+    event.preventDefault();
+    window.location.assign(`${alternatePath(pathname, target)}${window.location.search}${window.location.hash}`);
   }
 
   return (
@@ -36,7 +44,7 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 flex items-center justify-between h-20">
-        <Link href="/" className="flex items-center gap-3" aria-label="Cenotes Kin-Ha — inicio">
+        <Link href={lp("/")} className="flex items-center gap-3" aria-label={locale === "es" ? "Cenotes Kin-Ha, inicio" : "Kin-Ha Cenotes, home"}>
           <span className="grid h-9 w-9 place-items-center rounded-full border border-[#69d8cb]/60 text-[#69d8cb]">◌</span>
           <span className="text-white font-bold text-lg tracking-[0.13em]">
             KIN-HA
@@ -46,7 +54,7 @@ export default function Navbar() {
 
         <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-white/80">
           {navLinks.map(({ href, label }) => (
-            <Link key={href} href={href} className="hover:text-teal-300 transition-colors">
+            <Link key={href} href={lp(href)} className="hover:text-teal-300 transition-colors">
               {label}
             </Link>
           ))}
@@ -55,25 +63,27 @@ export default function Navbar() {
         <div className="hidden lg:flex items-center gap-3">
           {/* Language toggle — inline to avoid nested-component remount issue */}
           <div className="flex items-center gap-1 text-xs font-semibold">
-            <button
-              type="button"
-              onClick={() => handleSetLocale("es")}
+            <a
+              href={alternatePath(pathname, "es")}
+              hrefLang="es"
+              onClick={(event) => switchLocale(event, "es")}
               className={`px-1.5 py-0.5 rounded transition-colors duration-200 ${
                 locale === "es" ? "text-[#69d8cb]" : "text-white/50 hover:text-white/80"
               }`}
             >
               ES
-            </button>
+            </a>
             <span className="text-white/30">|</span>
-            <button
-              type="button"
-              onClick={() => handleSetLocale("en")}
+            <a
+              href={alternatePath(pathname, "en")}
+              hrefLang="en"
+              onClick={(event) => switchLocale(event, "en")}
               className={`px-1.5 py-0.5 rounded transition-colors duration-200 ${
                 locale === "en" ? "text-[#69d8cb]" : "text-white/50 hover:text-white/80"
               }`}
             >
               EN
-            </button>
+            </a>
           </div>
 
           <a
@@ -88,7 +98,7 @@ export default function Navbar() {
             WhatsApp
           </a>
           <Link
-            href="/booking"
+            href={lp("/booking")}
             className="bg-[#69d8cb] hover:bg-white text-[#062c24] font-bold px-5 py-2.5 rounded-full text-sm transition shadow"
           >
             {t.nav.book_now}
@@ -97,10 +107,10 @@ export default function Navbar() {
 
         <div className="flex items-center gap-2 lg:hidden">
           <div className="flex items-center rounded-full border border-white/25 bg-black/20 text-xs font-bold">
-            <button type="button" onClick={() => handleSetLocale("es")} aria-label="Español"
-              className={`px-3 py-1.5 rounded-full ${locale === "es" ? "bg-[#69d8cb] text-[#062c24]" : "text-white/80"}`}>ES</button>
-            <button type="button" onClick={() => handleSetLocale("en")} aria-label="English"
-              className={`px-3 py-1.5 rounded-full ${locale === "en" ? "bg-[#69d8cb] text-[#062c24]" : "text-white/80"}`}>EN</button>
+            <a href={alternatePath(pathname, "es")} hrefLang="es" onClick={(event) => switchLocale(event, "es")} aria-label="Español"
+              className={`px-3 py-1.5 rounded-full ${locale === "es" ? "bg-[#69d8cb] text-[#062c24]" : "text-white/80"}`}>ES</a>
+            <a href={alternatePath(pathname, "en")} hrefLang="en" onClick={(event) => switchLocale(event, "en")} aria-label="English"
+              className={`px-3 py-1.5 rounded-full ${locale === "en" ? "bg-[#69d8cb] text-[#062c24]" : "text-white/80"}`}>EN</a>
           </div>
         <button
           type="button"
@@ -127,7 +137,7 @@ export default function Navbar() {
           {navLinks.map(({ href, label }) => (
             <Link
               key={href}
-              href={href}
+              href={lp(href)}
               onClick={() => setOpen(false)}
               className="py-3 hover:text-[#69d8cb] transition-colors border-b border-white/10"
             >
@@ -136,28 +146,30 @@ export default function Navbar() {
           ))}
           <div className="flex items-center justify-between pt-1">
             <div className="flex items-center gap-1 text-xs font-semibold">
-              <button
-                type="button"
-                onClick={() => handleSetLocale("es")}
+              <a
+                href={alternatePath(pathname, "es")}
+                hrefLang="es"
+                onClick={(event) => switchLocale(event, "es")}
                 className={`px-1.5 py-0.5 rounded transition-colors duration-200 ${
                   locale === "es" ? "text-[#69d8cb]" : "text-white/50 hover:text-white/80"
                 }`}
               >
                 ES
-              </button>
+              </a>
               <span className="text-white/30">|</span>
-              <button
-                type="button"
-                onClick={() => handleSetLocale("en")}
+              <a
+                href={alternatePath(pathname, "en")}
+                hrefLang="en"
+                onClick={(event) => switchLocale(event, "en")}
                 className={`px-1.5 py-0.5 rounded transition-colors duration-200 ${
                   locale === "en" ? "text-[#69d8cb]" : "text-white/50 hover:text-white/80"
                 }`}
               >
                 EN
-              </button>
+              </a>
             </div>
             <Link
-              href="/booking"
+              href={lp("/booking")}
               onClick={() => setOpen(false)}
               className="text-center bg-[#69d8cb] text-[#062c24] px-4 py-2 rounded-full text-xs font-bold"
             >

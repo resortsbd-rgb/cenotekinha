@@ -10,6 +10,7 @@ import { trackTourView, trackWhatsAppClick } from "@/lib/analytics";
 import BokunButton from "@/components/booking/BokunButton";
 import PromoLine from "@/components/ui/PromoLine";
 import { getBokunProductId } from "@/lib/bokun";
+import { tourPath } from "@/lib/routes";
 
 const WHATSAPP = "529982053527";
 
@@ -160,7 +161,9 @@ export default function ToursSection({ asPageTitle = false }: { asPageTitle?: bo
                       {tour.duration}
                     </p>
                     <h3 className={`mb-4 font-medium leading-tight ${isFeatured ? "text-4xl lg:text-5xl" : "text-3xl"}`}>
-                      {name}
+                      <Link href={tourPath(tour.id, locale)} className="hover:text-[#69d8cb]">
+                        {name}
+                      </Link>
                     </h3>
                     <p className="mb-4 leading-relaxed text-white/65">{description}</p>
                     <p className="mb-8 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
@@ -232,7 +235,7 @@ export default function ToursSection({ asPageTitle = false }: { asPageTitle?: bo
                         className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#c9792e] px-6 py-3 font-bold text-white transition hover:bg-[#d99a4e]"
                       />
                       <Link
-                        href={`/booking?tour=${tour.id}`}
+                        href={tourPath(tour.id, locale)}
                         className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/30 px-6 py-3 font-semibold text-white transition hover:border-white hover:bg-white/10"
                       >
                         {locale === "es" ? "Ver detalles" : "View details"}
@@ -255,6 +258,10 @@ export default function ToursSection({ asPageTitle = false }: { asPageTitle?: bo
                           source="tour_card_variant"
                           className="font-semibold text-[#69d8cb] underline underline-offset-4 hover:text-white"
                         />
+                        {" · "}
+                        <Link href={tourPath(variant.id, locale)} className="font-semibold text-[#69d8cb] underline underline-offset-4 hover:text-white">
+                          {locale === "es" ? "Ver el tour a caballo" : "See the horseback tour"}
+                        </Link>
                       </p>
                     )}
                   </div>

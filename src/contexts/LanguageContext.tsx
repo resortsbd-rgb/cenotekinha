@@ -1,60 +1,35 @@
 "use client";
-import { useSyncExternalStore } from "react";
+import { createContext, useContext } from "react";
 import type { Locale } from "@/lib/translations";
 
-// Module-level store — bypasses RSC boundary limitations with React context
-let _locale: Locale = "es";
-const _listeners = new Set<() => void>();
+// El idioma lo decide la URL: "/" es español y "/en" es inglés.
+// Así cada idioma llega completo en el HTML y los buscadores lo pueden indexar por separado.
+const LanguageContext = createContext<Locale>("es");
 
-function _notify() {
-  _listeners.forEach((fn) => fn());
-}
-
-// Initialize from localStorage on first client load
-if (typeof window !== "undefined") {
-  let stored: string | null = null;
-  try {
-    stored = localStorage.getItem("kin-ha-locale");
-  } catch {
-    // Navegación privada o almacenamiento bloqueado: se usa el idioma del navegador.
-  }
-  if (stored === "es" || stored === "en") {
-    _locale = stored;
-  } else {
-    // Primera visita: español solo si el navegador está en español.
-    _locale = (navigator.language || "").toLowerCase().startsWith("es") ? "es" : "en";
-  }
-  document.documentElement.lang = _locale;
-}
-
-export function setLocale(l: Locale) {
-  if (_locale === l) return;
-  _locale = l;
-  if (typeof window !== "undefined") {
-    try {
-      localStorage.setItem("kin-ha-locale", l);
-    } catch {
-      // Sin almacenamiento: el idioma vale solo para esta visita.
-    }
-    document.documentElement.lang = l;
-  }
-  _notify();
+export function LanguageProvider({ locale, children }: { locale: Locale; children: React.ReactNode }) {
+  return <LanguageContext.Provider value={locale}>{children}</LanguageContext.Provider>;
 }
 
 export function useLanguage() {
-  const locale = useSyncExternalStore(
-    (listener) => {
-      _listeners.add(listener);
-      return () => _listeners.delete(listener);
-    },
-    () => _locale,
-    () => "es" as Locale, // server snapshot — always default on SSR
-  );
-
-  return { locale, setLocale };
+  return { locale: useContext(LanguageContext) };
 }
 
-// Keep LanguageProvider as a passthrough so the layout import still works
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+export const LOCALE_STORAGE_KEY = "kin-ha-locale";
+
+/** Recuerda el idioma elegido. Sin almacenamiento disponible, simplemente no se recuerda. */
+export function rememberLocale(locale: Locale) {
+  try {
+    localStorage.setItem(LOCALE_STORAGE_KEY, locale);
+  } catch {
+    // Navegación privada o almacenamiento bloqueado.
+  }
+}
+
+export function storedLocale(): Locale | null {
+  try {
+    const value = localStorage.getItem(LOCALE_STORAGE_KEY);
+    return value === "es" || value === "en" ? value : null;
+  } catch {
+    return null;
+  }
 }
