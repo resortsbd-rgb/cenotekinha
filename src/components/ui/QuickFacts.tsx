@@ -20,9 +20,11 @@ const COPY = {
     facts: [
       ["Ubicación", "Ruta de los Cenotes, Puerto Morelos, Quintana Roo"],
       ["Horario", "Todos los días, de 9:00 am a 5:00 pm"],
-      ["Transporte", "Desde hoteles de Cancún, Puerto Morelos y Playa del Carmen"],
+      ["Recogida", "Hoteles desde Playacar hasta Puerto Morelos, Cancún e Isla Blanca"],
+      ["Último momento", "Con transporte, reserva hasta 8 horas antes"],
       ["Cancelación", "Gratis hasta 24 horas antes"],
     ],
+    pickupLink: "¿Recogen en mi hotel?",
     link: "Cómo elegir tu tour de cenotes",
   },
   en: {
@@ -32,9 +34,11 @@ const COPY = {
     facts: [
       ["Location", "Ruta de los Cenotes, Puerto Morelos, Quintana Roo"],
       ["Hours", "Every day, 9:00am to 5:00pm"],
-      ["Pickup", "From hotels in Cancún, Puerto Morelos and Playa del Carmen"],
+      ["Pickup", "Hotels from Playacar to Puerto Morelos, Cancún and Isla Blanca"],
+      ["Last minute", "With pickup, book as late as 8 hours before"],
       ["Cancellation", "Free up to 24 hours before"],
     ],
+    pickupLink: "Do you pick up at my hotel?",
     link: "How to choose your cenote tour",
   },
 };
@@ -49,9 +53,14 @@ export default function QuickFacts() {
           <p className="mb-4 text-xs font-bold uppercase tracking-[0.28em] text-[#0b7760]">{t.eyebrow}</p>
           <h2 className="text-balance text-4xl font-medium leading-[1] tracking-[-0.03em] md:text-5xl">{t.title}</h2>
           <p className="mt-6 text-lg leading-relaxed text-[#10231e]/75">{t.answer}</p>
-          <Link href={STATIC_ROUTES.guide[locale]} className="mt-6 inline-block font-semibold text-[#0b4638] underline underline-offset-4 hover:text-[#0b7760]">
-            {t.link}
-          </Link>
+          <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:gap-6">
+            <Link href={STATIC_ROUTES.pickup[locale]} className="font-semibold text-[#0b4638] underline underline-offset-4 hover:text-[#0b7760]">
+              {t.pickupLink}
+            </Link>
+            <Link href={STATIC_ROUTES.guide[locale]} className="font-semibold text-[#0b4638] underline underline-offset-4 hover:text-[#0b7760]">
+              {t.link}
+            </Link>
+          </div>
         </div>
         <dl className="divide-y divide-[#10231e]/12 border-y border-[#10231e]/12">
           {t.facts.map(([label, value]) => (

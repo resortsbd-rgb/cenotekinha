@@ -37,13 +37,13 @@ function priceRange(locale: Locale) {
 const BUSINESS_COPY = {
   es: {
     description:
-      "Parque de aventura en la Ruta de los Cenotes de Puerto Morelos: Cenote Kin-Ha (caverna) y Cenote Blanca Flor (abierto), tirolesas, ATV y paseo a caballo, con transporte desde Cancún, Puerto Morelos y Playa del Carmen.",
+      "Parque de aventura en la Ruta de los Cenotes de Puerto Morelos: Cenote Kin-Ha (caverna) y Cenote Blanca Flor (abierto), tirolesas, ATV y paseo a caballo, con recogida en hoteles desde Playacar hasta Puerto Morelos, Cancún e Isla Blanca.",
     cave: "Cenote de caverna con luz natural, estalactitas y agua azul profunda.",
     open: "Cenote abierto al cielo, con plataformas para saltar.",
   },
   en: {
     description:
-      "Adventure park on the Ruta de los Cenotes in Puerto Morelos: Kin-Ha Cenote (cavern) and Blanca Flor Cenote (open-air), zip lines, ATVs and horseback riding, with pickup from Cancún, Puerto Morelos and Playa del Carmen.",
+      "Adventure park on the Ruta de los Cenotes in Puerto Morelos: Kin-Ha Cenote (cavern) and Blanca Flor Cenote (open-air), zip lines, ATVs and horseback riding, with hotel pickup between Playacar, Puerto Morelos, Cancún and Isla Blanca.",
     cave: "Cavern cenote with natural light, stalactites and deep blue water.",
     open: "Open-air cenote with jumping platforms.",
   },

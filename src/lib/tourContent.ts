@@ -89,8 +89,8 @@ export type TourContent = {
 };
 
 const PICKUP_ARRIVAL = {
-  es: "Te recogemos en el lobby de tu hotel en Cancún, Puerto Morelos o Playa del Carmen. Te confirmamos la hora exacta y te pedimos tu número de habitación, porque la seguridad de muchos hoteles lo exige. Conviene estar listo 10 minutos antes. Algunos hoteles no permiten la entrada de vans de tours: en ese caso acordamos otro punto.",
-  en: "We pick you up at your hotel lobby in Cancún, Puerto Morelos or Playa del Carmen. We confirm the exact time and ask for your room number, because security at many resorts requires it. Please be ready 10 minutes early. Some hotels don't allow tour vans: in that case we agree on another meeting point.",
+  es: "Recogemos en hoteles desde Playacar y Playa del Carmen hasta Puerto Morelos, Cancún e Isla Blanca. Te confirmamos la hora exacta y te pedimos tu número de habitación, porque la seguridad de muchos hoteles lo exige. Conviene estar listo 10 minutos antes.",
+  en: "We pick up at hotels from Playacar and Playa del Carmen to Puerto Morelos, Cancún and Isla Blanca. We confirm the exact time and ask for your room number, because security at many resorts requires it. Please be ready 10 minutes early.",
 };
 
 export const TOUR_CONTENT: Record<TourId, TourContent> = {

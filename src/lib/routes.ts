@@ -13,6 +13,7 @@ export const STATIC_ROUTES = {
   faq: { es: "/faq", en: "/en/faq" },
   contact: { es: "/contact", en: "/en/contact" },
   guide: { es: "/guia/cenotes-cerca-de-cancun", en: "/en/guide/cenotes-near-cancun" },
+  pickup: { es: "/recogida-en-hotel", en: "/en/hotel-pickup" },
 } satisfies Record<string, RoutePair>;
 
 // Las direcciones en español reutilizan las del sitio anterior que Google todavía conoce.

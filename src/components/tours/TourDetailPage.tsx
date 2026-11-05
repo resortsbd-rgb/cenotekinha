@@ -18,11 +18,14 @@ const LABELS = {
     person: "por persona",
     duration: "Duración",
     transport: "Transporte",
-    pickup: "Incluido desde tu hotel: Cancún, Puerto Morelos y Playa del Carmen",
+    pickup: "Incluido, desde hoteles entre Playacar, Puerto Morelos, Cancún e Isla Blanca",
     own: "Llegas en tu auto, con estacionamiento gratis",
     booking: "Reserva",
     online: "En línea, con calendario y pago seguro",
     whatsapp: "Por WhatsApp",
+    lastMinute: "Último momento",
+    lastMinuteValue: "Reserva hasta 8 horas antes de la recogida",
+    pickupLink: "Ver zonas de recogida",
     cancellation: "Cancelación",
     free: "Gratis hasta 24 horas antes",
     bookOnline: "Ver fechas y reservar",
@@ -53,11 +56,14 @@ const LABELS = {
     person: "per person",
     duration: "Duration",
     transport: "Transport",
-    pickup: "Included from your hotel: Cancún, Puerto Morelos and Playa del Carmen",
+    pickup: "Included, from hotels between Playacar, Puerto Morelos, Cancún and Isla Blanca",
     own: "Arrive by car, with free parking",
     booking: "Booking",
     online: "Online, with live calendar and secure payment",
     whatsapp: "On WhatsApp",
+    lastMinute: "Last minute",
+    lastMinuteValue: "Book as late as 8 hours before pickup",
+    pickupLink: "See pickup areas",
     cancellation: "Cancellation",
     free: "Free up to 24 hours before",
     bookOnline: "See dates & book",
@@ -118,13 +124,14 @@ export default function TourDetailPage({ tourId, locale }: { tourId: TourId; loc
     [t.duration, tour.duration],
     [t.transport, tour.transport === "own" ? t.own : t.pickup],
     [t.booking, online ? t.online : t.whatsapp],
+    ...(tour.transport === "own" ? [] : ([[t.lastMinute, t.lastMinuteValue]] as [string, string][])),
     [t.cancellation, t.free],
   ];
   const buttonClass =
     "inline-flex min-h-14 w-full items-center justify-center rounded-full bg-[#c9792e] px-8 py-4 text-center font-bold text-white transition hover:bg-[#d99a4e]";
 
   return (
-    <div className="bg-[#f6f1e7] text-[#10231e]">
+    <div className="bg-[#f6f1e7] pb-24 text-[#10231e] lg:pb-0">
       <JsonLd data={tourJsonLd(tour.id, locale, content.activities[locale])} />
       <JsonLd data={breadcrumbJsonLd(breadcrumbs)} />
       <JsonLd data={faqJsonLd(content.faqs[locale])} />
@@ -160,18 +167,6 @@ export default function TourDetailPage({ tourId, locale }: { tourId: TourId; loc
               </a>
             </p>
 
-            {/* En teléfono, el precio y el botón no deben quedar hasta abajo de la página. */}
-            <div className="mt-6 border border-[#10231e]/12 bg-white p-5 lg:hidden">
-              <p className="mb-4 font-semibold">{t.from} {price} <span className="font-normal text-[#10231e]/70">{t.person}</span></p>
-              <BokunButton
-                tourId={tour.id}
-                label={online ? t.bookOnline : t.bookWhatsapp}
-                whatsappMessage={t.message(name)}
-                tourName={name}
-                source="tour_page_top"
-                className={buttonClass}
-              />
-            </div>
 
             <section className="mt-12">
               <Heading>{t.activities}</Heading>
@@ -197,6 +192,11 @@ export default function TourDetailPage({ tourId, locale }: { tourId: TourId; loc
             <section className="mt-12">
               <Heading>{t.arrival}</Heading>
               <p className="leading-relaxed text-[#10231e]/80">{content.arrival[locale]}</p>
+              {tour.transport !== "own" && (
+                <Link href={STATIC_ROUTES.pickup[locale]} className="mt-3 inline-block font-semibold text-[#0b4638] underline underline-offset-4">
+                  {t.pickupLink}
+                </Link>
+              )}
               {tour.transport === "own" && (
                 <a
                   href="https://www.google.com/maps/dir/?api=1&destination=20.851221,-87.1276722"
@@ -288,6 +288,24 @@ export default function TourDetailPage({ tourId, locale }: { tourId: TourId; loc
             ))}
           </div>
         </section>
+      </div>
+
+      {/* En teléfono, el precio y el botón siempre a la vista: quien ya está en destino decide rápido. */}
+      <div className="fixed inset-x-0 bottom-0 z-30 flex items-center gap-3 border-t border-[#10231e]/12 bg-white px-4 py-3 shadow-[0_-8px_24px_rgba(0,0,0,.12)] lg:hidden">
+        <p className="shrink-0 text-sm leading-tight">
+          <span className="block text-[#10231e]/65">{t.from}</span>
+          <strong className="text-base">{price}</strong>
+        </p>
+        <div className="min-w-0 flex-1">
+          <BokunButton
+            tourId={tour.id}
+            label={online ? t.bookOnline : t.bookWhatsapp}
+            whatsappMessage={t.message(name)}
+            tourName={name}
+            source="tour_page_sticky"
+            className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[#c9792e] px-4 py-2 text-center text-sm font-bold text-white"
+          />
+        </div>
       </div>
     </div>
   );

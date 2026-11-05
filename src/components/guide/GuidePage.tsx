@@ -7,7 +7,7 @@ import { articleJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/lib/structuredData
 import { VISIT_NOTES } from "@/lib/tourContent";
 import type { Locale } from "@/lib/translations";
 
-const DATE_MODIFIED = "2026-11-03";
+const DATE_MODIFIED = "2026-11-05";
 const MEXICO_DESCONOCIDO = "https://escapadas.mexicodesconocido.com.mx/atractivos/ruta-de-los-cenotes/";
 
 const COPY = {
@@ -18,7 +18,7 @@ const COPY = {
     description:
       "Qué es la Ruta de los Cenotes, en qué se diferencia un cenote de caverna de uno abierto, qué tour elegir, cómo llegar, qué llevar y las reglas para nadar.",
     lead: "Si te hospedas en Cancún o Playa del Carmen, la Ruta de los Cenotes de Puerto Morelos es una de las zonas donde puedes nadar en cenotes en plena selva. La mejor elección depende de tres cosas: si quieres adrenalina o un día tranquilo, si tienes auto y cuánto quieres gastar.",
-    updated: "Actualizada el 3 de noviembre de 2026 por el equipo de Cenotes Kin-Ha.",
+    updated: "Actualizada el 5 de noviembre de 2026 por el equipo de Cenotes Kin-Ha.",
     whatTitle: "¿Qué es un cenote?",
     what: "Un cenote es una poza natural de agua dulce que se forma cuando se colapsa la roca caliza y queda expuesta el agua subterránea. Son característicos de la península de Yucatán y su agua suele ser muy clara porque se filtra a través de la roca.",
     routeTitle: "¿Qué es la Ruta de los Cenotes?",
@@ -45,7 +45,7 @@ const COPY = {
     horseLink: "Ver el tour a caballo",
     arriveTitle: "¿Cómo llegar a los cenotes desde Cancún o Playa del Carmen?",
     arrive: [
-      ["Con transporte", "El Tour ecológico, el tour de ATV, el tour a caballo y la Aventura completa incluyen recogida en hoteles de Cancún, Puerto Morelos y Playa del Carmen. El tiempo de traslado depende de tu hotel."],
+      ["Con transporte", "El Tour ecológico, el tour de ATV, el tour a caballo y la Aventura completa incluyen recogida en hoteles desde Playacar hasta Puerto Morelos, Cancún e Isla Blanca. El tiempo de traslado depende de tu hotel."],
       ["En tu auto", "Busca «Cenotes Kin-Ha» en Google Maps. Puedes llegar entre las 9:30 am y las 3:00 pm y el estacionamiento es gratis."],
     ],
     bring: "¿Qué llevar a un cenote?",
@@ -66,7 +66,7 @@ const COPY = {
     description:
       "What the Ruta de los Cenotes is, how cave and open-air cenotes differ, which tour to pick, how to get there, what to bring and the rules for swimming.",
     lead: "If you're staying in Cancún or Playa del Carmen, the Ruta de los Cenotes in Puerto Morelos is one of the areas where you can swim in cenotes deep in the jungle. The best choice comes down to three things: whether you want adrenaline or a relaxed day, whether you have a car, and your budget.",
-    updated: "Updated November 3, 2026 by the Kin-Ha Cenotes team.",
+    updated: "Updated November 5, 2026 by the Kin-Ha Cenotes team.",
     whatTitle: "What is a cenote?",
     what: "A cenote is a natural freshwater pool that forms when limestone collapses and exposes the groundwater below. They're typical of the Yucatán Peninsula, and the water is often very clear because it filters through the rock.",
     routeTitle: "What is the Ruta de los Cenotes?",
@@ -93,7 +93,7 @@ const COPY = {
     horseLink: "See the horseback tour",
     arriveTitle: "How do you get to the cenotes from Cancún or Playa del Carmen?",
     arrive: [
-      ["With pickup", "The Eco Tour, ATV tour, horseback tour and Full Adventure include pickup from hotels in Cancún, Puerto Morelos and Playa del Carmen. Travel time depends on your hotel."],
+      ["With pickup", "The Eco Tour, ATV tour, horseback tour and Full Adventure include pickup from hotels between Playacar, Puerto Morelos, Cancún and Isla Blanca. Travel time depends on your hotel."],
       ["By car", "Search “Cenotes Kin-Ha” in Google Maps. You can arrive between 9:30am and 3:00pm, and parking is free."],
     ],
     bring: "What should you bring to a cenote?",
@@ -215,6 +215,12 @@ export default function GuidePage({ locale }: { locale: Locale }) {
             </div>
           ))}
         </dl>
+
+        <p className="mt-5">
+          <Link href={STATIC_ROUTES.pickup[locale]} className="font-semibold underline underline-offset-4">
+            {locale === "es" ? "Ver zonas de recogida" : "See pickup areas"}
+          </Link>
+        </p>
 
         <H2>{t.bring}</H2>
         <ul className="list-disc space-y-2 pl-5 leading-relaxed text-[#10231e]/80">

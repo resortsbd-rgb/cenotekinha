@@ -18,6 +18,7 @@ export default function Footer() {
   }));
 
   const infoLinks = [
+    { href: STATIC_ROUTES.pickup[locale], label: locale === "es" ? "Recogida en hotel" : "Hotel pickup" },
     { href: STATIC_ROUTES.guide[locale], label: locale === "es" ? "Guía: cenotes cerca de Cancún" : "Guide: cenotes near Cancún" },
     { href: lp("/booking"), label: t.footer.book },
     { href: lp("/gallery"), label: t.nav.gallery },

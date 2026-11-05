@@ -126,6 +126,18 @@ const PAGE_COPY = {
         "WhatsApp, email, hours and directions to Kin-Ha Cenotes on the Ruta de los Cenotes in Puerto Morelos. Open daily from 9:00am to 5:00pm.",
     },
   },
+  pickup: {
+    es: {
+      title: "Tours de cenotes con recogida en tu hotel | Kin-Ha",
+      description:
+        "Recogida en hoteles desde Playacar hasta Puerto Morelos, Cancún e Isla Blanca. Reserva hasta 8 horas antes. Cancelación gratis hasta 24 h.",
+    },
+    en: {
+      title: "Cenote Tours with Hotel Pickup: Cancún & Playa | Kin-Ha",
+      description:
+        "Hotel pickup from Playacar to Puerto Morelos, Cancún and Isla Blanca. Book as late as 8 hours before pickup. Free cancellation up to 24 hours.",
+    },
+  },
   guide: {
     es: {
       title: "Cenotes cerca de Cancún: guía para elegir tu tour | Kin-Ha",

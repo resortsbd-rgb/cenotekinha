@@ -5,7 +5,7 @@ import { SITE_URL } from "@/lib/seo";
 export const dynamic = "force-static";
 
 // Fecha de la última revisión del contenido. Actualizarla cuando cambien precios o textos.
-const LAST_REVIEWED = "2026-11-03";
+const LAST_REVIEWED = "2026-11-05";
 
 const absolute = (path: string) => (path === "/" ? `${SITE_URL}/` : `${SITE_URL}${path}`);
 
