@@ -138,6 +138,18 @@ const PAGE_COPY = {
         "Hotel pickup from Playacar to Puerto Morelos, Cancún and Isla Blanca. Book as late as 8 hours before pickup. Free cancellation up to 24 hours.",
     },
   },
+  tequila: {
+    es: {
+      title: "Tequila artesanal y cata en Cenotes Kin-Ha | Puerto Morelos",
+      description:
+        "La historia del tequila artesanal que se prueba en Cenotes Kin-Ha: de los campos de agave de Jalisco a la selva de la Ruta de los Cenotes. Cata incluida en cada experiencia.",
+    },
+    en: {
+      title: "Artisanal Tequila Tasting at Kin-Ha Cenotes | Puerto Morelos",
+      description:
+        "The story behind the artisanal tequila you taste at Kin-Ha Cenotes: from the agave fields of Jalisco to the jungle of the Ruta de los Cenotes. Tasting included in every experience.",
+    },
+  },
   guide: {
     es: {
       title: "Cenotes cerca de Cancún: guía para elegir tu tour | Kin-Ha",

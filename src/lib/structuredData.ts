@@ -180,8 +180,8 @@ export function faqJsonLd(items: readonly { q: string; a: string }[]) {
   };
 }
 
-export function articleJsonLd({ headline, description, path, locale, dateModified }: {
-  headline: string; description: string; path: string; locale: Locale; dateModified: string;
+export function articleJsonLd({ headline, description, path, locale, dateModified, image }: {
+  headline: string; description: string; path: string; locale: Locale; dateModified: string; image?: string;
 }) {
   return {
     "@context": "https://schema.org",
@@ -190,7 +190,7 @@ export function articleJsonLd({ headline, description, path, locale, dateModifie
     description,
     inLanguage: locale,
     mainEntityOfPage: absolute(path),
-    image: `${SITE}/images/hero-blanca-flor-plataformas.webp`,
+    image: `${SITE}${image ?? "/images/hero-blanca-flor-plataformas.webp"}`,
     datePublished: dateModified,
     dateModified,
     author: { "@id": BUSINESS_ID },
