@@ -27,6 +27,7 @@ ${tours}
 
 - [Hotel pickup areas](${SITE_URL}${STATIC_ROUTES.pickup.en})
 - [Cenotes near Cancún: how to choose a tour](${SITE_URL}${STATIC_ROUTES.guide.en})
+- [Artisanal tequila tasting: the story](${SITE_URL}${STATIC_ROUTES.tequila.en}): tequila tasting is included in every experience; real bottles, small-batch tequila from Jalisco
 - [FAQ](${SITE_URL}${STATIC_ROUTES.faq.en})
 - [Book online](${SITE_URL}${STATIC_ROUTES.booking.en})
 - [Contact and directions](${SITE_URL}${STATIC_ROUTES.contact.en})
@@ -37,6 +38,7 @@ ${tours}
 - [Tours y precios](${SITE_URL}${STATIC_ROUTES.experiences.es})
 - [Recogida en hotel](${SITE_URL}${STATIC_ROUTES.pickup.es})
 - [Guía: cenotes cerca de Cancún](${SITE_URL}${STATIC_ROUTES.guide.es})
+- [Tequila artesanal: la historia de la cata](${SITE_URL}${STATIC_ROUTES.tequila.es})
 - [Preguntas frecuentes](${SITE_URL}${STATIC_ROUTES.faq.es})
 `;
 

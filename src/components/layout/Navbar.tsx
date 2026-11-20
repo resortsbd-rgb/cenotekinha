@@ -19,6 +19,7 @@ export default function Navbar() {
     { href: "/experiences", label: t.nav.tours },
     { href: "/about", label: t.footer.about },
     { href: "/gallery", label: t.nav.gallery },
+    { href: "/tequila-artesanal", label: locale === "es" ? "Tequila" : "Tequila tasting" },
     { href: "/contact", label: t.nav.contact },
   ];
 
