@@ -35,7 +35,7 @@ const COPY = {
     facts: [
       ["Jalisco, México", "Donde nace el tequila"],
       ["Agave azul", "La planta detrás de cada botella"],
-      ["Lotes pequeños", "Cada lote es distinto"],
+      ["Cada lote es distinto", "Sabores únicos"],
       ["Incluido", "En cada experiencia Kin-Ha"],
     ],
     storyEyebrow: "La historia",
@@ -43,10 +43,10 @@ const COPY = {
     lead1:
       "Hay cosas que no se pueden apurar. Un agave azul tarda años en estar listo. Un lote toma el tiempo que necesita. Y no hay dos lotes que salgan exactamente iguales.",
     lead2:
-      "Ese es el tequila que abrimos para ti en Kin-Ha: hecho despacio, en lotes pequeños, y pensado para probarse despacio también.",
+      "Ese es el tequila que abrimos para ti en Kin-Ha: hecho despacio, lote por lote, y pensado para probarse despacio también.",
     chapters: [
       ["Empieza en la tierra", "Cada botella empieza como agave azul creciendo en Jalisco, el corazón del país del tequila. Tarda años en estar listo y nadie puede apurarlo."],
-      ["Hecho con paciencia", "El tequila artesanal se hace en lotes pequeños, por productores que se toman su tiempo. Ese cuidado se nota al probarlo."],
+      ["Hecho con paciencia", "El tequila artesanal se hace con cuidado en cada paso del proceso. Ese cuidado se nota al probarlo."],
       ["Ningún sorbo es igual", "Cada lote sale distinto, así que los sabores son únicos. Lo que pruebas en Kin-Ha no es copia de nada más."],
       ["Y llega a la selva", "De Jalisco a la Ruta de los Cenotes. Aquí, entre los árboles y el agua turquesa, la botella se abre para ti. Algo tan especial no se hizo para dejarlo pasar."],
     ],
@@ -77,7 +77,7 @@ const COPY = {
     faqTitle: "Preguntas sobre la cata de tequila",
     faqs: [
       { q: "¿La degustación de tequila está incluida?", a: "Sí. La degustación de tequila forma parte de todas las experiencias de Cenotes Kin-Ha." },
-      { q: "¿Qué es el tequila artesanal?", a: "Es tequila elaborado en lotes pequeños y con mucho cuidado en el proceso. Por eso cada lote tiene sabores propios y no hay dos iguales." },
+      { q: "¿Qué es el tequila artesanal?", a: "Es tequila elaborado con mucho cuidado en el proceso. Por eso cada lote tiene sabores propios y no hay dos iguales." },
       { q: "¿De qué se hace el tequila?", a: "Todo tequila se elabora con agave azul (Weber) y solo puede producirse en las zonas de México autorizadas por su denominación de origen, principalmente en Jalisco." },
       { q: "¿Qué botellas puedo probar en Kin-Ha?", a: "La selección actual incluye los tequilas Aguascalientes Reposado y Atalaje Añejo, y los licores Cabo Único de chocolate, vainilla y damiana. La selección puede variar según el día." },
       { q: "¿Puedo comprar una botella?", a: "Sí. Las botellas de la colección están a la venta: pregunta por la tuya al terminar tu cata." },
@@ -104,7 +104,7 @@ const COPY = {
     facts: [
       ["Jalisco, México", "Where tequila is born"],
       ["Blue agave", "The plant behind every bottle"],
-      ["Small batch", "Every lot is different"],
+      ["Every batch is different", "Unique flavors"],
       ["Included", "In every Kin-Ha experience"],
     ],
     storyEyebrow: "The story",
@@ -112,10 +112,10 @@ const COPY = {
     lead1:
       "Some things cannot be rushed. A blue agave takes years to be ready. A batch takes the time it needs. And no two batches come out quite the same.",
     lead2:
-      "That is the tequila we open for you at Kin-Ha: made slowly, in small batches, and meant to be tasted slowly too.",
+      "That is the tequila we open for you at Kin-Ha: made slowly, batch by batch, and meant to be tasted slowly too.",
     chapters: [
       ["It starts in the earth", "Every bottle begins as blue agave growing in Jalisco, the heart of tequila country. It takes years to be ready, and nobody can hurry it."],
-      ["Made with patience", "Artisanal tequila is made in small batches by producers who take their time. That care is something you can taste."],
+      ["Made with patience", "Artisanal tequila is made with care at every step of the process. That care is something you can taste."],
       ["No two sips alike", "Every batch comes out different, so the flavors are truly unique. What you taste at Kin-Ha is not a copy of anything else."],
       ["Then it reaches the jungle", "From Jalisco to the Ruta de los Cenotes. Here, among the trees and the turquoise water, the bottle is opened for you. Something this special is not meant to be skipped."],
     ],
@@ -146,7 +146,7 @@ const COPY = {
     faqTitle: "Questions about the tequila tasting",
     faqs: [
       { q: "Is the tequila tasting included?", a: "Yes. The tequila tasting is part of every experience at Kin-Ha Cenotes." },
-      { q: "What is artisanal tequila?", a: "It is tequila made in small batches with great care in the process. That is why every batch has its own flavors and no two are the same." },
+      { q: "What is artisanal tequila?", a: "It is tequila made with great care in the process. That is why every batch has its own flavors and no two are the same." },
       { q: "What is tequila made from?", a: "All tequila is made from blue (Weber) agave and can only be produced in the areas of México covered by its denomination of origin, mainly in Jalisco." },
       { q: "Which bottles can I taste at Kin-Ha?", a: "The current selection includes Aguascalientes Reposado and Atalaje Añejo tequilas, plus Cabo Único chocolate, vanilla and damiana liqueurs. The selection may vary by day." },
       { q: "Can I buy a bottle?", a: "Yes. The bottles in the collection are for sale: ask for yours at the end of your tasting." },

@@ -27,7 +27,7 @@ ${tours}
 
 - [Hotel pickup areas](${SITE_URL}${STATIC_ROUTES.pickup.en})
 - [Cenotes near Cancún: how to choose a tour](${SITE_URL}${STATIC_ROUTES.guide.en})
-- [Artisanal tequila tasting: the story](${SITE_URL}${STATIC_ROUTES.tequila.en}): tequila tasting is included in every experience; real bottles, small-batch tequila from Jalisco
+- [Artisanal tequila tasting: the story](${SITE_URL}${STATIC_ROUTES.tequila.en}): tequila tasting is included in every experience; the artisanal tequilas and liqueurs you can taste and buy at Kin-Ha
 - [FAQ](${SITE_URL}${STATIC_ROUTES.faq.en})
 - [Book online](${SITE_URL}${STATIC_ROUTES.booking.en})
 - [Contact and directions](${SITE_URL}${STATIC_ROUTES.contact.en})
@@ -38,7 +38,7 @@ ${tours}
 - [Tours y precios](${SITE_URL}${STATIC_ROUTES.experiences.es})
 - [Recogida en hotel](${SITE_URL}${STATIC_ROUTES.pickup.es})
 - [Guía: cenotes cerca de Cancún](${SITE_URL}${STATIC_ROUTES.guide.es})
-- [Tequila artesanal: la historia de la cata](${SITE_URL}${STATIC_ROUTES.tequila.es})
+- [Tequila artesanal: la historia de la cata](${SITE_URL}${STATIC_ROUTES.tequila.es}): la degustación de tequila está incluida en cada experiencia; los tequilas y licores artesanales que puedes probar y comprar en Kin-Ha
 - [Preguntas frecuentes](${SITE_URL}${STATIC_ROUTES.faq.es})
 `;
 
