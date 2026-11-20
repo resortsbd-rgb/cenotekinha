@@ -1,10 +1,19 @@
 import Image from "next/image";
+import { Libre_Caslon_Text } from "next/font/google";
 import Link from "next/link";
 import JsonLd from "@/components/seo/JsonLd";
 import { STATIC_ROUTES, tourPath } from "@/lib/routes";
 import { TOURS, MAIN_TOURS_FILTER } from "@/lib/stripe";
 import { articleJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/lib/structuredData";
 import type { Locale } from "@/lib/translations";
+
+const caslon = Libre_Caslon_Text({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-caslon",
+  display: "swap",
+});
 
 // Historia del tequila artesanal que se ofrece en la degustación de Cenotes Kin-Ha.
 // Sin precios a propósito: los precios viven en las páginas de cada tour.
@@ -30,7 +39,7 @@ const COPY = {
       ["Incluido", "En cada experiencia Kin-Ha"],
     ],
     storyEyebrow: "La historia",
-    storyH2: "Un destilado con domicilio.",
+    storyH2: "La historia",
     lead1:
       "Hay cosas que no se pueden apurar. Un agave azul tarda años en estar listo. Un lote toma el tiempo que necesita. Y no hay dos lotes que salgan exactamente iguales.",
     lead2:
@@ -45,7 +54,7 @@ const COPY = {
     noteBig: "Hay bebidas que se terminan. Y hay otras que se recuerdan. Levanta la copa, respira, tómalo despacio y deja que este lugar se quede contigo.",
     noteSmall: "Palabras del equipo que guía la cata en Kin-Ha.",
     colEyebrow: "La colección",
-    colH2: "Sobre la mesa.",
+    colH2: "Carta de cata",
     colSub: "Botellas reales, fotografiadas en Kin-Ha. Tequilas y licores de la selección actual; puede variar según el día.",
     lineupAlt: "Cinco botellas en fila sobre un muro de piedra en la selva: tequila Reposado Aguascalientes, tequila Añejo Atalaje y licores Cabo Único de chocolate, vainilla y damiana",
     bottles: [
@@ -99,7 +108,7 @@ const COPY = {
       ["Included", "In every Kin-Ha experience"],
     ],
     storyEyebrow: "The story",
-    storyH2: "A spirit with an address.",
+    storyH2: "The story",
     lead1:
       "Some things cannot be rushed. A blue agave takes years to be ready. A batch takes the time it needs. And no two batches come out quite the same.",
     lead2:
@@ -114,7 +123,7 @@ const COPY = {
     noteBig: "Some drinks you finish. Some you remember. Lift the glass, breathe in, take it slowly, and let this place stay with you.",
     noteSmall: "Words from the team that leads the tasting at Kin-Ha.",
     colEyebrow: "The collection",
-    colH2: "On the table.",
+    colH2: "Tasting menu",
     colSub: "Real bottles, photographed at Kin-Ha. Tequilas and liqueurs from the current selection; it may vary by day.",
     lineupAlt: "Five bottles in a row on a stone wall in the jungle: Aguascalientes Reposado tequila, Atalaje Añejo tequila, and Cabo Único chocolate, vanilla and damiana liqueurs",
     bottles: [
@@ -151,12 +160,18 @@ const COPY = {
   },
 };
 
-const EYEBROW = "text-xs font-bold uppercase tracking-[0.24em] text-[#5fd1d6]";
-const H2 = "font-[family-name:var(--font-heading)] text-4xl font-medium leading-[1.05] tracking-[-0.01em] sm:text-5xl lg:text-6xl";
+const SERIF = { fontFamily: "var(--font-caslon, 'Libre Caslon Text'), Georgia, serif" };
+const SANS = { fontFamily: "var(--font-body), system-ui, sans-serif" };
+const GRAIN =
+  "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 .95  0 0 0 0 .85  0 0 0 .05 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")";
+
+const H2 = "text-3xl font-normal leading-tight sm:text-4xl lg:text-5xl";
 const BTN_PRIMARY =
-  "inline-flex min-h-14 items-center justify-center rounded-full bg-[#c9792e] px-8 py-4 font-bold text-white transition hover:bg-[#d99a4e]";
+  "inline-flex min-h-14 items-center justify-center rounded-sm bg-[#efe6d3] px-9 py-4 text-base font-bold tracking-wide text-[#14100d] transition hover:bg-white";
 const BTN_GHOST =
-  "inline-flex min-h-14 items-center justify-center rounded-full border border-white/40 px-8 py-4 font-medium text-[#f6f1e7] transition hover:bg-white/10";
+  "inline-flex min-h-14 items-center justify-center rounded-sm border border-[#efe6d3]/50 px-9 py-4 text-base text-[#efe6d3] transition hover:border-[#efe6d3] hover:bg-[#efe6d3]/10";
+const HAIR = "border-[#b59a6a]/35";
+const DIM = "text-[#efe6d3]/75";
 
 export default function TequilaPage({ locale }: { locale: Locale }) {
   const t = COPY[locale];
@@ -164,7 +179,10 @@ export default function TequilaPage({ locale }: { locale: Locale }) {
   const mainTours = TOURS.filter(MAIN_TOURS_FILTER);
 
   return (
-    <article className="bg-[#0a1411] text-[#f6f1e7]">
+    <article
+      className={`${caslon.variable} bg-[#14100d] text-[#efe6d3]`}
+      style={{ ...SERIF, backgroundImage: GRAIN }}
+    >
       <JsonLd
         data={articleJsonLd({
           headline: t.headline,
@@ -183,191 +201,178 @@ export default function TequilaPage({ locale }: { locale: Locale }) {
       />
       <JsonLd data={faqJsonLd(t.faqs)} />
 
-      {/* HERO */}
-      <section className="mx-auto flex max-w-6xl flex-wrap items-center gap-14 px-5 pb-20 pt-32 sm:px-8">
-        <div className="min-w-0 flex-[1_1_28rem]">
-          <p className={`${EYEBROW} mb-5`}>{t.eyebrow}</p>
-          <h1 className="mb-6 font-[family-name:var(--font-heading)] text-5xl font-medium leading-[1.02] tracking-[-0.01em] sm:text-6xl lg:text-7xl">
-            {t.h1a} <em className="text-[#d99a4e]">{t.h1b}</em>
+      {/* PORTADA */}
+      <section className="mx-auto grid max-w-6xl gap-12 px-5 pb-20 pt-32 sm:px-8 lg:grid-cols-12 lg:items-end lg:gap-16">
+        <div className="lg:col-span-6">
+          <p className="mb-6 text-lg italic text-[#b59a6a]">{t.eyebrow}</p>
+          <h1 className="mb-8 text-5xl font-normal leading-[1.05] sm:text-6xl lg:text-7xl" style={SERIF}>
+            {t.h1a} <em>{t.h1b}</em>
           </h1>
-          <p className="mb-9 max-w-xl text-lg text-[#f6f1e7]/80 sm:text-xl">{t.sub}</p>
-          <div className="flex flex-wrap gap-3">
+          <p className={`mb-10 max-w-lg text-xl leading-relaxed ${DIM}`}>{t.sub}</p>
+          <div className="flex flex-wrap gap-3" style={SANS}>
             <Link href={STATIC_ROUTES.booking[locale]} className={BTN_PRIMARY}>
-              {t.ctaBook} →
+              {t.ctaBook}
             </Link>
             <a href="#tours" className={BTN_GHOST}>
               {t.ctaTours}
             </a>
           </div>
         </div>
-        <figure className="min-w-[16rem] flex-[0_1_26rem]">
-          <div className="relative aspect-[3/4] overflow-hidden rounded-t-full rounded-b-3xl border border-white/15">
-            <Image
-              src="/images/tequila-atalaje-cenote.webp"
-              alt={t.heroAlt}
-              fill
-              priority
-              sizes="(max-width: 768px) 90vw, 420px"
-              className="object-cover object-[50%_60%]"
-            />
+        <figure className="lg:col-span-6">
+          <div className="border border-[#efe6d3]/20 p-3">
+            <div className="relative aspect-[4/5] overflow-hidden">
+              <Image
+                src="/images/tequila-atalaje-cenote.webp"
+                alt={t.heroAlt}
+                fill
+                priority
+                sizes="(max-width: 1024px) 90vw, 560px"
+                className="object-cover object-[50%_58%]"
+              />
+            </div>
           </div>
-          <figcaption className="mt-3 text-center text-sm text-[#f6f1e7]/60">{t.heroCaption}</figcaption>
+          <figcaption className="mt-3 text-sm italic text-[#efe6d3]/60">{t.heroCaption}</figcaption>
         </figure>
       </section>
 
-      {/* FACTS */}
-      <section className="border-y border-white/10 bg-[#0e1b16]">
-        <dl className="mx-auto grid max-w-6xl grid-cols-2 gap-x-8 gap-y-6 px-5 py-7 sm:px-8 lg:grid-cols-4">
-          {t.facts.map(([big, small]) => (
-            <div key={big}>
-              <dt className="font-[family-name:var(--font-heading)] text-2xl font-semibold text-[#d99a4e]">{big}</dt>
-              <dd className="text-sm text-[#f6f1e7]/65">{small}</dd>
+      <p className={`mx-auto max-w-6xl border-y ${HAIR} px-5 py-5 text-center text-base italic text-[#efe6d3]/70 sm:px-8`}>
+        {t.facts.map(([big]) => big).join("  ·  ")}
+      </p>
+
+      {/* HISTORIA */}
+      <section className="mx-auto max-w-2xl px-5 py-28 sm:px-8">
+        <h2 className={`${H2} mb-10`} style={SERIF}>{t.storyH2}</h2>
+        <p className="mb-6 text-xl leading-[1.8] first-letter:float-left first-letter:mr-3 first-letter:text-7xl first-letter:leading-[0.8] first-letter:text-[#b59a6a]">
+          {t.lead1}
+        </p>
+        <p className={`mb-12 text-xl leading-[1.8] ${DIM}`}>{t.lead2}</p>
+        <div className="space-y-8">
+          {t.chapters.map(([title, body]) => (
+            <p key={title} className={`text-lg leading-[1.8] ${DIM}`}>
+              <em className="text-[#efe6d3]">{title}. </em>
+              {body}
+            </p>
+          ))}
+        </div>
+      </section>
+
+      {/* VOZ DE LA CATA */}
+      <section className={`border-y ${HAIR}`}>
+        <blockquote className="mx-auto max-w-3xl px-5 py-24 text-center sm:px-8">
+          <p className="mb-6 text-3xl italic leading-snug sm:text-4xl">{t.noteBig}</p>
+          <footer className="text-base text-[#b59a6a]">{t.noteSmall}</footer>
+        </blockquote>
+      </section>
+
+      {/* CARTA DE CATA */}
+      <section className="mx-auto grid max-w-6xl gap-14 px-5 py-28 sm:px-8 lg:grid-cols-12 lg:gap-16">
+        <div className="lg:col-span-5">
+          <div className="border border-[#efe6d3]/20 p-3">
+            <div className="relative aspect-[9/16] overflow-hidden">
+              <Image
+                src="/images/tequila-botellas-kinha.webp"
+                alt={t.lineupAlt}
+                fill
+                sizes="(max-width: 1024px) 90vw, 440px"
+                className="object-cover"
+              />
             </div>
-          ))}
-        </dl>
-      </section>
-
-      {/* STORY */}
-      <section className="mx-auto flex max-w-6xl flex-wrap gap-16 px-5 py-24 sm:px-8">
-        <div className="min-w-0 flex-[1_1_22rem]">
-          <p className={`${EYEBROW} mb-4`}>{t.storyEyebrow}</p>
-          <h2 className={`${H2} mb-6`}>{t.storyH2}</h2>
-          <p className="mb-5 text-lg text-[#f6f1e7]/80">{t.lead1}</p>
-          <p className="text-lg text-[#f6f1e7]/80">{t.lead2}</p>
-        </div>
-        <ol className="min-w-0 flex-[1.2_1_28rem]">
-          {t.chapters.map(([title, body], index) => (
-            <li key={title} className="flex gap-7 border-t border-white/10 py-8">
-              <span aria-hidden="true" className="w-14 shrink-0 font-[family-name:var(--font-heading)] text-5xl italic leading-none text-[#d99a4e]">
-                {["I", "II", "III", "IV"][index]}
-              </span>
-              <div className="min-w-0">
-                <h3 className="mb-2 font-[family-name:var(--font-heading)] text-3xl font-semibold leading-tight">{title}</h3>
-                <p className="text-[#f6f1e7]/80">{body}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      {/* TASTING NOTE */}
-      <section className="border-y border-white/10 bg-[#11201b]">
-        <div className="mx-auto max-w-3xl px-5 py-20 text-center sm:px-8">
-          <p className={`${EYEBROW} mb-5`}>{t.noteEyebrow}</p>
-          <p className="mb-5 font-[family-name:var(--font-heading)] text-3xl font-medium italic leading-snug sm:text-4xl">{t.noteBig}</p>
-          <p className="text-[#f6f1e7]/65">{t.noteSmall}</p>
-        </div>
-      </section>
-
-      {/* COLLECTION */}
-      <section className="mx-auto max-w-6xl px-5 py-24 sm:px-8">
-        <div className="mb-14 max-w-2xl">
-          <p className={`${EYEBROW} mb-4`}>{t.colEyebrow}</p>
-          <h2 className={`${H2} mb-4`}>{t.colH2}</h2>
-          <p className="text-lg text-[#f6f1e7]/80">{t.colSub}</p>
-        </div>
-        <div className="flex flex-wrap items-start gap-14">
-          <div className="relative aspect-[9/16] w-full max-w-md min-w-[16rem] flex-[0_1_28rem] overflow-hidden rounded-3xl border border-white/15">
-            <Image
-              src="/images/tequila-botellas-kinha.webp"
-              alt={t.lineupAlt}
-              fill
-              sizes="(max-width: 768px) 90vw, 448px"
-              className="object-cover"
-            />
           </div>
-          <ul className="flex min-w-0 flex-[1_1_24rem] flex-col gap-3">
-            {t.bottles.map(([kind, name, line], index) => (
-              <li key={name} className="flex items-center gap-5 rounded-2xl border border-white/10 bg-[#11201b] px-6 py-5">
-                <span aria-hidden="true" className="font-[family-name:var(--font-heading)] text-3xl italic text-[#d99a4e]">{index + 1}</span>
+        </div>
+        <div className="lg:col-span-7">
+          <h2 className={`${H2} mb-4`} style={SERIF}>{t.colH2}</h2>
+          <p className={`mb-10 max-w-xl text-lg leading-relaxed ${DIM}`}>{t.colSub}</p>
+          <ul className={`border-b ${HAIR}`}>
+            {t.bottles.map(([kind, name, line]) => (
+              <li key={name} className={`flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1 border-t ${HAIR} py-6`}>
                 <div className="min-w-0">
-                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#5fd1d6]">{kind}</p>
-                  <p className="font-[family-name:var(--font-heading)] text-2xl font-semibold leading-tight">{name}</p>
-                  <p className="text-sm text-[#f6f1e7]/70">{line}</p>
+                  <p className="text-2xl sm:text-3xl" style={SERIF}>{name}</p>
+                  <p className={`mt-1 text-base ${DIM}`}>{line}</p>
                 </div>
+                <p className="text-base italic text-[#b59a6a]">{kind}</p>
               </li>
             ))}
           </ul>
         </div>
       </section>
 
-      {/* TAKE HOME */}
-      <section className="border-y border-white/10 bg-[#0e1b16]">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-14 px-5 py-24 sm:px-8">
-          <figure className="min-w-[16rem] flex-[0_1_26rem]">
-            <div className="relative aspect-[3/4] overflow-hidden rounded-3xl border border-white/15">
-              <Image
-                src="/images/tequila-damiana-vela.webp"
-                alt={t.damianaAlt}
-                fill
-                sizes="(max-width: 768px) 90vw, 420px"
-                className="object-cover object-[50%_45%]"
-              />
-            </div>
-            <figcaption className="mt-3 text-sm text-[#f6f1e7]/60">{t.damianaCaption}</figcaption>
-          </figure>
-          <div className="min-w-0 flex-[1_1_24rem]">
-            <p className={`${EYEBROW} mb-4`}>{t.takeEyebrow}</p>
-            <h2 className={`${H2} mb-6`}>{t.takeH2}</h2>
-            <p className="text-lg text-[#f6f1e7]/80">{t.takeBody}</p>
+      {/* PARA LLEVAR */}
+      <section className={`border-y ${HAIR} bg-[#1b1612]/70`}>
+        <div className="mx-auto grid max-w-6xl items-center gap-14 px-5 py-28 sm:px-8 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:order-2 lg:col-span-5">
+            <figure>
+              <div className="border border-[#efe6d3]/20 p-3">
+                <div className="relative aspect-[3/4] overflow-hidden">
+                  <Image
+                    src="/images/tequila-damiana-vela.webp"
+                    alt={t.damianaAlt}
+                    fill
+                    sizes="(max-width: 1024px) 90vw, 440px"
+                    className="object-cover object-[50%_45%]"
+                  />
+                </div>
+              </div>
+              <figcaption className="mt-3 text-sm italic text-[#efe6d3]/60">{t.damianaCaption}</figcaption>
+            </figure>
+          </div>
+          <div className="lg:order-1 lg:col-span-7">
+            <h2 className={`${H2} mb-8`} style={SERIF}>{t.takeH2}</h2>
+            <p className={`max-w-xl text-xl leading-[1.8] ${DIM}`}>{t.takeBody}</p>
           </div>
         </div>
       </section>
 
-      {/* TOURS */}
-      <section id="tours" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-24 sm:px-8">
-        <div className="mb-12 max-w-2xl">
-          <p className={`${EYEBROW} mb-4`}>{t.toursEyebrow}</p>
-          <h2 className={`${H2} mb-4`}>{t.toursH2}</h2>
-          <p className="text-lg text-[#f6f1e7]/80">{t.toursSub}</p>
-        </div>
-        <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {/* EXPERIENCIAS */}
+      <section id="tours" className="mx-auto max-w-4xl scroll-mt-24 px-5 py-28 sm:px-8">
+        <h2 className={`${H2} mb-4`} style={SERIF}>{t.toursH2}</h2>
+        <p className={`mb-10 text-lg ${DIM}`}>{t.toursSub}</p>
+        <ul className={`border-b ${HAIR}`}>
           {mainTours.map((tour) => (
-            <li key={tour.id}>
+            <li key={tour.id} className={`border-t ${HAIR}`}>
               <Link
                 href={tourPath(tour.id, locale)}
-                className="flex h-full flex-col gap-3 rounded-2xl border border-white/10 bg-[#11201b] p-7 transition hover:border-[#5fd1d6] hover:bg-[#172a24]"
+                className="group flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 py-6 transition hover:bg-[#efe6d3]/5"
               >
-                <span className="font-[family-name:var(--font-heading)] text-2xl font-semibold leading-tight">
-                  {locale === "es" ? tour.nameEs : tour.nameEn}
-                </span>
-                <span className="flex-1 text-sm text-[#f6f1e7]/70">{locale === "es" ? tour.descEs : tour.descEn}</span>
-                <span className="text-sm font-bold text-[#5fd1d6]">{t.discover} →</span>
+                <div className="min-w-0 max-w-xl">
+                  <p className="text-2xl" style={SERIF}>{locale === "es" ? tour.nameEs : tour.nameEn}</p>
+                  <p className={`mt-1 text-base ${DIM}`}>{locale === "es" ? tour.descEs : tour.descEn}</p>
+                </div>
+                <span className="text-base italic text-[#b59a6a] underline-offset-4 group-hover:underline">{t.discover} →</span>
               </Link>
             </li>
           ))}
         </ul>
       </section>
 
-      {/* FAQ */}
-      <section className="mx-auto max-w-3xl px-5 pb-24 sm:px-8">
-        <h2 className="mb-8 font-[family-name:var(--font-heading)] text-4xl font-medium leading-tight">{t.faqTitle}</h2>
-        <div className="divide-y divide-white/10 border-y border-white/10">
+      {/* PREGUNTAS */}
+      <section className="mx-auto max-w-3xl px-5 pb-28 sm:px-8">
+        <h2 className="mb-8 text-3xl font-normal leading-tight" style={SERIF}>{t.faqTitle}</h2>
+        <div className={`divide-y divide-[#b59a6a]/35 border-y ${HAIR}`}>
           {t.faqs.map((item) => (
-            <div key={item.q} className="py-5">
-              <h3 className="font-semibold">{item.q}</h3>
-              <p className="mt-2 leading-relaxed text-[#f6f1e7]/75">{item.a}</p>
+            <div key={item.q} className="py-6">
+              <h3 className="text-xl font-normal" style={SERIF}>{item.q}</h3>
+              <p className={`mt-2 text-lg leading-relaxed ${DIM}`}>{item.a}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* CLOSING CTA */}
-      <section className="border-t border-white/10 bg-[#11201b]">
-        <div className="mx-auto max-w-3xl px-5 py-24 text-center sm:px-8">
-          <h2 className="mb-5 font-[family-name:var(--font-heading)] text-5xl font-medium leading-[1.02] sm:text-6xl lg:text-7xl">
-            {t.endH2a} <em className="text-[#d99a4e]">{t.endH2b}</em>
+      {/* CIERRE */}
+      <section className={`border-t ${HAIR} bg-[#1b1612]/70`}>
+        <div className="mx-auto max-w-3xl px-5 py-28 text-center sm:px-8">
+          <h2 className="mb-6 text-5xl font-normal leading-[1.05] sm:text-6xl" style={SERIF}>
+            {t.endH2a} <em>{t.endH2b}</em>
           </h2>
-          <p className="mb-9 text-lg text-[#f6f1e7]/80 sm:text-xl">{t.endSub}</p>
-          <div className="flex flex-wrap justify-center gap-3">
+          <p className={`mb-10 text-xl ${DIM}`}>{t.endSub}</p>
+          <div className="flex flex-wrap justify-center gap-3" style={SANS}>
             <Link href={STATIC_ROUTES.booking[locale]} className={BTN_PRIMARY}>
-              {t.ctaBook} →
+              {t.ctaBook}
             </Link>
             <Link href={STATIC_ROUTES.pickup[locale]} className={BTN_GHOST}>
               {t.ctaPickup}
             </Link>
           </div>
-          <p className="mt-10 text-sm text-[#f6f1e7]/55">{t.legal}</p>
+          <p className="mt-12 text-sm italic text-[#efe6d3]/55">{t.legal}</p>
         </div>
       </section>
     </article>
